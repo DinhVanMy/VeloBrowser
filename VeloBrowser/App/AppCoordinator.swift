@@ -42,6 +42,9 @@ final class AppCoordinator {
     /// Whether the now playing sheet is presented.
     var showNowPlaying = false
 
+    /// Whether the reading list sheet is presented.
+    var showReadingList = false
+
     /// Whether the share sheet is presented.
     var showShareSheet = false
 
@@ -142,6 +145,14 @@ struct AppCoordinatorView: View {
             NavigationStack {
                 DownloadsView(downloadManager: container.downloadManager)
             }
+        }
+        .sheet(isPresented: $coordinator.showReadingList) {
+            ReadingListView(
+                repository: container.readingListRepository,
+                onOpenURL: { url in
+                    container.tabManager.activeViewModel?.loadURL(url)
+                }
+            )
         }
         .sheet(isPresented: $coordinator.showShareSheet) {
             if let url = container.tabManager.activeViewModel?.currentURL {

@@ -177,3 +177,64 @@ final class DownloadItemEntity {
         self.statusRawValue = item.status.rawValue
     }
 }
+
+// MARK: - ReadingListItemEntity
+
+/// SwiftData persistent model for reading list items.
+@Model
+final class ReadingListItemEntity {
+    /// Unique identifier.
+    @Attribute(.unique) var id: UUID
+
+    /// The saved page URL string.
+    var urlString: String
+
+    /// Article title.
+    var title: String
+
+    /// Short excerpt or description.
+    var excerpt: String
+
+    /// Date the item was added.
+    var dateAdded: Date
+
+    /// Whether the item has been read.
+    var isRead: Bool
+
+    init(
+        id: UUID = UUID(),
+        urlString: String,
+        title: String,
+        excerpt: String = "",
+        dateAdded: Date = Date(),
+        isRead: Bool = false
+    ) {
+        self.id = id
+        self.urlString = urlString
+        self.title = title
+        self.excerpt = excerpt
+        self.dateAdded = dateAdded
+        self.isRead = isRead
+    }
+
+    /// Converts this entity to a domain model.
+    func toDomain() -> ReadingListItem? {
+        guard let url = URL(string: urlString) else { return nil }
+        return ReadingListItem(
+            id: id,
+            url: url,
+            title: title,
+            excerpt: excerpt,
+            dateAdded: dateAdded,
+            isRead: isRead
+        )
+    }
+
+    /// Updates this entity from a domain model.
+    func update(from item: ReadingListItem) {
+        self.urlString = item.url.absoluteString
+        self.title = item.title
+        self.excerpt = item.excerpt
+        self.isRead = item.isRead
+    }
+}

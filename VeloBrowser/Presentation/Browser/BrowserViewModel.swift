@@ -49,6 +49,21 @@ final class BrowserViewModel {
     /// Error message to display, if any.
     var errorMessage: String?
 
+    /// Whether the current page is detected as readable (for reader mode button).
+    var isPageReadable: Bool = false
+
+    /// Whether reader mode is currently shown.
+    var showReaderMode: Bool = false
+
+    /// The extracted reader content (populated when reader mode activates).
+    var readerContent: ReaderContent?
+
+    /// Whether desktop user-agent is active for this tab.
+    var isDesktopMode: Bool = false
+
+    /// Incremented to signal a user-agent change requiring reload.
+    var desktopModeToken: Int = 0
+
     /// Weak reference to the WKWebView for media extraction and JS evaluation.
     weak var webView: WKWebView?
 
@@ -151,6 +166,45 @@ final class BrowserViewModel {
         errorMessage = nil
         // Increment stop to halt any current load
         stopToken += 1
+    }
+
+    /// Toggles reader mode on the current page.
+    ///
+    /// - Parameter readerService: The reader mode service to extract content.
+    func toggleReaderMode(using readerService: ReaderModeServiceProtocol) {
+        if showReaderMode {
+            showReaderMode = false
+            readerContent = nil
+        } else {
+            guard let webView else { return }
+            Task {
+                if let content = await readerService.extractContent(from: webView) {
+                    readerContent = content
+                    showReaderMode = true
+                }
+            }
+        }
+    }
+
+    /// Toggles desktop / mobile user-agent for this tab.
+    func toggleDesktopMode() {
+        isDesktopMode.toggle()
+        desktopModeToken += 1
+        // Reload automatically to apply the new UA
+        reloadToken += 1
+    }
+
+    /// Checks page readability after load completes.
+    ///
+    /// - Parameter readerService: The reader mode service.
+    func checkReadability(using readerService: ReaderModeServiceProtocol) {
+        guard let webView else {
+            isPageReadable = false
+            return
+        }
+        Task {
+            isPageReadable = await readerService.isReadable(from: webView)
+        }
     }
 
     // MARK: - WebView Callbacks

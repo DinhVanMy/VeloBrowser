@@ -62,6 +62,9 @@ struct AddressBarView: View {
                 // Reload / Stop button
                 reloadStopButton
 
+                // Reader mode button
+                readerModeButton
+
                 // Ad block badge
                 adBlockBadge
             }
@@ -140,6 +143,27 @@ struct AddressBarView: View {
                 .contentShape(Rectangle())
         }
         .accessibilityLabel(viewModel.isLoading ? "Stop loading" : "Reload page")
+    }
+
+    @ViewBuilder
+    private var readerModeButton: some View {
+        if viewModel.isPageReadable && viewModel.currentURL != nil {
+            Button {
+                viewModel.showReaderMode = true
+            } label: {
+                Image(systemName: viewModel.showReaderMode ? "book.fill" : "book")
+                    .font(.caption)
+                    .foregroundStyle(
+                        viewModel.showReaderMode
+                            ? DesignSystem.Colors.accent
+                            : DesignSystem.Colors.textSecondary
+                    )
+                    .frame(minWidth: 28, minHeight: DesignSystem.minimumTouchTarget)
+                    .contentShape(Rectangle())
+            }
+            .accessibilityLabel("Reader mode")
+            .transition(.scale.combined(with: .opacity))
+        }
     }
 
     @ViewBuilder

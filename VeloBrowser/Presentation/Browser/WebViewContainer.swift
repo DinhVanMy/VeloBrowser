@@ -40,6 +40,12 @@ struct WebViewContainer: UIViewRepresentable {
     /// Token incremented to trigger go forward.
     var goForwardToken: Int = 0
 
+    /// Whether desktop user-agent is active.
+    var isDesktopMode: Bool = false
+
+    /// Token incremented to signal user-agent change.
+    var desktopModeToken: Int = 0
+
     /// Callback invoked when the page title changes.
     var onTitleChange: ((String) -> Void)?
 
@@ -177,11 +183,21 @@ struct WebViewContainer: UIViewRepresentable {
             coord.lastGoForwardToken = goForwardToken
             if webView.canGoForward { webView.goForward() }
         }
+
+        // Desktop mode user-agent switch
+        if desktopModeToken != coord.lastDesktopModeToken {
+            coord.lastDesktopModeToken = desktopModeToken
+            webView.customUserAgent = isDesktopMode ? Self.desktopUserAgent : nil
+        }
     }
 
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
     }
+
+    /// Desktop Safari user-agent string for "Request Desktop Site".
+    private static let desktopUserAgent =
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
 
     /// JavaScript that counts hidden ad elements and reports to native code.
     private static let adBlockCounterJS = """
@@ -235,6 +251,7 @@ struct WebViewContainer: UIViewRepresentable {
         var lastStopToken: Int = 0
         var lastGoBackToken: Int = 0
         var lastGoForwardToken: Int = 0
+        var lastDesktopModeToken: Int = 0
 
         private var titleObservation: NSKeyValueObservation?
         private var urlObservation: NSKeyValueObservation?

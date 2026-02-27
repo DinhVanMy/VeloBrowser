@@ -85,6 +85,17 @@ struct BrowserView: View {
         } message: {
             Text("No playable audio or video was found on this page. Try playing a video first, then use this option.")
         }
+        .fullScreenCover(isPresented: $viewModel.showReaderMode) {
+            if let content = viewModel.readerContent {
+                ReaderModeView(
+                    content: content,
+                    onDismiss: { viewModel.showReaderMode = false },
+                    onShare: {
+                        coordinator.showShareSheet = true
+                    }
+                )
+            }
+        }
     }
 
     // MARK: - Web Content
@@ -99,21 +110,26 @@ struct BrowserView: View {
                 stopToken: viewModel.stopToken,
                 goBackToken: viewModel.goBackToken,
                 goForwardToken: viewModel.goForwardToken,
+                isDesktopMode: viewModel.isDesktopMode,
+                desktopModeToken: viewModel.desktopModeToken,
                 onTitleChange: { title in
                     viewModel.handleTitleChange(title)
-                    // Sync title to Tab model
                     if let activeTab = container.tabManager.activeTab {
                         container.tabManager.updateTab(id: activeTab.id, title: title)
                     }
                 },
                 onURLChange: { url in
                     viewModel.handleURLChange(url)
-                    // Sync URL to Tab model
                     if let activeTab = container.tabManager.activeTab, let url {
                         container.tabManager.updateTab(id: activeTab.id, url: url)
                     }
                 },
-                onLoadingChange: { viewModel.handleLoadingChange($0) },
+                onLoadingChange: { loading in
+                    viewModel.handleLoadingChange(loading)
+                    if !loading {
+                        viewModel.checkReadability(using: container.readerModeService)
+                    }
+                },
                 onProgressChange: { viewModel.handleProgressChange($0) },
                 onNavigationChange: { back, fwd in
                     viewModel.handleNavigationChange(canGoBack: back, canGoForward: fwd)
@@ -316,6 +332,26 @@ struct BrowserView: View {
                 } label: {
                     Label("Find on Page", systemImage: "doc.text.magnifyingglass")
                 }
+
+                // Desktop mode toggle
+                Button {
+                    viewModel.toggleDesktopMode()
+                    HapticManager.light()
+                } label: {
+                    Label(
+                        viewModel.isDesktopMode ? "Request Mobile Site" : "Request Desktop Site",
+                        systemImage: viewModel.isDesktopMode ? "iphone" : "desktopcomputer"
+                    )
+                }
+
+                // Reader mode (only if page is readable)
+                if viewModel.isPageReadable {
+                    Button {
+                        viewModel.toggleReaderMode(using: container.readerModeService)
+                    } label: {
+                        Label("Reader Mode", systemImage: "doc.plaintext")
+                    }
+                }
             }
 
             Divider()
@@ -336,6 +372,21 @@ struct BrowserView: View {
                 coordinator.navigate(to: .downloads)
             } label: {
                 Label("Downloads", systemImage: "arrow.down.circle")
+            }
+
+            Button {
+                coordinator.showReadingList = true
+            } label: {
+                Label("Reading List", systemImage: "eyeglasses")
+            }
+
+            // Add current page to reading list
+            if viewModel.currentURL != nil {
+                Button {
+                    addToReadingList()
+                } label: {
+                    Label("Add to Reading List", systemImage: "plus.circle")
+                }
             }
 
             Divider()
@@ -390,6 +441,16 @@ struct BrowserView: View {
         let bookmark = Bookmark(url: url, title: title, faviconURL: faviconURL)
         Task {
             try? await container.bookmarkRepository.save(bookmark)
+            HapticManager.success()
+        }
+    }
+
+    private func addToReadingList() {
+        guard let url = viewModel.currentURL else { return }
+        let title = viewModel.pageTitle.isEmpty ? (url.host() ?? url.absoluteString) : viewModel.pageTitle
+        let item = ReadingListItem(url: url, title: title)
+        Task {
+            try? await container.readingListRepository.save(item)
             HapticManager.success()
         }
     }

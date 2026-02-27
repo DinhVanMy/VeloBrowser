@@ -50,6 +50,12 @@ final class DIContainer {
     /// Network connectivity monitor.
     let networkMonitor: NetworkMonitor
 
+    /// Reader mode content extraction service.
+    let readerModeService: ReaderModeServiceProtocol
+
+    /// Repository for reading list operations.
+    let readingListRepository: ReadingListRepositoryProtocol
+
     // MARK: - Initialization
 
     /// Creates a new DIContainer with all dependencies wired up.
@@ -59,7 +65,8 @@ final class DIContainer {
         let schema = Schema([
             BookmarkEntity.self,
             HistoryEntryEntity.self,
-            DownloadItemEntity.self
+            DownloadItemEntity.self,
+            ReadingListItemEntity.self
         ])
 
         let configuration = ModelConfiguration(
@@ -86,6 +93,8 @@ final class DIContainer {
             self.mediaPlayerService = MediaPlayerService(nowPlayingManager: self.nowPlayingManager)
             self.downloadManager = DownloadManagerService(downloadRepository: self.downloadRepository)
             self.networkMonitor = NetworkMonitor()
+            self.readerModeService = ReaderModeService()
+            self.readingListRepository = SwiftDataReadingListRepository(modelContext: context)
         } catch {
             fatalError("Failed to initialize SwiftData ModelContainer: \(error.localizedDescription)")
         }

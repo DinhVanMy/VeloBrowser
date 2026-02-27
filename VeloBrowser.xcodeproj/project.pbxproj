@@ -55,6 +55,13 @@
 		24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */; };
 7B4CE0547EA90C903E9A53CC /* PlatformLogos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95796A7183FBB2634B1A1208 /* PlatformLogos.swift */; };
 A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */; };
+		A1C0303E171AE3594CFEBA92 /* ReaderModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9F559CBF7EF391AAE1B3B /* ReaderModeService.swift */; };
+		B5C2131F9942BBE3D7A8CEE3 /* ReaderModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70055DB124D18163F37CF18F /* ReaderModeView.swift */; };
+		BE7EADA1C119793104A6F35F /* ReadingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F746B52E459969E9CA8BBE /* ReadingListItem.swift */; };
+		73C3353C50E3318F5E18E041 /* ReadingListRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787DEFF6EEB8F9E805078DEF /* ReadingListRepositoryProtocol.swift */; };
+		3FD694990492F49052164757 /* ReadingListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */; };
+		D4D9666134B1B6F59D706792 /* ReadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */; };
+		A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +126,13 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepositoryTests.swift; sourceTree = "<group>"; };
 95796A7183FBB2634B1A1208 /* PlatformLogos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformLogos.swift; sourceTree = "<group>"; };
 86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloLogoView.swift; sourceTree = "<group>"; };
+		EFE9F559CBF7EF391AAE1B3B /* ReaderModeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderModeService.swift; sourceTree = "<group>"; };
+		70055DB124D18163F37CF18F /* ReaderModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderModeView.swift; sourceTree = "<group>"; };
+		67F746B52E459969E9CA8BBE /* ReadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListItem.swift; sourceTree = "<group>"; };
+		787DEFF6EEB8F9E805078DEF /* ReadingListRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepositoryProtocol.swift; sourceTree = "<group>"; };
+		EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepository.swift; sourceTree = "<group>"; };
+		6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListView.swift; sourceTree = "<group>"; };
+		C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +159,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 				FA3351D6DA52134FB293CA14 /* BookmarkRepository.swift */,
 				A07FA3A6707F4CB266EEC658 /* DownloadRepository.swift */,
 				CD900609801A8FE5B707602C /* HistoryRepository.swift */,
+				EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -158,6 +173,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 				3F53760F7CD6555D3DEF9BA2 /* NetworkMonitor.swift */,
 				52A6AAF5D2A3DC8A0A2F2D62 /* NowPlayingManager.swift */,
 				6B2C7CBBD08C16C61CDF9A98 /* TabManager.swift */,
+				EFE9F559CBF7EF391AAE1B3B /* ReaderModeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -196,6 +212,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 				8E1A9C8C792B5EA38C4746A8 /* DownloadItem.swift */,
 				BF4E24555AA33466B4492376 /* HistoryEntry.swift */,
 				CC0351C6032DA49C53695D8D /* Tab.swift */,
+				67F746B52E459969E9CA8BBE /* ReadingListItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,6 +258,8 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				AC6274FA0E44C1D92A9BB453 /* History */,
 				B23DD58565F0CA2712E93C96 /* Media */,
 				EA3AF42C8057C5FD198C7582 /* Onboarding */,
+				READERGRP000000000000001 /* Reader */,
+				READLISTGRP0000000000001 /* ReadingList */,
 				A0DCBE2537C53A9A6B81DB87 /* Settings */,
 				D366B379FC59425070385DCF /* Shared */,
 			);
@@ -334,6 +353,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				0CEEB5C28B610DFB656ABD98 /* BookmarkRepositoryProtocol.swift */,
 				2D16A85CCB4BA04CAD7F378E /* DownloadRepositoryProtocol.swift */,
 				C431C5CABC17C5248CD431E2 /* HistoryRepositoryProtocol.swift */,
+				787DEFF6EEB8F9E805078DEF /* ReadingListRepositoryProtocol.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -365,6 +385,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			children = (
 				06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */,
 				5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */,
+				C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */,
 				3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */,
 				136A896D296C22A0204E85A6 /* TabManagerTests.swift */,
 			);
@@ -378,6 +399,22 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		READERGRP000000000000001 /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				70055DB124D18163F37CF18F /* ReaderModeView.swift */,
+			);
+			path = Reader;
+			sourceTree = "<group>";
+		};
+		READLISTGRP0000000000001 /* ReadingList */ = {
+			isa = PBXGroup;
+			children = (
+				6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */,
+			);
+			path = ReadingList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -511,6 +548,12 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */,
 				A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */,
 				430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */,
+				A1C0303E171AE3594CFEBA92 /* ReaderModeService.swift in Sources */,
+				B5C2131F9942BBE3D7A8CEE3 /* ReaderModeView.swift in Sources */,
+				BE7EADA1C119793104A6F35F /* ReadingListItem.swift in Sources */,
+				73C3353C50E3318F5E18E041 /* ReadingListRepositoryProtocol.swift in Sources */,
+				3FD694990492F49052164757 /* ReadingListRepository.swift in Sources */,
+				D4D9666134B1B6F59D706792 /* ReadingListView.swift in Sources */,
 				7B4CE0547EA90C903E9A53CC /* PlatformLogos.swift in Sources */,
 				A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */,
 			);
@@ -524,6 +567,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				C744641F71783567067DF6D2 /* TabManagerTests.swift in Sources */,
 				943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */,
 				24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */,
+				A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
