@@ -167,6 +167,15 @@ struct VeloBrowserApp: App {
         }
     }
 
+    // MARK: - Widget Data Sync
+
+    /// Syncs privacy stats and bookmarks to the App Group shared container for widgets.
+    private func syncWidgetData() {
+        let adsBlocked = container.adBlockService.totalAdsBlocked
+        let trackersStripped = container.trackingProtectionService.strippedCount
+        WidgetDataSync.syncStats(adsBlocked: adsBlocked, trackersStripped: trackersStripped)
+    }
+
     // MARK: - Scene Phase
 
     /// Handles app lifecycle changes for biometric lock and review prompts.
@@ -174,6 +183,7 @@ struct VeloBrowserApp: App {
         switch phase {
         case .background, .inactive:
             container.appLockService.appDidEnterBackground()
+            syncWidgetData()
         case .active:
             container.appLockService.appDidBecomeActive()
             reviewManager.requestReviewIfAppropriate()

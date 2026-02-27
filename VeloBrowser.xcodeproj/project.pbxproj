@@ -81,6 +81,14 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		DC5EE0C74F020584308F89B5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D6272794F51141D5802ABB05 /* Localizable.xcstrings */; };
 		5F680422E42C02C38E68341E /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */; };
 		B32AF5914E5673009B22C2BF /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16429C16A892F6610F32D86 /* ReviewManager.swift */; };
+		A1DB76AE43F26C0A0763584D /* WidgetDataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */; };
+0EC65507C09887EB8243979F /* VeloBrowserWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */; };
+3079EEC36C86A1D9D44D8156 /* QuickSearchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */; };
+4F41B9BC542A9A94291CA3D6 /* FavoritesGridWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */; };
+B1E2BEBC9E0976D406E56855 /* PrivacyStatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */; };
+884D2C6F5D1C0753F85AD015 /* SharedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */; };
+0BD7E8CD23C7B527737D8D11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EF39994539446C107D03E2 /* Assets.xcassets */; };
+20086A5FA80BF655F2D9BFD4 /* VeloBrowserWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +99,28 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 			remoteGlobalIDString = 66CBAF970BD90622C3254C79;
 			remoteInfo = VeloBrowser;
 		};
+85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */ = {
+isa = PBXContainerItemProxy;
+containerPortal = C88CA87BB3F5765642BE78D3 /* Project object */;
+proxyType = 1;
+remoteGlobalIDString = 868947C76CEA2BBBB3BA8973;
+remoteInfo = VeloBrowserWidgets;
+};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+F6299643EF2F7E10DFDC7FD1 /* Embed App Extensions */ = {
+isa = PBXCopyFilesBuildPhase;
+buildActionMask = 2147483647;
+dstPath = "";
+dstSubfolderSpec = 13;
+files = (
+20086A5FA80BF655F2D9BFD4 /* VeloBrowserWidgets.appex in Embed App Extensions */,
+);
+name = "Embed App Extensions";
+runOnlyForDeploymentPostprocessing = 0;
+};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00B031DAB4FC9CB26EE159C4 /* MediaPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerService.swift; sourceTree = "<group>"; };
@@ -171,6 +200,17 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		D6272794F51141D5802ABB05 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightIndexer.swift; sourceTree = "<group>"; };
 		F16429C16A892F6610F32D86 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloBrowserWidgetsBundle.swift; sourceTree = "<group>"; };
+509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSearchWidget.swift; sourceTree = "<group>"; };
+DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGridWidget.swift; sourceTree = "<group>"; };
+0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyStatsWidget.swift; sourceTree = "<group>"; };
+8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataProvider.swift; sourceTree = "<group>"; };
+14EBEFC8696FADD6C0520E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+E2EF39994539446C107D03E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+FC2DFA0B2256DAC5A4E397B0 /* VeloBrowserWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeloBrowserWidgets.entitlements; sourceTree = "<group>"; };
+0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VeloBrowserWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+1C118F4652F8232ACEC0F69A /* VeloBrowser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeloBrowser.entitlements; sourceTree = "<group>"; };
+5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataSync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +228,13 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+A88C9ECF03B3D100A4B0809A /* Frameworks */ = {
+isa = PBXFrameworksBuildPhase;
+buildActionMask = 2147483647;
+files = (
+);
+runOnlyForDeploymentPostprocessing = 0;
+};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -219,6 +266,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 				179456FF36417004BB5DF235 /* TabSuspensionManager.swift */,
 				C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */,
 				F16429C16A892F6610F32D86 /* ReviewManager.swift */,
+				5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -226,6 +274,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		26EE0F706760CC1E87473DCA = {
 			isa = PBXGroup;
 			children = (
+				9713F1BFB46453663B9B074A /* VeloBrowserWidgets */,
 				6E8932C064D77B9016E0657D /* VeloBrowser */,
 				95F21B59DAACEF6B58749A59 /* VeloBrowserTests */,
 				F8BAFC4040BB9E74AEF9B722 /* Products */,
@@ -265,6 +314,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		6E8932C064D77B9016E0657D /* VeloBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				1C118F4652F8232ACEC0F69A /* VeloBrowser.entitlements */,
 				D6272794F51141D5802ABB05 /* Localizable.xcstrings */,
 				ACB43C1CF7B30BCF3AD9C8BE /* App */,
 				3335A126665160A8A9A6B461 /* Data */,
@@ -450,6 +500,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 		F8BAFC4040BB9E74AEF9B722 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */,
 				5F927EAB0FBC56EEFC72FA8F /* VeloBrowser.app */,
 				292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */,
 			);
@@ -482,6 +533,21 @@ children = (
 path = iPad;
 sourceTree = "<group>";
 };
+9713F1BFB46453663B9B074A /* VeloBrowserWidgets */ = {
+isa = PBXGroup;
+children = (
+80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */,
+509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */,
+DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */,
+0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */,
+8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */,
+14EBEFC8696FADD6C0520E99 /* Info.plist */,
+E2EF39994539446C107D03E2 /* Assets.xcassets */,
+FC2DFA0B2256DAC5A4E397B0 /* VeloBrowserWidgets.entitlements */,
+);
+path = VeloBrowserWidgets;
+sourceTree = "<group>";
+};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -492,10 +558,12 @@ sourceTree = "<group>";
 				20D4A7F60D6350D34201F051 /* Sources */,
 				E0FE87046B94B321B27A2E5B /* Frameworks */,
 				EEBA35FF8AF5F55368336FDD /* Resources */,
+				F6299643EF2F7E10DFDC7FD1 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6CE5CF64BFC1125E62824D23 /* PBXTargetDependency */,
 			);
 			name = VeloBrowser;
 			productName = VeloBrowser;
@@ -519,6 +587,23 @@ sourceTree = "<group>";
 			productReference = 292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+868947C76CEA2BBBB3BA8973 /* VeloBrowserWidgets */ = {
+isa = PBXNativeTarget;
+buildConfigurationList = A8B287E373C538769C76A85E /* Build configuration list for PBXNativeTarget "VeloBrowserWidgets" */;
+buildPhases = (
+3D96C8123F0A80C3DD88B4E8 /* Sources */,
+A88C9ECF03B3D100A4B0809A /* Frameworks */,
+4271397B653F8BD28B702849 /* Resources */,
+);
+buildRules = (
+);
+dependencies = (
+);
+name = VeloBrowserWidgets;
+productName = VeloBrowserWidgets;
+productReference = 0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */;
+productType = "com.apple.product-type.app-extension";
+};
 /* End PBXNativeTarget section */
 
 /* Begin PBXTargetDependency section */
@@ -527,6 +612,11 @@ sourceTree = "<group>";
 			target = 66CBAF970BD90622C3254C79 /* VeloBrowser */;
 			targetProxy = 41CB7E5684EF3BECAF5DFFB0 /* PBXContainerItemProxy */;
 		};
+6CE5CF64BFC1125E62824D23 /* PBXTargetDependency */ = {
+isa = PBXTargetDependency;
+target = 868947C76CEA2BBBB3BA8973 /* VeloBrowserWidgets */;
+targetProxy = 85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */;
+};
 /* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
@@ -557,6 +647,7 @@ sourceTree = "<group>";
 			targets = (
 				66CBAF970BD90622C3254C79 /* VeloBrowser */,
 				F9515ECE56F449DD2B08C043 /* VeloBrowserTests */,
+				868947C76CEA2BBBB3BA8973 /* VeloBrowserWidgets */,
 			);
 		};
 /* End PBXProject section */
@@ -571,6 +662,14 @@ sourceTree = "<group>";
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+4271397B653F8BD28B702849 /* Resources */ = {
+isa = PBXResourcesBuildPhase;
+buildActionMask = 2147483647;
+files = (
+0BD7E8CD23C7B527737D8D11 /* Assets.xcassets in Resources */,
+);
+runOnlyForDeploymentPostprocessing = 0;
+};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -620,6 +719,7 @@ sourceTree = "<group>";
 				A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */,
 				430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */,
 				B32AF5914E5673009B22C2BF /* ReviewManager.swift in Sources */,
+				A1DB76AE43F26C0A0763584D /* WidgetDataSync.swift in Sources */,
 				5F680422E42C02C38E68341E /* SpotlightIndexer.swift in Sources */,
 				7B4E60C121A6C49A646F66BD /* TabSuspensionManager.swift in Sources */,
 				8201BD2625C4755A3256084C /* CacheManagerView.swift in Sources */,
@@ -660,6 +760,18 @@ sourceTree = "<group>";
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+3D96C8123F0A80C3DD88B4E8 /* Sources */ = {
+isa = PBXSourcesBuildPhase;
+buildActionMask = 2147483647;
+files = (
+0EC65507C09887EB8243979F /* VeloBrowserWidgetsBundle.swift in Sources */,
+3079EEC36C86A1D9D44D8156 /* QuickSearchWidget.swift in Sources */,
+4F41B9BC542A9A94291CA3D6 /* FavoritesGridWidget.swift in Sources */,
+B1E2BEBC9E0976D406E56855 /* PrivacyStatsWidget.swift in Sources */,
+884D2C6F5D1C0753F85AD015 /* SharedDataProvider.swift in Sources */,
+);
+runOnlyForDeploymentPostprocessing = 0;
+};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -667,6 +779,7 @@ sourceTree = "<group>";
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VeloBrowser/VeloBrowser.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6Z82T2F75B;
@@ -694,6 +807,7 @@ sourceTree = "<group>";
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VeloBrowser/VeloBrowser.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6Z82T2F75B;
@@ -808,6 +922,64 @@ sourceTree = "<group>";
 			};
 			name = Release;
 		};
+8F8FC8E0B8328E0F63AB06D7 /* Debug */ = {
+isa = XCBuildConfiguration;
+buildSettings = {
+ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+CODE_SIGN_ENTITLEMENTS = VeloBrowserWidgets/VeloBrowserWidgets.entitlements;
+CODE_SIGN_STYLE = Automatic;
+CURRENT_PROJECT_VERSION = 1;
+DEVELOPMENT_TEAM = 6Z82T2F75B;
+GENERATE_INFOPLIST_FILE = NO;
+INFOPLIST_FILE = VeloBrowserWidgets/Info.plist;
+INFOPLIST_KEY_CFBundleDisplayName = "VeloBrowser Widgets";
+INFOPLIST_KEY_NSHumanReadableCopyright = "";
+LD_RUNPATH_SEARCH_PATHS = (
+"$(inherited)",
+"@executable_path/Frameworks",
+"@executable_path/../../Frameworks",
+);
+MARKETING_VERSION = 1.0.0;
+PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.widgets;
+PRODUCT_NAME = "$(TARGET_NAME)";
+SKIP_INSTALL = YES;
+SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+SUPPORTS_MACCATALYST = NO;
+SWIFT_EMIT_LOC_STRINGS = YES;
+TARGETED_DEVICE_FAMILY = "1,2";
+};
+name = Debug;
+};
+01446A9596FFE92082311C3C /* Release */ = {
+isa = XCBuildConfiguration;
+buildSettings = {
+ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+CODE_SIGN_ENTITLEMENTS = VeloBrowserWidgets/VeloBrowserWidgets.entitlements;
+CODE_SIGN_STYLE = Automatic;
+CURRENT_PROJECT_VERSION = 1;
+DEVELOPMENT_TEAM = 6Z82T2F75B;
+GENERATE_INFOPLIST_FILE = NO;
+INFOPLIST_FILE = VeloBrowserWidgets/Info.plist;
+INFOPLIST_KEY_CFBundleDisplayName = "VeloBrowser Widgets";
+INFOPLIST_KEY_NSHumanReadableCopyright = "";
+LD_RUNPATH_SEARCH_PATHS = (
+"$(inherited)",
+"@executable_path/Frameworks",
+"@executable_path/../../Frameworks",
+);
+MARKETING_VERSION = 1.0.0;
+PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.widgets;
+PRODUCT_NAME = "$(TARGET_NAME)";
+SKIP_INSTALL = YES;
+SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+SUPPORTS_MACCATALYST = NO;
+SWIFT_EMIT_LOC_STRINGS = YES;
+TARGETED_DEVICE_FAMILY = "1,2";
+};
+name = Release;
+};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -838,6 +1010,15 @@ sourceTree = "<group>";
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+A8B287E373C538769C76A85E /* Build configuration list for PBXNativeTarget "VeloBrowserWidgets" */ = {
+isa = XCConfigurationList;
+buildConfigurations = (
+8F8FC8E0B8328E0F63AB06D7 /* Debug */,
+01446A9596FFE92082311C3C /* Release */,
+);
+defaultConfigurationIsVisible = 0;
+defaultConfigurationName = Release;
+};
 /* End XCConfigurationList section */
 	};
 	rootObject = C88CA87BB3F5765642BE78D3 /* Project object */;
