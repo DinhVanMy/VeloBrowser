@@ -82,6 +82,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		5F680422E42C02C38E68341E /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */; };
 		B32AF5914E5673009B22C2BF /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16429C16A892F6610F32D86 /* ReviewManager.swift */; };
 		A1DB76AE43F26C0A0763584D /* WidgetDataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */; };
+		8D6F3B9D07914747B8F6F1BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7267DF417CD060CC52F641D3 /* LaunchScreen.storyboard */; };
 0EC65507C09887EB8243979F /* VeloBrowserWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */; };
 3079EEC36C86A1D9D44D8156 /* QuickSearchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */; };
 4F41B9BC542A9A94291CA3D6 /* FavoritesGridWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */; };
@@ -211,6 +212,7 @@ FC2DFA0B2256DAC5A4E397B0 /* VeloBrowserWidgets.entitlements */ = {isa = PBXFileR
 0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VeloBrowserWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 1C118F4652F8232ACEC0F69A /* VeloBrowser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeloBrowser.entitlements; sourceTree = "<group>"; };
 5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataSync.swift; sourceTree = "<group>"; };
+7267DF417CD060CC52F641D3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +391,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			children = (
 				E1D748B58AD8AF3709C24610 /* Assets.xcassets */,
 				78E659AC4475569097B5725E /* Info.plist */,
+				7267DF417CD060CC52F641D3 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@ targetProxy = 85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */;
 			files = (
 				DC5EE0C74F020584308F89B5 /* Localizable.xcstrings in Resources */,
 				8B3DFD9F6EE6B0271AC9EE70 /* Assets.xcassets in Resources */,
+				8D6F3B9D07914747B8F6F1BE /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,7 +791,7 @@ runOnlyForDeploymentPostprocessing = 0;
 				INFOPLIST_FILE = VeloBrowser/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -815,7 +819,7 @@ runOnlyForDeploymentPostprocessing = 0;
 				INFOPLIST_FILE = VeloBrowser/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

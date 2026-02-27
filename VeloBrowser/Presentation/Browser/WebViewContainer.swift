@@ -133,6 +133,16 @@ struct WebViewContainer: UIViewRepresentable {
             config.websiteDataStore = .nonPersistent()
         }
 
+        // Background audio: prevent sites from detecting backgrounded state
+        // Must be injected at documentStart (before site scripts load) so
+        // YouTube and similar sites cannot pause media on visibilitychange.
+        let backgroundAudioScript = WKUserScript(
+            source: Self.backgroundAudioJS,
+            injectionTime: .atDocumentStart,
+            forMainFrameOnly: false
+        )
+        config.userContentController.addUserScript(backgroundAudioScript)
+
         // Add ad-block counter script
         let counterScript = WKUserScript(
             source: Self.adBlockCounterJS,
@@ -267,6 +277,51 @@ struct WebViewContainer: UIViewRepresentable {
                 img.setAttribute('loading', 'lazy');
             }
         });
+    })();
+    """
+
+    /// JavaScript injected at documentStart to prevent sites (YouTube, etc.)
+    /// from pausing media when the app enters background.
+    ///
+    /// Overrides `document.hidden` and `document.visibilityState` to always
+    /// report "visible", and blocks `visibilitychange` events from reaching
+    /// site scripts. This allows WKWebView audio to continue playing via
+    /// the background audio session.
+    private static let backgroundAudioJS = """
+    (function() {
+        // Override visibility API so sites think the page is always visible
+        Object.defineProperty(document, 'hidden', {
+            get: function() { return false; },
+            configurable: true
+        });
+        Object.defineProperty(document, 'visibilityState', {
+            get: function() { return 'visible'; },
+            configurable: true
+        });
+        Object.defineProperty(document, 'webkitHidden', {
+            get: function() { return false; },
+            configurable: true
+        });
+
+        // Intercept and block visibilitychange events from reaching site scripts
+        document.addEventListener('visibilitychange', function(e) {
+            e.stopImmediatePropagation();
+        }, true);
+        document.addEventListener('webkitvisibilitychange', function(e) {
+            e.stopImmediatePropagation();
+        }, true);
+
+        // Also override the Page Visibility API on window for edge cases
+        window.addEventListener('blur', function(e) {
+            e.stopImmediatePropagation();
+        }, true);
+        window.addEventListener('focus', function(e) {
+            e.stopImmediatePropagation();
+        }, true);
+
+        // Override hasFocus to always return true
+        var origHasFocus = document.hasFocus;
+        document.hasFocus = function() { return true; };
     })();
     """
 

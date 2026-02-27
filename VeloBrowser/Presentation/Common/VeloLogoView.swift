@@ -12,14 +12,14 @@ struct VeloLogoView: View {
 
     var body: some View {
         ZStack {
-            // Gradient background circle
+            // Gradient background circle — matches AppIcon gradient
             Circle()
                 .fill(
                     LinearGradient(
                         colors: [
-                            Color(red: 0.11, green: 0.20, blue: 0.46),
-                            Color(red: 0.20, green: 0.42, blue: 0.85),
-                            Color(red: 0.30, green: 0.60, blue: 0.95)
+                            Color(red: 28/255, green: 51/255, blue: 117/255),
+                            Color(red: 51/255, green: 107/255, blue: 217/255),
+                            Color(red: 77/255, green: 153/255, blue: 242/255)
                         ],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
@@ -29,7 +29,7 @@ struct VeloLogoView: View {
             // Stylized "V" shape
             VeloVShape()
                 .fill(.white)
-                .frame(width: size * 0.5, height: size * 0.45)
+                .frame(width: size * 0.5, height: size * 0.56)
                 .offset(y: -size * 0.01)
 
             // Small speed accent lines
@@ -54,14 +54,14 @@ private struct VeloVShape: Shape {
         let w = rect.width
         let h = rect.height
 
-        // Stylized V with slightly rounded edges
+        // Stylized V matching the app icon proportions
         path.move(to: CGPoint(x: w * 0.0, y: h * 0.0))
-        path.addLine(to: CGPoint(x: w * 0.2, y: h * 0.0))
-        path.addLine(to: CGPoint(x: w * 0.5, y: h * 0.82))
-        path.addLine(to: CGPoint(x: w * 0.8, y: h * 0.0))
+        path.addLine(to: CGPoint(x: w * 0.24, y: h * 0.0))
+        path.addLine(to: CGPoint(x: w * 0.5, y: h * 0.857))
+        path.addLine(to: CGPoint(x: w * 0.76, y: h * 0.0))
         path.addLine(to: CGPoint(x: w * 1.0, y: h * 0.0))
-        path.addLine(to: CGPoint(x: w * 0.58, y: h * 1.0))
-        path.addLine(to: CGPoint(x: w * 0.42, y: h * 1.0))
+        path.addLine(to: CGPoint(x: w * 0.56, y: h * 1.0))
+        path.addLine(to: CGPoint(x: w * 0.44, y: h * 1.0))
         path.closeSubpath()
         return path
     }

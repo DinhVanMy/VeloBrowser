@@ -183,6 +183,7 @@ struct VeloBrowserApp: App {
         switch phase {
         case .background, .inactive:
             container.appLockService.appDidEnterBackground()
+            container.tabManager.saveTabs()
             syncWidgetData()
         case .active:
             container.appLockService.appDidBecomeActive()

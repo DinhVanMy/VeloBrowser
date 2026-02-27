@@ -85,8 +85,97 @@ final class TabManager: TabManagerProtocol {
     /// - Parameter historyRepository: Repository for recording browsing history in tab view models.
     init(historyRepository: HistoryRepositoryProtocol) {
         self.historyRepository = historyRepository
-        // Create initial tab
-        createTab(url: nil, isPrivate: false)
+        // Restore persisted tabs or create initial blank tab
+        if !restoreTabs() {
+            createTab(url: nil, isPrivate: false)
+        }
+    }
+
+    // MARK: - Tab Persistence
+
+    /// Key used to store tab data in UserDefaults.
+    private static let tabsStorageKey = "persistedTabs"
+
+    /// Lightweight structure for serializing tab state to disk.
+    private struct PersistedTab: Codable {
+        let urlString: String?
+        let title: String
+        let isActive: Bool
+    }
+
+    /// Saves the current non-private tabs to UserDefaults.
+    ///
+    /// Call this when the app enters the background or is about to terminate.
+    /// Private tabs are intentionally NOT persisted.
+    func saveTabs() {
+        let persistable = tabs.compactMap { tab -> PersistedTab? in
+            guard !tab.isPrivate else { return nil }
+            return PersistedTab(
+                urlString: tab.url?.absoluteString,
+                title: tab.title,
+                isActive: tab.isActive
+            )
+        }
+        guard !persistable.isEmpty else { return }
+        if let data = try? JSONEncoder().encode(persistable) {
+            UserDefaults.standard.set(data, forKey: Self.tabsStorageKey)
+        }
+    }
+
+    /// Restores previously saved tabs from UserDefaults.
+    ///
+    /// - Returns: `true` if tabs were successfully restored.
+    @discardableResult
+    private func restoreTabs() -> Bool {
+        guard let data = UserDefaults.standard.data(forKey: Self.tabsStorageKey),
+              let persisted = try? JSONDecoder().decode([PersistedTab].self, from: data),
+              !persisted.isEmpty else {
+            return false
+        }
+
+        // Clear storage after reading to avoid stale state
+        UserDefaults.standard.removeObject(forKey: Self.tabsStorageKey)
+
+        var restoredAny = false
+        var hasActiveTab = false
+
+        for saved in persisted {
+            let url = saved.urlString.flatMap { URL(string: $0) }
+            let tab = Tab(
+                url: url,
+                title: saved.title,
+                isPrivate: false,
+                isActive: saved.isActive,
+                createdAt: .now,
+                lastAccessedAt: .now
+            )
+
+            if tab.isActive {
+                // Deactivate any previously active tab
+                for index in tabs.indices { tabs[index].isActive = false }
+                hasActiveTab = true
+            }
+
+            tabs.append(tab)
+
+            let vm = BrowserViewModel(
+                historyRepository: historyRepository,
+                searchEngineTemplate: searchEngineTemplate,
+                isPrivate: false
+            )
+            if let url {
+                vm.loadURL(url)
+            }
+            viewModels[tab.id] = vm
+            restoredAny = true
+        }
+
+        // Ensure at least one tab is active
+        if restoredAny && !hasActiveTab {
+            tabs[tabs.count - 1].isActive = true
+        }
+
+        return restoredAny
     }
 
     // MARK: - Tab Operations
