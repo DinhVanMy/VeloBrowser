@@ -32,8 +32,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <!-- Deep navy blue background matching Velo brand -->
-                        <color key="backgroundColor" red="0.11" green="0.20" blue="0.46" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <!-- Dark navy background matching Velo brand logo -->
+                        <color key="backgroundColor" red="0.004" green="0.020" blue="0.114" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <!-- Logo: center horizontally and vertically (offset -20 to leave room for text) -->
                             <constraint firstItem="velo-logo-img" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="logo-cx"/>
