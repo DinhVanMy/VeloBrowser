@@ -40,6 +40,7 @@ struct TabSwitcherView: View {
                             TabThumbnailView(
                                 tab: tab,
                                 isActive: tab.isActive,
+                                snapshot: tabManager.snapshots[tab.id],
                                 onSelect: {
                                     tabManager.switchToTab(id: tab.id)
                                     dismiss()
@@ -112,6 +113,7 @@ struct TabSwitcherView: View {
 struct TabThumbnailView: View {
     let tab: Tab
     let isActive: Bool
+    let snapshot: UIImage?
     let onSelect: () -> Void
     let onClose: () -> Void
 
@@ -163,7 +165,13 @@ struct TabThumbnailView: View {
                 ZStack {
                     DesignSystem.Colors.backgroundPrimary
 
-                    if let url = tab.url {
+                    if let snapshot {
+                        Image(uiImage: snapshot)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 160)
+                            .clipped()
+                    } else if let url = tab.url {
                         VStack(spacing: DesignSystem.Spacing.sm) {
                             Image(systemName: "globe")
                                 .font(.title)

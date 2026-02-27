@@ -65,9 +65,17 @@ struct DownloadsView: View {
     private var downloadList: some View {
         List {
             ForEach(downloadManager.downloads) { item in
-                DownloadRowView(item: item) {
-                    downloadManager.cancelDownload(id: item.id)
-                }
+                DownloadRowView(
+                    item: item,
+                    onCancel: {
+                        downloadManager.cancelDownload(id: item.id)
+                    },
+                    onRetry: item.status == .failed ? {
+                        Task {
+                            await downloadManager.startDownload(url: item.sourceURL)
+                        }
+                    } : nil
+                )
             }
             .onDelete { indexSet in
                 let ids = indexSet.map { downloadManager.downloads[$0].id }
@@ -86,6 +94,7 @@ struct DownloadsView: View {
 struct DownloadRowView: View {
     let item: DownloadItem
     var onCancel: () -> Void
+    var onRetry: (() -> Void)?
 
     var body: some View {
         VStack(alignment: .leading, spacing: DesignSystem.Spacing.xs) {
@@ -164,9 +173,20 @@ struct DownloadRowView: View {
             .font(DesignSystem.Typography.caption)
             .foregroundStyle(DesignSystem.Colors.textSecondary)
         case .failed:
-            Text("Failed")
-                .font(DesignSystem.Typography.caption)
-                .foregroundStyle(DesignSystem.Colors.destructive)
+            HStack(spacing: DesignSystem.Spacing.xs) {
+                Text("Failed")
+                    .font(DesignSystem.Typography.caption)
+                    .foregroundStyle(DesignSystem.Colors.destructive)
+
+                if let onRetry {
+                    Button(action: onRetry) {
+                        Label("Retry", systemImage: "arrow.clockwise")
+                            .font(DesignSystem.Typography.caption)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.mini)
+                }
+            }
         case .cancelled:
             Text("Cancelled")
                 .font(DesignSystem.Typography.caption)

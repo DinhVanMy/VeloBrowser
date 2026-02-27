@@ -10,6 +10,7 @@
 		0A008D6394D27A7E7D4E70C0 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B8B08D88CBAC11AC86697C /* Bookmark.swift */; };
 		23D34CA1BF943EDA085E208C /* AddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51682E218C32EFC7863B0C0 /* AddressBarView.swift */; };
 		33F52EA7BBAE29867D31FFE9 /* NewTabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57CCD668609986C1E1B706C /* NewTabPageView.swift */; };
+		B8E6B75694DF1D26ABAAAE14 /* FindInPageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D5082F083188926383C0C /* FindInPageBar.swift */; };
 		3039531D7E7D0EE16F9EEE6B /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0351C6032DA49C53695D8D /* Tab.swift */; };
 		3451BBC5E842F39E64D189B3 /* MediaPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B031DAB4FC9CB26EE159C4 /* MediaPlayerService.swift */; };
 		430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C7CBBD08C16C61CDF9A98 /* TabManager.swift */; };
@@ -103,6 +104,7 @@
 		E1D748B58AD8AF3709C24610 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E51682E218C32EFC7863B0C0 /* AddressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBarView.swift; sourceTree = "<group>"; };
 		C57CCD668609986C1E1B706C /* NewTabPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTabPageView.swift; sourceTree = "<group>"; };
+		A89D5082F083188926383C0C /* FindInPageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindInPageBar.swift; sourceTree = "<group>"; };
 		E5B8B08D88CBAC11AC86697C /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		EDA1CD63A29D1A0A8A4A3B95 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EEE76A92BEA5432772B5C9F5 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				E51682E218C32EFC7863B0C0 /* AddressBarView.swift */,
 				8B13C9BEDF0E7CA0D603694C /* BrowserView.swift */,
 				C57CCD668609986C1E1B706C /* NewTabPageView.swift */,
+				A89D5082F083188926383C0C /* FindInPageBar.swift */,
 				F9D5CAA5C5A3F441926AC7E5 /* BrowserViewModel.swift */,
 				5671C9EA50BCB2FAC5D47A31 /* TabSwitcherView.swift */,
 				C5753E18D949E901BAE7B204 /* WebViewContainer.swift */,
@@ -472,6 +475,7 @@
 				23D34CA1BF943EDA085E208C /* AddressBarView.swift in Sources */,
 				88DF2D7FBAD70756F6881F18 /* BrowserView.swift in Sources */,
 				33F52EA7BBAE29867D31FFE9 /* NewTabPageView.swift in Sources */,
+				B8E6B75694DF1D26ABAAAE14 /* FindInPageBar.swift in Sources */,
 				71C55FAB530E8FC3C808730B /* BrowserViewModel.swift in Sources */,
 				D2C21078BF183C41E9AF1206 /* TabSwitcherView.swift in Sources */,
 				59158E94CD67388A18D9F24A /* WebViewContainer.swift in Sources */,

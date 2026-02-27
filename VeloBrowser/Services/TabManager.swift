@@ -62,6 +62,9 @@ final class TabManager: TabManagerProtocol {
     /// View models keyed by tab ID.
     private(set) var viewModels: [UUID: BrowserViewModel] = [:]
 
+    /// Tab page snapshots keyed by tab ID.
+    private(set) var snapshots: [UUID: UIImage] = [:]
+
     /// The view model for the active tab.
     var activeViewModel: BrowserViewModel? {
         guard let tab = activeTab else { return nil }
@@ -170,6 +173,7 @@ final class TabManager: TabManagerProtocol {
         let wasActive = tabs[index].isActive
         tabs.remove(at: index)
         viewModels.removeValue(forKey: id)
+        snapshots.removeValue(forKey: id)
 
         if tabs.isEmpty {
             // Always keep at least one tab
@@ -185,10 +189,30 @@ final class TabManager: TabManagerProtocol {
         }
     }
 
+    /// Captures a snapshot of the current tab's web view.
+    func captureSnapshot(for tabID: UUID) {
+        guard let vm = viewModels[tabID], let webView = vm.webView else { return }
+        let config = WKSnapshotConfiguration()
+        webView.takeSnapshot(with: config) { [weak self] image, _ in
+            Task { @MainActor in
+                if let image {
+                    self?.snapshots[tabID] = image
+                }
+            }
+        }
+    }
+
     /// Switches to a tab by its ID.
+    ///
+    /// Captures a snapshot of the current tab before switching.
     ///
     /// - Parameter id: The tab ID to make active.
     func switchToTab(id: UUID) {
+        // Capture snapshot of the outgoing tab
+        if let currentTab = activeTab, currentTab.id != id {
+            captureSnapshot(for: currentTab.id)
+        }
+
         for index in tabs.indices {
             let isTarget = tabs[index].id == id
             tabs[index].isActive = isTarget

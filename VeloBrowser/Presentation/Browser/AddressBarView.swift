@@ -75,12 +75,20 @@ struct AddressBarView: View {
             .clipShape(RoundedRectangle(cornerRadius: DesignSystem.Radius.button))
             .padding(.horizontal, DesignSystem.Spacing.md)
 
-            // Loading progress bar
+            // Loading progress bar — thin accent-colored bar
             if viewModel.isLoading {
-                ProgressView(value: viewModel.loadingProgress)
-                    .tint(DesignSystem.Colors.accent)
-                    .padding(.horizontal, DesignSystem.Spacing.md)
-                    .transition(.opacity)
+                GeometryReader { geometry in
+                    Rectangle()
+                        .fill(DesignSystem.Colors.accent)
+                        .frame(
+                            width: geometry.size.width * viewModel.loadingProgress,
+                            height: 2
+                        )
+                        .animation(.easeInOut(duration: 0.2), value: viewModel.loadingProgress)
+                }
+                .frame(height: 2)
+                .padding(.horizontal, DesignSystem.Spacing.md)
+                .transition(.opacity)
             }
         }
         .animation(.easeOut(duration: DesignSystem.AnimationDuration.fast), value: viewModel.isLoading)

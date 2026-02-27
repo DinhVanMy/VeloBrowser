@@ -22,11 +22,21 @@ struct BrowserView: View {
     var tabCount: Int
 
     @State private var showTabLimitAlert = false
+    @State private var showFindInPage = false
     @AppStorage("javaScriptEnabled") private var javaScriptEnabled: Bool = true
 
     var body: some View {
         ZStack(alignment: .bottom) {
             VStack(spacing: 0) {
+                // Find in page bar
+                if showFindInPage {
+                    FindInPageBar(
+                        isVisible: $showFindInPage,
+                        webView: viewModel.webView
+                    )
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                }
+
                 // Collapsible address bar
                 if viewModel.isToolbarVisible {
                     AddressBarView(viewModel: viewModel)
@@ -159,10 +169,30 @@ struct BrowserView: View {
 
     private var bottomToolbar: some View {
         HStack {
-            // Back
-            toolbarButton(icon: "chevron.left", label: "Back", disabled: !viewModel.canGoBack) {
+            // Back — long-press shows history
+            Menu {
+                // Long-press shows back list
+                ForEach(viewModel.backList) { item in
+                    Button {
+                        viewModel.goToBackForwardItem(url: item.url)
+                    } label: {
+                        Text(item.title)
+                    }
+                }
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.body)
+                    .foregroundStyle(
+                        viewModel.canGoBack ? DesignSystem.Colors.textPrimary : DesignSystem.Colors.textTertiary
+                    )
+                    .frame(minWidth: DesignSystem.minimumTouchTarget,
+                           minHeight: DesignSystem.minimumTouchTarget)
+                    .contentShape(Rectangle())
+            } primaryAction: {
                 viewModel.goBack()
             }
+            .disabled(!viewModel.canGoBack)
+            .accessibilityLabel("Back")
 
             Spacer()
 
@@ -254,6 +284,14 @@ struct BrowserView: View {
                     }
                 } label: {
                     Label("Play in Background", systemImage: "play.circle")
+                }
+
+                Button {
+                    withAnimation(.easeOut(duration: DesignSystem.AnimationDuration.fast)) {
+                        showFindInPage = true
+                    }
+                } label: {
+                    Label("Find on Page", systemImage: "doc.text.magnifyingglass")
                 }
             }
 

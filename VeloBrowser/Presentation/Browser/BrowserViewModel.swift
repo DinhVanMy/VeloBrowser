@@ -199,6 +199,33 @@ final class BrowserViewModel {
         }
     }
 
+    // MARK: - Back/Forward List
+
+    /// A simplified representation of a back/forward list item.
+    struct BackForwardItem: Identifiable {
+        let id = UUID()
+        let url: URL
+        let title: String
+    }
+
+    /// Returns the back list from the WKWebView's backForwardList.
+    var backList: [BackForwardItem] {
+        guard let webView else { return [] }
+        return webView.backForwardList.backList.reversed().map {
+            BackForwardItem(url: $0.url, title: $0.title ?? $0.url.host() ?? $0.url.absoluteString)
+        }
+    }
+
+    /// Navigates directly to a WKBackForwardList item by URL.
+    func goToBackForwardItem(url: URL) {
+        guard let webView else { return }
+        if let item = webView.backForwardList.backList.first(where: { $0.url == url }) {
+            webView.go(to: item)
+        } else if let item = webView.backForwardList.forwardList.first(where: { $0.url == url }) {
+            webView.go(to: item)
+        }
+    }
+
     // MARK: - Private
 
     /// Safe fallback URL for cases where URL construction fails.
