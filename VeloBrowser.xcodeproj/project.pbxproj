@@ -1,0 +1,691 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A008D6394D27A7E7D4E70C0 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B8B08D88CBAC11AC86697C /* Bookmark.swift */; };
+		23D34CA1BF943EDA085E208C /* AddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51682E218C32EFC7863B0C0 /* AddressBarView.swift */; };
+		33F52EA7BBAE29867D31FFE9 /* NewTabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57CCD668609986C1E1B706C /* NewTabPageView.swift */; };
+		3039531D7E7D0EE16F9EEE6B /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0351C6032DA49C53695D8D /* Tab.swift */; };
+		3451BBC5E842F39E64D189B3 /* MediaPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B031DAB4FC9CB26EE159C4 /* MediaPlayerService.swift */; };
+		430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C7CBBD08C16C61CDF9A98 /* TabManager.swift */; };
+		4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F53760F7CD6555D3DEF9BA2 /* NetworkMonitor.swift */; };
+		45773CF9D5618629E86DDC71 /* DownloadRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D16A85CCB4BA04CAD7F378E /* DownloadRepositoryProtocol.swift */; };
+		4C5F4511185F63D51D95817D /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4E24555AA33466B4492376 /* HistoryEntry.swift */; };
+		5078F20075959319F3B03367 /* DownloadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122132FB187F1627F93D39C6 /* DownloadsView.swift */; };
+		51EEB5F63067C590C27A23B8 /* DownloadRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FA3A6707F4CB266EEC658 /* DownloadRepository.swift */; };
+		539AD0C6201C5FBA17C457B7 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4C923FEC18DCF21F8F1F3 /* UserDefaultsStore.swift */; };
+		54D6E2B528652E4EE505457C /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39115E179B2AE1780690687B /* NowPlayingView.swift */; };
+		59158E94CD67388A18D9F24A /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5753E18D949E901BAE7B204 /* WebViewContainer.swift */; };
+		5E2B4B4F6AD3B62BD1ACE2BC /* BookmarkRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEEB5C28B610DFB656ABD98 /* BookmarkRepositoryProtocol.swift */; };
+		61FCDF4ADF9485ABD36B21DC /* FirstLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC49F63F02D67505F3D593D1 /* FirstLaunchView.swift */; };
+		71C55FAB530E8FC3C808730B /* BrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5CAA5C5A3F441926AC7E5 /* BrowserViewModel.swift */; };
+		823F29975FE4F93F3F88FD5A /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E050D8D6456447838CD19A1 /* ShareSheet.swift */; };
+		8539813F15ED4044C288CE38 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DB71B431DA1BE198E9CD4 /* AppCoordinator.swift */; };
+		88DF2D7FBAD70756F6881F18 /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13C9BEDF0E7CA0D603694C /* BrowserView.swift */; };
+		8B3DFD9F6EE6B0271AC9EE70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D748B58AD8AF3709C24610 /* Assets.xcassets */; };
+		8D33D867629EDCC1826E6FC1 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41224F4BA1C865D982EC3DF5 /* ColorPalette.swift */; };
+		99F6EC3376648C754BE7EE61 /* MiniPlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103770E93A2192B45FF56F56 /* MiniPlayerBar.swift */; };
+		9E50ACDE6170026F398448E5 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0318798FD561FA4712CF /* BookmarksView.swift */; };
+		A4FB66BEA54ED1ADB490F6D3 /* AdBlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BB7FBFA121175B348198A /* AdBlockService.swift */; };
+		A54D00EFA667EAC2FD240BCE /* SwiftDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0CF1267B0CEE6930602CF /* SwiftDataStore.swift */; };
+		A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A6AAF5D2A3DC8A0A2F2D62 /* NowPlayingManager.swift */; };
+		B49C86E56803F57FAF4F7154 /* PiPPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C414BE1810CFE0CA048AB44 /* PiPPlayerView.swift */; };
+		B7B2A49CD8CCE3457BC31EF2 /* HistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900609801A8FE5B707602C /* HistoryRepository.swift */; };
+		BB0A20CAFFF26F8D195604A5 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B505721FC675032497D79 /* DIContainer.swift */; };
+		BB2F3C86A275A74F1B7075EB /* DownloadManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF800E052C5399F1FF6ADE /* DownloadManagerService.swift */; };
+		CB2EE7963C4B0FA3D5F9D4C6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA1CD63A29D1A0A8A4A3B95 /* Theme.swift */; };
+		CB924DF94D28FA035405D22E /* BookmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3351D6DA52134FB293CA14 /* BookmarkRepository.swift */; };
+		D2C21078BF183C41E9AF1206 /* TabSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671C9EA50BCB2FAC5D47A31 /* TabSwitcherView.swift */; };
+		DA31D345474259741D98678E /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE76A92BEA5432772B5C9F5 /* Typography.swift */; };
+		DB61D8C48F7DF24CB3B12A04 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285DBB4F92340576E80A2727 /* HapticManager.swift */; };
+		E140E3F0496E12D3EA69D707 /* VeloBrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F46AC1BF1ADB318962CFB9 /* VeloBrowserApp.swift */; };
+		E3498A711DB2FE67B4ED7998 /* HistoryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431C5CABC17C5248CD431E2 /* HistoryRepositoryProtocol.swift */; };
+		E7284B92505F54F709EAFD72 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647BE74420607CC194045AE3 /* HistoryView.swift */; };
+		F22261CDCFF1BEBDFDBCAB76 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300DAC4D05673DF80F035CAF /* SettingsView.swift */; };
+		FADD4BBA70C218DCFAC7864E /* DownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A9C8C792B5EA38C4746A8 /* DownloadItem.swift */; };
+		6FF1EC6D2241ED2CE5B761D1 /* BrowserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */; };
+		C744641F71783567067DF6D2 /* TabManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A896D296C22A0204E85A6 /* TabManagerTests.swift */; };
+		943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */; };
+		24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		41CB7E5684EF3BECAF5DFFB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88CA87BB3F5765642BE78D3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66CBAF970BD90622C3254C79;
+			remoteInfo = VeloBrowser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00B031DAB4FC9CB26EE159C4 /* MediaPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerService.swift; sourceTree = "<group>"; };
+		033B0318798FD561FA4712CF /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		0CEEB5C28B610DFB656ABD98 /* BookmarkRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepositoryProtocol.swift; sourceTree = "<group>"; };
+		0E050D8D6456447838CD19A1 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		0E3B505721FC675032497D79 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		103770E93A2192B45FF56F56 /* MiniPlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerBar.swift; sourceTree = "<group>"; };
+		122132FB187F1627F93D39C6 /* DownloadsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsView.swift; sourceTree = "<group>"; };
+		25F46AC1BF1ADB318962CFB9 /* VeloBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloBrowserApp.swift; sourceTree = "<group>"; };
+		285DBB4F92340576E80A2727 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		2D16A85CCB4BA04CAD7F378E /* DownloadRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRepositoryProtocol.swift; sourceTree = "<group>"; };
+		300DAC4D05673DF80F035CAF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		39115E179B2AE1780690687B /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
+		3F53760F7CD6555D3DEF9BA2 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		41224F4BA1C865D982EC3DF5 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		46F0CF1267B0CEE6930602CF /* SwiftDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataStore.swift; sourceTree = "<group>"; };
+		52A6AAF5D2A3DC8A0A2F2D62 /* NowPlayingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingManager.swift; sourceTree = "<group>"; };
+		5671C9EA50BCB2FAC5D47A31 /* TabSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitcherView.swift; sourceTree = "<group>"; };
+		5C414BE1810CFE0CA048AB44 /* PiPPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPPlayerView.swift; sourceTree = "<group>"; };
+		5F927EAB0FBC56EEFC72FA8F /* VeloBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeloBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		647BE74420607CC194045AE3 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		6B2C7CBBD08C16C61CDF9A98 /* TabManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManager.swift; sourceTree = "<group>"; };
+		6E1BB7FBFA121175B348198A /* AdBlockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockService.swift; sourceTree = "<group>"; };
+		78E659AC4475569097B5725E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B13C9BEDF0E7CA0D603694C /* BrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
+		8E1A9C8C792B5EA38C4746A8 /* DownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadItem.swift; sourceTree = "<group>"; };
+		A07FA3A6707F4CB266EEC658 /* DownloadRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRepository.swift; sourceTree = "<group>"; };
+		AC49F63F02D67505F3D593D1 /* FirstLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchView.swift; sourceTree = "<group>"; };
+		B3E4C923FEC18DCF21F8F1F3 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
+		BF4E24555AA33466B4492376 /* HistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntry.swift; sourceTree = "<group>"; };
+		C431C5CABC17C5248CD431E2 /* HistoryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRepositoryProtocol.swift; sourceTree = "<group>"; };
+		C5753E18D949E901BAE7B204 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
+		C87DB71B431DA1BE198E9CD4 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		CBAF800E052C5399F1FF6ADE /* DownloadManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManagerService.swift; sourceTree = "<group>"; };
+		CC0351C6032DA49C53695D8D /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		CD900609801A8FE5B707602C /* HistoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRepository.swift; sourceTree = "<group>"; };
+		E1D748B58AD8AF3709C24610 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E51682E218C32EFC7863B0C0 /* AddressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBarView.swift; sourceTree = "<group>"; };
+		C57CCD668609986C1E1B706C /* NewTabPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTabPageView.swift; sourceTree = "<group>"; };
+		E5B8B08D88CBAC11AC86697C /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		EDA1CD63A29D1A0A8A4A3B95 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		EEE76A92BEA5432772B5C9F5 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		F9D5CAA5C5A3F441926AC7E5 /* BrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewModel.swift; sourceTree = "<group>"; };
+		FA3351D6DA52134FB293CA14 /* BookmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepository.swift; sourceTree = "<group>"; };
+		06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockServiceTests.swift; sourceTree = "<group>"; };
+		136A896D296C22A0204E85A6 /* TabManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManagerTests.swift; sourceTree = "<group>"; };
+		292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeloBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewModelTests.swift; sourceTree = "<group>"; };
+		5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepositoryTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E0FE87046B94B321B27A2E5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EFFE7AE1C97EDBC33A6CC8F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1505A8EE024071D64563D061 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				FA3351D6DA52134FB293CA14 /* BookmarkRepository.swift */,
+				A07FA3A6707F4CB266EEC658 /* DownloadRepository.swift */,
+				CD900609801A8FE5B707602C /* HistoryRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		1FF40DB5083ADBAFCDA5B611 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6E1BB7FBFA121175B348198A /* AdBlockService.swift */,
+				CBAF800E052C5399F1FF6ADE /* DownloadManagerService.swift */,
+				00B031DAB4FC9CB26EE159C4 /* MediaPlayerService.swift */,
+				3F53760F7CD6555D3DEF9BA2 /* NetworkMonitor.swift */,
+				52A6AAF5D2A3DC8A0A2F2D62 /* NowPlayingManager.swift */,
+				6B2C7CBBD08C16C61CDF9A98 /* TabManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		26EE0F706760CC1E87473DCA = {
+			isa = PBXGroup;
+			children = (
+				6E8932C064D77B9016E0657D /* VeloBrowser */,
+				95F21B59DAACEF6B58749A59 /* VeloBrowserTests */,
+				F8BAFC4040BB9E74AEF9B722 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3335A126665160A8A9A6B461 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BCBC1D942C6B7BE7607EF9AE /* Local */,
+				1505A8EE024071D64563D061 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		66D5846EB8733776CC17A17A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				6BF986C8DE5C319A78A2BC96 /* Models */,
+				E2233BB3A2EB58E705FFF9BC /* Repositories */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		6BF986C8DE5C319A78A2BC96 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E5B8B08D88CBAC11AC86697C /* Bookmark.swift */,
+				8E1A9C8C792B5EA38C4746A8 /* DownloadItem.swift */,
+				BF4E24555AA33466B4492376 /* HistoryEntry.swift */,
+				CC0351C6032DA49C53695D8D /* Tab.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6E8932C064D77B9016E0657D /* VeloBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				ACB43C1CF7B30BCF3AD9C8BE /* App */,
+				3335A126665160A8A9A6B461 /* Data */,
+				66D5846EB8733776CC17A17A /* Domain */,
+				7EF43E2270DA7ACA4382E5FE /* Presentation */,
+				1FF40DB5083ADBAFCDA5B611 /* Services */,
+				A7947EBCDC13C46C59565172 /* Resources */,
+			);
+			path = VeloBrowser;
+			sourceTree = "<group>";
+		};
+		78A6E72CC8EF3F8229EA4AEB /* Downloads */ = {
+			isa = PBXGroup;
+			children = (
+				122132FB187F1627F93D39C6 /* DownloadsView.swift */,
+			);
+			path = Downloads;
+			sourceTree = "<group>";
+		};
+		7EF43E2270DA7ACA4382E5FE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				D6D08C862BED256CC66164A5 /* Bookmarks */,
+				E2FAA3BAF03357BCAFF46023 /* Browser */,
+				9E0CADC4E1918C91F0947484 /* DesignSystem */,
+				78A6E72CC8EF3F8229EA4AEB /* Downloads */,
+				AC6274FA0E44C1D92A9BB453 /* History */,
+				B23DD58565F0CA2712E93C96 /* Media */,
+				EA3AF42C8057C5FD198C7582 /* Onboarding */,
+				A0DCBE2537C53A9A6B81DB87 /* Settings */,
+				D366B379FC59425070385DCF /* Shared */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9E0CADC4E1918C91F0947484 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				41224F4BA1C865D982EC3DF5 /* ColorPalette.swift */,
+				EDA1CD63A29D1A0A8A4A3B95 /* Theme.swift */,
+				EEE76A92BEA5432772B5C9F5 /* Typography.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		A0DCBE2537C53A9A6B81DB87 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				300DAC4D05673DF80F035CAF /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		A7947EBCDC13C46C59565172 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E1D748B58AD8AF3709C24610 /* Assets.xcassets */,
+				78E659AC4475569097B5725E /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AC6274FA0E44C1D92A9BB453 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				647BE74420607CC194045AE3 /* HistoryView.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		ACB43C1CF7B30BCF3AD9C8BE /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C87DB71B431DA1BE198E9CD4 /* AppCoordinator.swift */,
+				0E3B505721FC675032497D79 /* DIContainer.swift */,
+				25F46AC1BF1ADB318962CFB9 /* VeloBrowserApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B23DD58565F0CA2712E93C96 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				103770E93A2192B45FF56F56 /* MiniPlayerBar.swift */,
+				39115E179B2AE1780690687B /* NowPlayingView.swift */,
+				5C414BE1810CFE0CA048AB44 /* PiPPlayerView.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		BCBC1D942C6B7BE7607EF9AE /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				46F0CF1267B0CEE6930602CF /* SwiftDataStore.swift */,
+				B3E4C923FEC18DCF21F8F1F3 /* UserDefaultsStore.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		D366B379FC59425070385DCF /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				285DBB4F92340576E80A2727 /* HapticManager.swift */,
+				0E050D8D6456447838CD19A1 /* ShareSheet.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		D6D08C862BED256CC66164A5 /* Bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				033B0318798FD561FA4712CF /* BookmarksView.swift */,
+			);
+			path = Bookmarks;
+			sourceTree = "<group>";
+		};
+		E2233BB3A2EB58E705FFF9BC /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0CEEB5C28B610DFB656ABD98 /* BookmarkRepositoryProtocol.swift */,
+				2D16A85CCB4BA04CAD7F378E /* DownloadRepositoryProtocol.swift */,
+				C431C5CABC17C5248CD431E2 /* HistoryRepositoryProtocol.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		E2FAA3BAF03357BCAFF46023 /* Browser */ = {
+			isa = PBXGroup;
+			children = (
+				E51682E218C32EFC7863B0C0 /* AddressBarView.swift */,
+				8B13C9BEDF0E7CA0D603694C /* BrowserView.swift */,
+				C57CCD668609986C1E1B706C /* NewTabPageView.swift */,
+				F9D5CAA5C5A3F441926AC7E5 /* BrowserViewModel.swift */,
+				5671C9EA50BCB2FAC5D47A31 /* TabSwitcherView.swift */,
+				C5753E18D949E901BAE7B204 /* WebViewContainer.swift */,
+			);
+			path = Browser;
+			sourceTree = "<group>";
+		};
+		EA3AF42C8057C5FD198C7582 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				AC49F63F02D67505F3D593D1 /* FirstLaunchView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		95F21B59DAACEF6B58749A59 /* VeloBrowserTests */ = {
+			isa = PBXGroup;
+			children = (
+				06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */,
+				5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */,
+				3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */,
+				136A896D296C22A0204E85A6 /* TabManagerTests.swift */,
+			);
+			path = VeloBrowserTests;
+			sourceTree = "<group>";
+		};
+		F8BAFC4040BB9E74AEF9B722 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F927EAB0FBC56EEFC72FA8F /* VeloBrowser.app */,
+				292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		66CBAF970BD90622C3254C79 /* VeloBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6E526EBF580B4A3DE242452 /* Build configuration list for PBXNativeTarget "VeloBrowser" */;
+			buildPhases = (
+				20D4A7F60D6350D34201F051 /* Sources */,
+				E0FE87046B94B321B27A2E5B /* Frameworks */,
+				EEBA35FF8AF5F55368336FDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VeloBrowser;
+			productName = VeloBrowser;
+			productReference = 5F927EAB0FBC56EEFC72FA8F /* VeloBrowser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F9515ECE56F449DD2B08C043 /* VeloBrowserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9A1EE30D0000EA4C227297A /* Build configuration list for PBXNativeTarget "VeloBrowserTests" */;
+			buildPhases = (
+				08074459B57C8247E0B3A668 /* Sources */,
+				6EFFE7AE1C97EDBC33A6CC8F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FD7604569FE6A45A4BCABAE6 /* PBXTargetDependency */,
+			);
+			name = VeloBrowserTests;
+			productName = VeloBrowserTests;
+			productReference = 292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXTargetDependency section */
+		FD7604569FE6A45A4BCABAE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66CBAF970BD90622C3254C79 /* VeloBrowser */;
+			targetProxy = 41CB7E5684EF3BECAF5DFFB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXProject section */
+		C88CA87BB3F5765642BE78D3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 5332CC7324CB5C8A2306DA13 /* Build configuration list for PBXProject "VeloBrowser" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 26EE0F706760CC1E87473DCA;
+			productRefGroup = F8BAFC4040BB9E74AEF9B722 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66CBAF970BD90622C3254C79 /* VeloBrowser */,
+				F9515ECE56F449DD2B08C043 /* VeloBrowserTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EEBA35FF8AF5F55368336FDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B3DFD9F6EE6B0271AC9EE70 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20D4A7F60D6350D34201F051 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8539813F15ED4044C288CE38 /* AppCoordinator.swift in Sources */,
+				BB0A20CAFFF26F8D195604A5 /* DIContainer.swift in Sources */,
+				E140E3F0496E12D3EA69D707 /* VeloBrowserApp.swift in Sources */,
+				A54D00EFA667EAC2FD240BCE /* SwiftDataStore.swift in Sources */,
+				539AD0C6201C5FBA17C457B7 /* UserDefaultsStore.swift in Sources */,
+				CB924DF94D28FA035405D22E /* BookmarkRepository.swift in Sources */,
+				51EEB5F63067C590C27A23B8 /* DownloadRepository.swift in Sources */,
+				B7B2A49CD8CCE3457BC31EF2 /* HistoryRepository.swift in Sources */,
+				0A008D6394D27A7E7D4E70C0 /* Bookmark.swift in Sources */,
+				FADD4BBA70C218DCFAC7864E /* DownloadItem.swift in Sources */,
+				4C5F4511185F63D51D95817D /* HistoryEntry.swift in Sources */,
+				3039531D7E7D0EE16F9EEE6B /* Tab.swift in Sources */,
+				5E2B4B4F6AD3B62BD1ACE2BC /* BookmarkRepositoryProtocol.swift in Sources */,
+				45773CF9D5618629E86DDC71 /* DownloadRepositoryProtocol.swift in Sources */,
+				E3498A711DB2FE67B4ED7998 /* HistoryRepositoryProtocol.swift in Sources */,
+				9E50ACDE6170026F398448E5 /* BookmarksView.swift in Sources */,
+				23D34CA1BF943EDA085E208C /* AddressBarView.swift in Sources */,
+				88DF2D7FBAD70756F6881F18 /* BrowserView.swift in Sources */,
+				33F52EA7BBAE29867D31FFE9 /* NewTabPageView.swift in Sources */,
+				71C55FAB530E8FC3C808730B /* BrowserViewModel.swift in Sources */,
+				D2C21078BF183C41E9AF1206 /* TabSwitcherView.swift in Sources */,
+				59158E94CD67388A18D9F24A /* WebViewContainer.swift in Sources */,
+				8D33D867629EDCC1826E6FC1 /* ColorPalette.swift in Sources */,
+				CB2EE7963C4B0FA3D5F9D4C6 /* Theme.swift in Sources */,
+				DA31D345474259741D98678E /* Typography.swift in Sources */,
+				5078F20075959319F3B03367 /* DownloadsView.swift in Sources */,
+				E7284B92505F54F709EAFD72 /* HistoryView.swift in Sources */,
+				99F6EC3376648C754BE7EE61 /* MiniPlayerBar.swift in Sources */,
+				54D6E2B528652E4EE505457C /* NowPlayingView.swift in Sources */,
+				B49C86E56803F57FAF4F7154 /* PiPPlayerView.swift in Sources */,
+				61FCDF4ADF9485ABD36B21DC /* FirstLaunchView.swift in Sources */,
+				F22261CDCFF1BEBDFDBCAB76 /* SettingsView.swift in Sources */,
+				DB61D8C48F7DF24CB3B12A04 /* HapticManager.swift in Sources */,
+				823F29975FE4F93F3F88FD5A /* ShareSheet.swift in Sources */,
+				A4FB66BEA54ED1ADB490F6D3 /* AdBlockService.swift in Sources */,
+				BB2F3C86A275A74F1B7075EB /* DownloadManagerService.swift in Sources */,
+				3451BBC5E842F39E64D189B3 /* MediaPlayerService.swift in Sources */,
+				4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */,
+				A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */,
+				430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08074459B57C8247E0B3A668 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FF1EC6D2241ED2CE5B761D1 /* BrowserViewModelTests.swift in Sources */,
+				C744641F71783567067DF6D2 /* TabManagerTests.swift in Sources */,
+				943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */,
+				24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0F0CD40BADB296A01C75A169 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				ENABLE_TESTABILITY = NO;
+				INFOPLIST_FILE = VeloBrowser/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		48386F2AE1227319D1059298 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = VeloBrowser/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E7F931D7B227A42619B8D957 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		FAA17E0C8B726B220933B71A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9FE346366340C9C170221AFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeloBrowser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VeloBrowser";
+			};
+			name = Debug;
+		};
+		E301DDE1D96754BE2162B83D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeloBrowser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VeloBrowser";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5332CC7324CB5C8A2306DA13 /* Build configuration list for PBXProject "VeloBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7F931D7B227A42619B8D957 /* Debug */,
+				FAA17E0C8B726B220933B71A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6E526EBF580B4A3DE242452 /* Build configuration list for PBXNativeTarget "VeloBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48386F2AE1227319D1059298 /* Debug */,
+				0F0CD40BADB296A01C75A169 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9A1EE30D0000EA4C227297A /* Build configuration list for PBXNativeTarget "VeloBrowserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FE346366340C9C170221AFD /* Debug */,
+				E301DDE1D96754BE2162B83D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C88CA87BB3F5765642BE78D3 /* Project object */;
+}

@@ -1,0 +1,385 @@
+// BrowserView.swift
+// VeloBrowser
+//
+// Main browser view with address bar, web content, and toolbar.
+
+import SwiftUI
+
+/// The main browser screen containing the address bar, web content area,
+/// bottom toolbar, and pull-to-refresh support.
+///
+/// The address bar and toolbar collapse when the user scrolls down
+/// and reappear when scrolling up, following Safari-like behavior.
+struct BrowserView: View {
+    @Bindable var viewModel: BrowserViewModel
+    @Environment(AppCoordinator.self) private var coordinator
+    @Environment(DIContainer.self) private var container
+
+    /// Callback to open the tab switcher.
+    var onShowTabSwitcher: () -> Void
+
+    /// Current tab count to display on the tab button badge.
+    var tabCount: Int
+
+    @State private var showTabLimitAlert = false
+    @AppStorage("javaScriptEnabled") private var javaScriptEnabled: Bool = true
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            VStack(spacing: 0) {
+                // Collapsible address bar
+                if viewModel.isToolbarVisible {
+                    AddressBarView(viewModel: viewModel)
+                        .padding(.vertical, DesignSystem.Spacing.xs)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
+
+                // Web content area
+                webContentArea
+            }
+
+            // Bottom overlay: mini player + toolbar
+            VStack(spacing: 0) {
+                // Mini player bar (when media is active)
+                if container.mediaPlayerService.currentMediaURL != nil {
+                    MiniPlayerBar(
+                        mediaPlayer: container.mediaPlayerService,
+                        onExpand: { coordinator.showNowPlaying = true }
+                    )
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+
+                // Bottom toolbar
+                if viewModel.isToolbarVisible {
+                    bottomToolbar
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+            }
+        }
+        .animation(
+            .spring(response: 0.3, dampingFraction: 0.8),
+            value: viewModel.isToolbarVisible
+        )
+        .onTapGesture {
+            viewModel.showToolbar()
+        }
+        .ignoresSafeArea(.keyboard)
+        .alert("Tab Limit Reached", isPresented: $showTabLimitAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("You've reached the maximum of \(TabManager.maxTabs) tabs. Please close some tabs to open new ones.")
+        }
+    }
+
+    // MARK: - Web Content
+
+    private var webContentArea: some View {
+        ZStack {
+            WebViewContainer(
+                url: viewModel.pendingURL,
+                isPrivate: viewModel.isPrivate,
+                javaScriptEnabled: javaScriptEnabled,
+                reloadToken: viewModel.reloadToken,
+                stopToken: viewModel.stopToken,
+                goBackToken: viewModel.goBackToken,
+                goForwardToken: viewModel.goForwardToken,
+                onTitleChange: { title in
+                    viewModel.handleTitleChange(title)
+                    // Sync title to Tab model
+                    if let activeTab = container.tabManager.activeTab {
+                        container.tabManager.updateTab(id: activeTab.id, title: title)
+                    }
+                },
+                onURLChange: { url in
+                    viewModel.handleURLChange(url)
+                    // Sync URL to Tab model
+                    if let activeTab = container.tabManager.activeTab, let url {
+                        container.tabManager.updateTab(id: activeTab.id, url: url)
+                    }
+                },
+                onLoadingChange: { viewModel.handleLoadingChange($0) },
+                onProgressChange: { viewModel.handleProgressChange($0) },
+                onNavigationChange: { back, fwd in
+                    viewModel.handleNavigationChange(canGoBack: back, canGoForward: fwd)
+                },
+                onError: { viewModel.handleError($0) },
+                onScrollDirectionChange: { viewModel.handleScroll(isScrollingDown: $0) },
+                onWebViewCreated: { viewModel.webView = $0 },
+                onDownloadLink: { url in
+                    Task { await container.downloadManager.startDownload(url: url) }
+                    HapticManager.medium()
+                },
+                onOpenInNewTab: { url in
+                    if container.tabManager.tabCount >= TabManager.maxTabs {
+                        showTabLimitAlert = true
+                        HapticManager.warning()
+                    } else {
+                        container.tabManager.createTab(url: url)
+                        HapticManager.light()
+                    }
+                },
+                onAdBlocked: { count in
+                    viewModel.adsBlockedCount = count
+                },
+                onFaviconDetected: { faviconURL in
+                    if let activeTab = container.tabManager.activeTab {
+                        container.tabManager.updateTab(id: activeTab.id, faviconURL: faviconURL)
+                    }
+                }
+            )
+
+            // New Tab Page overlay (when no URL loaded)
+            if viewModel.currentURL == nil && viewModel.pendingURL == nil {
+                NewTabPageView(
+                    bookmarkRepository: container.bookmarkRepository,
+                    onSearch: { query in
+                        viewModel.addressBarText = query
+                        viewModel.submitAddressBar()
+                    },
+                    onOpenURL: { url in
+                        viewModel.loadURL(url)
+                    }
+                )
+                .transition(.opacity)
+            }
+
+            // Offline overlay
+            if !container.networkMonitor.isConnected && viewModel.currentURL == nil {
+                offlineOverlay
+            }
+
+            // Error overlay
+            if let errorMessage = viewModel.errorMessage {
+                errorOverlay(message: errorMessage)
+            }
+        }
+    }
+
+    // MARK: - Bottom Toolbar
+
+    private var bottomToolbar: some View {
+        HStack {
+            // Back
+            toolbarButton(icon: "chevron.left", label: "Back", disabled: !viewModel.canGoBack) {
+                viewModel.goBack()
+            }
+
+            Spacer()
+
+            // Forward
+            toolbarButton(icon: "chevron.right", label: "Forward", disabled: !viewModel.canGoForward) {
+                viewModel.goForward()
+            }
+
+            Spacer()
+
+            // Share
+            toolbarButton(
+                icon: "square.and.arrow.up",
+                label: "Share",
+                disabled: viewModel.currentURL == nil
+            ) {
+                coordinator.showShareSheet = true
+            }
+
+            Spacer()
+
+            // Tabs
+            Button(action: onShowTabSwitcher) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 6)
+                        .strokeBorder(DesignSystem.Colors.textPrimary, lineWidth: 1.5)
+                        .frame(width: 24, height: 24)
+                    Text("\(min(tabCount, 99))")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .foregroundStyle(DesignSystem.Colors.textPrimary)
+                }
+                .frame(minWidth: DesignSystem.minimumTouchTarget,
+                       minHeight: DesignSystem.minimumTouchTarget)
+                .contentShape(Rectangle())
+            }
+            .accessibilityLabel("\(tabCount) tabs")
+
+            Spacer()
+
+            // More menu
+            moreMenu
+        }
+        .padding(.horizontal, DesignSystem.Spacing.md)
+        .padding(.vertical, DesignSystem.Spacing.sm)
+        .background(
+            DesignSystem.Colors.backgroundPrimary
+                .shadow(.drop(color: .black.opacity(0.1), radius: 4, y: -2))
+        )
+    }
+
+    // MARK: - More Menu
+
+    private var moreMenu: some View {
+        Menu {
+            // New Tab
+            Button {
+                if container.tabManager.tabCount < TabManager.maxTabs {
+                    container.tabManager.createTab(url: nil, isPrivate: false)
+                    HapticManager.light()
+                } else {
+                    showTabLimitAlert = true
+                    HapticManager.warning()
+                }
+            } label: {
+                Label("New Tab", systemImage: "plus")
+            }
+
+            Button {
+                viewModel.reload()
+            } label: {
+                Label("Reload", systemImage: "arrow.clockwise")
+            }
+
+            if viewModel.currentURL != nil {
+                Button {
+                    addBookmark()
+                } label: {
+                    Label("Add Bookmark", systemImage: "star")
+                }
+
+                Button {
+                    Task {
+                        guard let webView = viewModel.webView else { return }
+                        await container.mediaPlayerService.extractAndPlay(
+                            from: webView,
+                            pageTitle: viewModel.pageTitle,
+                            pageURL: viewModel.currentURL
+                        )
+                    }
+                } label: {
+                    Label("Play in Background", systemImage: "play.circle")
+                }
+            }
+
+            Divider()
+
+            Button {
+                coordinator.navigate(to: .bookmarks)
+            } label: {
+                Label("Bookmarks", systemImage: "book")
+            }
+
+            Button {
+                coordinator.navigate(to: .history)
+            } label: {
+                Label("History", systemImage: "clock")
+            }
+
+            Button {
+                coordinator.navigate(to: .downloads)
+            } label: {
+                Label("Downloads", systemImage: "arrow.down.circle")
+            }
+
+            Divider()
+
+            Button {
+                coordinator.navigate(to: .settings)
+            } label: {
+                Label("Settings", systemImage: "gearshape")
+            }
+        } label: {
+            Image(systemName: "ellipsis")
+                .font(.body)
+                .foregroundStyle(DesignSystem.Colors.textPrimary)
+                .frame(minWidth: DesignSystem.minimumTouchTarget,
+                       minHeight: DesignSystem.minimumTouchTarget)
+                .contentShape(Rectangle())
+        }
+        .accessibilityLabel("More options")
+    }
+
+    // MARK: - Helpers
+
+    private func toolbarButton(
+        icon: String,
+        label: String,
+        disabled: Bool = false,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            Image(systemName: icon)
+                .font(.body)
+                .foregroundStyle(
+                    disabled ? DesignSystem.Colors.textTertiary : DesignSystem.Colors.textPrimary
+                )
+                .frame(minWidth: DesignSystem.minimumTouchTarget,
+                       minHeight: DesignSystem.minimumTouchTarget)
+                .contentShape(Rectangle())
+        }
+        .disabled(disabled)
+        .accessibilityLabel(label)
+    }
+
+    private func addBookmark() {
+        guard let url = viewModel.currentURL else { return }
+        let title = viewModel.pageTitle.isEmpty ? (url.host() ?? url.absoluteString) : viewModel.pageTitle
+        let faviconURL: URL? = {
+            if let activeTab = container.tabManager.activeTab {
+                return activeTab.faviconURL
+            }
+            return nil
+        }()
+        let bookmark = Bookmark(url: url, title: title, faviconURL: faviconURL)
+        Task {
+            try? await container.bookmarkRepository.save(bookmark)
+            HapticManager.success()
+        }
+    }
+
+    private func errorOverlay(message: String) -> some View {
+        VStack(spacing: DesignSystem.Spacing.md) {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.largeTitle)
+                .foregroundStyle(DesignSystem.Colors.warning)
+
+            Text("Failed to Load Page")
+                .font(DesignSystem.Typography.headline)
+                .foregroundStyle(DesignSystem.Colors.textPrimary)
+
+            Text(message)
+                .font(DesignSystem.Typography.subheadline)
+                .foregroundStyle(DesignSystem.Colors.textSecondary)
+                .multilineTextAlignment(.center)
+
+            Button("Try Again") {
+                viewModel.errorMessage = nil
+                viewModel.reload()
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding(DesignSystem.Spacing.xl)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(DesignSystem.Colors.backgroundPrimary)
+    }
+
+    private var offlineOverlay: some View {
+        VStack(spacing: DesignSystem.Spacing.md) {
+            Image(systemName: "wifi.slash")
+                .font(.system(size: 48, weight: .light))
+                .foregroundStyle(DesignSystem.Colors.textTertiary)
+
+            Text("No Internet Connection")
+                .font(DesignSystem.Typography.headline)
+                .foregroundStyle(DesignSystem.Colors.textPrimary)
+
+            Text("Check your connection and try again.")
+                .font(DesignSystem.Typography.subheadline)
+                .foregroundStyle(DesignSystem.Colors.textSecondary)
+
+            Button("Try Again") {
+                viewModel.reload()
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding(DesignSystem.Spacing.xl)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(DesignSystem.Colors.backgroundPrimary)
+    }
+}
