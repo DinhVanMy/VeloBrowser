@@ -6,44 +6,98 @@ A fast, private, and ad-free web browser built natively for iOS using Swift and 
 ![Swift 6.0](https://img.shields.io/badge/Swift-6.0-orange)
 ![SwiftUI](https://img.shields.io/badge/UI-SwiftUI-purple)
 ![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-green)
+![Tests](https://img.shields.io/badge/Tests-84%20passing-brightgreen)
 
 ## Features
 
-- **Built-in Ad Blocker** — Network-level blocking (60+ rules) + cosmetic CSS filtering. Per-site whitelist, shield counter badge.
-- **Background Audio** — Continue listening to web media when the app is backgrounded or the screen is locked, with full lock screen controls.
-- **Picture-in-Picture** — Watch videos in a floating window while multitasking.
-- **Tab Management** — Up to 100 tabs with grid-based tab switcher, swipe-to-close, private browsing mode.
-- **File Downloads** — Download any file with progress tracking, accessible via iOS Files app.
-- **Bookmarks & History** — Save pages, search history grouped by date, swipe-to-delete.
-- **Private Browsing** — Isolated non-persistent data store, no history recorded, visual indicator.
-- **Multiple Search Engines** — Google, DuckDuckGo, Bing.
-- **Accessibility** — Dynamic Type, VoiceOver labels, 44pt touch targets.
-- **Zero Data Collection** — No analytics, no tracking, no third-party services.
+### 🌐 Browser Core
+- **Full Web Browsing** — WKWebView-powered with address bar, navigation, progress bar, pull-to-refresh
+- **Tab Management** — Up to 100 tabs with grid-based switcher, swipe-to-close, drag-to-reorder
+- **Private Browsing** — Isolated WKWebsiteDataStore, no history, visual indicator
+- **Find in Page** — Text search with match highlighting and navigation
+- **Multiple Search Engines** — Google, DuckDuckGo, Bing
+
+### 🛡️ Ad Blocking & Privacy
+- **Built-in Ad Blocker** — 60+ WKContentRuleList rules + cosmetic CSS filtering, per-site whitelist, shield counter
+- **HTTPS-Only Mode** — Auto-upgrade HTTP → HTTPS with fallback warning
+- **Tracking Parameter Removal** — Strips fbclid, gclid, utm_*, and 20+ tracking params
+- **Fingerprint Protection** — Canvas, WebGL, navigator, screen, audio fingerprint randomization
+- **Cookie Manager** — Browse, delete per-domain, block third-party cookies
+- **Biometric App Lock** — Face ID / Touch ID with configurable lock timeout
+- **Privacy Dashboard** — Centralized stats for all privacy protections
+
+### 🎵 Media
+- **Background Audio** — Web media continues playing when backgrounded or locked
+- **Lock Screen Controls** — Play/pause, seek, track info via MPNowPlayingInfoCenter
+- **Picture-in-Picture** — Floating video window during multitasking
+
+### 📖 Reader Mode & Content
+- **Reader Mode** — Extracts article content, configurable font/size/spacing/theme
+- **Reading List** — Save articles for later with read/unread tracking
+- **Desktop Mode Toggle** — Per-tab user agent switching
+
+### 📥 Downloads & Data
+- **File Downloads** — Progress tracking, pause/resume, iOS Files app integration
+- **Bookmarks** — Save, edit, search with drag-to-reorder
+- **History** — Grouped by date, searchable, swipe-to-delete
+- **Spotlight Integration** — Bookmarks and history searchable from iOS search
+
+### 📱 iPad Support
+- **Adaptive Layout** — Sidebar navigation, horizontal tab bar, split view
+- **Pointer & Trackpad** — Hover effects, right-click context menus
+- **Drag & Drop** — URL dragging between apps
+- **Keyboard Shortcuts** — Cmd+T/W/L/R/F/D and more
+
+### ⚡ Performance
+- **Tab Suspension** — Auto-suspend inactive tabs to free memory
+- **Lazy Service Loading** — MediaPlayer, Downloads, Reader init on first use
+- **WKProcessPool Sharing** — Shared pool for normal tabs, isolated for private
+- **Image Lazy Loading** — JS injection for below-fold images
+- **Memory Pressure Handling** — Auto-suspend on system memory warning
+- **Battery Optimization** — Reduced animations in Low Power Mode
+
+### 🌍 Localization
+- **6 Languages** — English, Vietnamese, Japanese, Korean, Chinese (Simplified), Spanish
+- **String Catalog** — Xcode 15+ xcstrings format with pluralization support
+
+### 📲 iOS Integration
+- **Quick Actions** — Home screen shortcuts for New Tab, Private Tab, Search
+- **Deep Links** — `velobrowser://` URL scheme for search, open, newtab, privatetab
+- **Spotlight & Handoff** — Indexed bookmarks/history, web activity continuation
+- **App Store Review** — Smart review prompts based on usage metrics
+- **Dynamic Type** — Full accessibility with VoiceOver labels, 44pt touch targets
 
 ## Architecture
 
-Velo Browser follows **Clean Architecture** with the MVVM-C (Model-View-ViewModel-Coordinator) pattern:
-
 ```
-┌─────────────────────────────────────────────┐
-│                Presentation                  │
-│  Views ─── ViewModels ─── Coordinator        │
-├─────────────────────────────────────────────┤
-│                  Domain                      │
-│  Models ─── Repository Protocols             │
-├─────────────────────────────────────────────┤
-│                   Data                       │
-│  SwiftData Entities ─── Repositories         │
-├─────────────────────────────────────────────┤
-│                 Services                     │
-│  TabManager, AdBlock, Media, Downloads, Net  │
-└─────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────┐
+│                  Presentation                    │
+│  Views ─── ViewModels ─── Coordinator            │
+│  DesignSystem (Colors, Typography, Spacing)      │
+│  iPad (Sidebar, TabBar, Adaptive Layout)         │
+├─────────────────────────────────────────────────┤
+│                    Domain                        │
+│  Models ─── Repository Protocols                 │
+│  Tab, Bookmark, HistoryEntry, DownloadItem,      │
+│  ReadingListItem, ReaderContent                  │
+├─────────────────────────────────────────────────┤
+│                     Data                         │
+│  SwiftData Entities ─── Repositories             │
+│  UserDefaults ─── App Group Shared Storage       │
+├─────────────────────────────────────────────────┤
+│                   Services                       │
+│  TabManager, AdBlock, Media, Downloads,          │
+│  ReaderMode, HTTPS Upgrade, Tracking Protection, │
+│  Fingerprint, AppLock, TabSuspension,            │
+│  Spotlight, ReviewManager, NetworkMonitor        │
+└─────────────────────────────────────────────────┘
 ```
 
-- **Dependency Injection** — Protocol-based DI via `DIContainer` (supports in-memory mode for testing)
-- **Navigation** — `AppCoordinator` manages NavigationStack and sheet presentations
-- **WebView Bridge** — Token-based imperative commands from ViewModel to WKWebView
-- **Strict Concurrency** — `@MainActor`, `Sendable`, `async/await` throughout
+**Key patterns:**
+- **MVVM-C** — Model-View-ViewModel-Coordinator with protocol-based DI
+- **Token-based Commands** — ViewModel increments Int tokens; WebView Coordinator detects changes
+- **Strict Concurrency** — `@MainActor`, `Sendable`, `async/await`, `@Observable`
+- **Zero Dependencies** — Everything built with Apple frameworks only
 
 ## Tech Stack
 
@@ -53,9 +107,12 @@ Velo Browser follows **Clean Architecture** with the MVVM-C (Model-View-ViewMode
 | UI Framework | SwiftUI |
 | Web Engine | WKWebView (WebKit) |
 | Persistence | SwiftData |
-| Media | AVFoundation, MediaPlayer |
-| Networking | URLSession, Network.framework |
+| Media | AVFoundation, MediaPlayer, AVKit |
+| Privacy | LocalAuthentication, WebKit Content Rules |
+| Search | CoreSpotlight |
 | Ad Blocking | WKContentRuleListStore, WKUserScript |
+| Networking | URLSession, Network.framework |
+| Localization | String Catalog (xcstrings) |
 | Minimum Target | iOS 17.0 |
 | Dependencies | **Zero** third-party libraries |
 
@@ -69,7 +126,7 @@ Velo Browser follows **Clean Architecture** with the MVVM-C (Model-View-ViewMode
 ### Build & Run
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/DinhVanMy/VeloBrowser.git
 cd VeloBrowser
 
 # Open in Xcode
@@ -81,7 +138,7 @@ xcodebuild -project VeloBrowser.xcodeproj \
   -destination 'platform=iOS Simulator,name=iPhone 16' \
   build
 
-# Run tests
+# Run tests (84 tests across 8 suites)
 xcodebuild -project VeloBrowser.xcodeproj \
   -scheme VeloBrowser \
   -destination 'platform=iOS Simulator,name=iPhone 16' \
@@ -91,69 +148,104 @@ xcodebuild -project VeloBrowser.xcodeproj \
 ## Project Structure
 
 ```
-VeloBrowser/
+VeloBrowser/                          # 64 production Swift files
 ├── App/
-│   ├── VeloBrowserApp.swift          # @main entry point
-│   ├── DIContainer.swift             # Dependency injection container
-│   └── AppCoordinator.swift          # Navigation coordinator
+│   ├── VeloBrowserApp.swift          # @main, deep links, Spotlight, Quick Actions
+│   ├── DIContainer.swift             # Protocol-based DI, lazy service init
+│   └── AppCoordinator.swift          # Navigation, iPad/iPhone adaptive layout
 ├── Presentation/
 │   ├── Browser/
-│   │   ├── BrowserView.swift         # Main browser UI
-│   │   ├── BrowserViewModel.swift    # Browser state & logic
-│   │   ├── WebViewContainer.swift    # WKWebView bridge
-│   │   ├── AddressBarView.swift      # Collapsible address bar
-│   │   └── TabSwitcherView.swift     # Tab grid view
-│   ├── DesignSystem/
-│   │   ├── ColorPalette.swift        # Semantic colors
-│   │   ├── Typography.swift          # Font styles
-│   │   └── Theme.swift               # Spacing, radius, animation
-│   ├── Bookmarks/BookmarksView.swift
-│   ├── History/HistoryView.swift
-│   ├── Downloads/DownloadsView.swift
-│   ├── Media/
-│   │   ├── MiniPlayerBar.swift       # Floating audio bar
-│   │   ├── NowPlayingView.swift      # Full media controls
-│   │   └── PiPPlayerView.swift       # PiP controller
+│   │   ├── BrowserView.swift         # Main browser UI + keyboard shortcuts
+│   │   ├── BrowserViewModel.swift    # Browser state, navigation, media detection
+│   │   ├── WebViewContainer.swift    # WKWebView bridge, gestures, context menu
+│   │   ├── AddressBarView.swift      # Collapsible bar, Paste & Go, domain display
+│   │   ├── TabSwitcherView.swift     # Tab grid, swipe-close, private tabs
+│   │   ├── FindInPageBar.swift       # Text search overlay
+│   │   └── NewTabPageView.swift      # Home page with quick access
+│   ├── DesignSystem/                 # Colors, Typography, Theme tokens
+│   ├── Settings/
+│   │   ├── SettingsView.swift        # All settings sections
+│   │   ├── CookieManagerView.swift   # Per-domain cookie management
+│   │   ├── CacheManagerView.swift    # Website data storage management
+│   │   └── PrivacyDashboardView.swift
+│   ├── Media/                        # MiniPlayerBar, NowPlayingView, PiPPlayerView
+│   ├── Reader/ReaderModeView.swift   # Reader mode with font/theme settings
+│   ├── ReadingList/                  # Reading list management
+│   ├── Bookmarks/, History/, Downloads/
+│   ├── iPad/                         # SidebarView, TabBarView, iPadLayoutView
 │   ├── Onboarding/FirstLaunchView.swift
-│   ├── Settings/SettingsView.swift
-│   └── Shared/
-│       ├── ShareSheet.swift
-│       └── HapticManager.swift
+│   └── Shared/                       # DeviceHelper, HapticManager, LockScreen, Share
 ├── Domain/
-│   ├── Models/                        # Tab, Bookmark, HistoryEntry, DownloadItem
-│   └── Repositories/                  # Protocol definitions
+│   ├── Models/                       # Tab, Bookmark, HistoryEntry, DownloadItem, etc.
+│   └── Repositories/                 # Protocol definitions
 ├── Data/
-│   ├── Local/
-│   │   ├── SwiftDataStore.swift      # @Model entities
-│   │   └── UserDefaultsStore.swift
-│   └── Repositories/                  # SwiftData implementations
-├── Services/
-│   ├── TabManager.swift
-│   ├── AdBlockService.swift
-│   ├── MediaPlayerService.swift
-│   ├── NowPlayingManager.swift
-│   ├── DownloadManagerService.swift
-│   └── NetworkMonitor.swift
-└── Resources/
-    ├── Assets.xcassets/
-    ├── Info.plist
-    └── privacy-policy.html
+│   ├── Local/                        # SwiftData entities, UserDefaults
+│   └── Repositories/                 # SwiftData implementations
+├── Services/                         # 14 services with protocol-based DI
+│   ├── TabManager.swift              # Tab lifecycle, snapshots
+│   ├── AdBlockService.swift          # Content rules compilation
+│   ├── MediaPlayerService.swift      # Background audio extraction
+│   ├── DownloadManagerService.swift  # URLSession download tasks
+│   ├── ReaderModeService.swift       # HTML content extraction
+│   ├── HTTPSUpgradeService.swift     # HTTP → HTTPS auto-upgrade
+│   ├── TrackingProtectionService.swift
+│   ├── FingerprintProtectionService.swift
+│   ├── AppLockService.swift          # Biometric authentication
+│   ├── TabSuspensionManager.swift    # Memory optimization
+│   ├── SpotlightIndexer.swift        # CoreSpotlight indexing
+│   ├── ReviewManager.swift           # App Store review prompts
+│   ├── NetworkMonitor.swift          # Connectivity + battery monitoring
+│   └── NowPlayingManager.swift       # Lock screen media controls
+├── Resources/
+│   ├── Assets.xcassets/
+│   ├── Info.plist
+│   └── privacy-policy.html
+└── Localizable.xcstrings             # 6-language string catalog
 
-VeloBrowserTests/
-├── BrowserViewModelTests.swift       # URL resolution, navigation tokens
-├── TabManagerTests.swift             # Tab lifecycle, max limit
-├── AdBlockServiceTests.swift         # Whitelist, toggle logic
-└── BookmarkRepositoryTests.swift     # SwiftData CRUD operations
+VeloBrowserTests/                     # 84 tests across 8 suites
+├── BrowserViewModelTests.swift       # URL resolution, navigation, callbacks
+├── TabManagerTests.swift             # Tab CRUD, limits, private tabs
+├── AdBlockServiceTests.swift         # Whitelist, toggle, persistence
+├── BookmarkRepositoryTests.swift     # SwiftData CRUD, search
+├── ReadingListRepositoryTests.swift  # Reading list persistence
+├── HTTPSUpgradeServiceTests.swift    # HTTP upgrade, exceptions
+├── TrackingProtectionServiceTests.swift  # URL param stripping
+└── TabSuspensionManagerTests.swift   # Suspend/resume, memory warning
 ```
 
 ## Testing
 
-49 unit tests covering:
-- **BrowserViewModel** — URL resolution (direct URL, domain, search query), navigation token increments, callback handling
-- **TabManager** — Create/close/switch/reorder tabs, 100-tab limit, private tabs, close-all
-- **AdBlockService** — Enable/disable toggle, whitelist CRUD, case-insensitive matching, persistence
-- **BookmarkRepository** — Save/fetch/update/delete, search by title/URL, folder filtering
+84 unit tests across 8 suites using Swift Testing framework:
+
+| Suite | Tests | Coverage |
+|-------|-------|----------|
+| BrowserViewModel | 15 | URL resolution, navigation tokens, callbacks, error handling |
+| TabManager | 14 | Create/close/switch/reorder, 100-tab limit, private tabs |
+| AdBlockService | 9 | Toggle, whitelist CRUD, case-insensitive matching |
+| BookmarkRepository | 10 | SwiftData CRUD, search, folder filtering |
+| ReadingListRepository | 8 | Save/fetch/update/delete, read status |
+| HTTPSUpgradeService | 8 | HTTP→HTTPS upgrade, exception handling |
+| TrackingProtection | 10 | URL cleaning for fbclid, utm_*, gclid, etc. |
+| TabSuspensionManager | 10 | Suspend/resume lifecycle, memory warning |
+
+## Localization
+
+Velo Browser supports 6 languages via Xcode String Catalog:
+
+| Language | Code | Status |
+|----------|------|--------|
+| English | en | ✅ Base |
+| Vietnamese | vi | ✅ Complete |
+| Japanese | ja | ✅ Complete |
+| Korean | ko | ✅ Complete |
+| Chinese (Simplified) | zh-Hans | ✅ Complete |
+| Spanish | es | ✅ Complete |
+
+### Contributing Translations
+1. Open `VeloBrowser/Localizable.xcstrings` in Xcode
+2. Add or edit translations for your target language
+3. Submit a pull request
 
 ## License
 
-All rights reserved. See LICENSE file for details.
+MIT License. See [LICENSE](LICENSE) for details.

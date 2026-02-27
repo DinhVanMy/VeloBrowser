@@ -78,6 +78,9 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		7B4E60C121A6C49A646F66BD /* TabSuspensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179456FF36417004BB5DF235 /* TabSuspensionManager.swift */; };
 		8201BD2625C4755A3256084C /* CacheManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */; };
 		D2614397A726ABD44C352B83 /* TabSuspensionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */; };
+		DC5EE0C74F020584308F89B5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D6272794F51141D5802ABB05 /* Localizable.xcstrings */; };
+		5F680422E42C02C38E68341E /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */; };
+		B32AF5914E5673009B22C2BF /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16429C16A892F6610F32D86 /* ReviewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +168,9 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		179456FF36417004BB5DF235 /* TabSuspensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSuspensionManager.swift; sourceTree = "<group>"; };
 		E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerView.swift; sourceTree = "<group>"; };
 		0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSuspensionManagerTests.swift; sourceTree = "<group>"; };
+		D6272794F51141D5802ABB05 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightIndexer.swift; sourceTree = "<group>"; };
+		F16429C16A892F6610F32D86 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +217,8 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 				9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */,
 				6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */,
 				179456FF36417004BB5DF235 /* TabSuspensionManager.swift */,
+				C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */,
+				F16429C16A892F6610F32D86 /* ReviewManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -257,6 +265,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		6E8932C064D77B9016E0657D /* VeloBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				D6272794F51141D5802ABB05 /* Localizable.xcstrings */,
 				ACB43C1CF7B30BCF3AD9C8BE /* App */,
 				3335A126665160A8A9A6B461 /* Data */,
 				66D5846EB8733776CC17A17A /* Domain */,
@@ -535,6 +544,11 @@ sourceTree = "<group>";
 			knownRegions = (
 				en,
 				Base,
+				vi,
+				ja,
+				ko,
+				"zh-Hans",
+				es,
 			);
 			mainGroup = 26EE0F706760CC1E87473DCA;
 			productRefGroup = F8BAFC4040BB9E74AEF9B722 /* Products */;
@@ -552,6 +566,7 @@ sourceTree = "<group>";
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC5EE0C74F020584308F89B5 /* Localizable.xcstrings in Resources */,
 				8B3DFD9F6EE6B0271AC9EE70 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +619,8 @@ sourceTree = "<group>";
 				4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */,
 				A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */,
 				430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */,
+				B32AF5914E5673009B22C2BF /* ReviewManager.swift in Sources */,
+				5F680422E42C02C38E68341E /* SpotlightIndexer.swift in Sources */,
 				7B4E60C121A6C49A646F66BD /* TabSuspensionManager.swift in Sources */,
 				8201BD2625C4755A3256084C /* CacheManagerView.swift in Sources */,
 				81ABF6AC2BC2D216919FEA79 /* iPadLayoutView.swift in Sources */,

@@ -71,5 +71,32 @@
 </array>
 </dict>
 </array>
+<key>UIApplicationShortcutItems</key>
+<array>
+<dict>
+<key>UIApplicationShortcutItemType</key>
+<string>com.velobrowser.newtab</string>
+<key>UIApplicationShortcutItemTitle</key>
+<string>New Tab</string>
+<key>UIApplicationShortcutItemIconType</key>
+<string>UIApplicationShortcutIconTypeAdd</string>
+</dict>
+<dict>
+<key>UIApplicationShortcutItemType</key>
+<string>com.velobrowser.privatetab</string>
+<key>UIApplicationShortcutItemTitle</key>
+<string>Private Tab</string>
+<key>UIApplicationShortcutItemIconSymbolName</key>
+<string>eye.slash</string>
+</dict>
+<dict>
+<key>UIApplicationShortcutItemType</key>
+<string>com.velobrowser.search</string>
+<key>UIApplicationShortcutItemTitle</key>
+<string>Search</string>
+<key>UIApplicationShortcutItemIconType</key>
+<string>UIApplicationShortcutIconTypeSearch</string>
+</dict>
+</array>
 </dict>
 </plist>

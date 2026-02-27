@@ -82,3 +82,38 @@ Initial release of Velo Browser — fast, private, and ad-free browsing for iOS.
 - Bookmarks and browsing history
 - Multiple search engine support
 - Universal app for iPhone and iPad
+- Reader Mode with customizable fonts and themes
+- HTTPS-Only Mode with auto-upgrade
+- Tracking parameter removal (fbclid, utm_*, etc.)
+- Fingerprint protection
+- Biometric app lock (Face ID / Touch ID)
+- Reading list for offline articles
+- Desktop mode toggle per tab
+- iPad sidebar navigation and horizontal tab bar
+- Keyboard shortcuts for iPad
+- Tab suspension for memory optimization
+- Spotlight search integration
+- Home screen Quick Actions
+- 6 languages: English, Vietnamese, Japanese, Korean, Chinese, Spanish
+
+---
+
+## Localized Keywords
+
+### English (en) — 100 chars max
+browser,ad blocker,private,fast,background audio,pip,video,download,tabs,secure,reader,privacy
+
+### Vietnamese (vi)
+trình duyệt,chặn quảng cáo,riêng tư,nhanh,phát nền,tải xuống,tab,bảo mật,đọc,quyền riêng tư
+
+### Japanese (ja)
+ブラウザ,広告ブロック,プライベート,高速,バックグラウンド再生,ダウンロード,タブ,セキュリティ,リーダー
+
+### Korean (ko)
+브라우저,광고차단,프라이버시,빠른,백그라운드재생,다운로드,탭,보안,읽기모드,개인정보
+
+### Chinese Simplified (zh-Hans)
+浏览器,广告拦截,隐私,快速,后台播放,下载,标签页,安全,阅读模式,隐私保护
+
+### Spanish (es)
+navegador,bloqueador anuncios,privado,rápido,audio fondo,descargas,pestañas,seguro,lector,privacidad

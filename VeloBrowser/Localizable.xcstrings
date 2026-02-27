@@ -1,0 +1,1185 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Settings" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cài đặt" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "設定" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "설정" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设置" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes" } }
+      }
+    },
+    "General" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chung" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "一般" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "일반" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "通用" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "General" } }
+      }
+    },
+    "Search Engine" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Công cụ tìm kiếm" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "検索エンジン" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "검색 엔진" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "搜索引擎" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Motor de búsqueda" } }
+      }
+    },
+    "Default search engine" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Công cụ tìm kiếm mặc định" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "デフォルトの検索エンジン" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "기본 검색 엔진" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认搜索引擎" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Motor de búsqueda predeterminado" } }
+      }
+    },
+    "JavaScript" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "JavaScript" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "JavaScript" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "JavaScript" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "JavaScript" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "JavaScript" } }
+      }
+    },
+    "Enable JavaScript" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bật JavaScript" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "JavaScriptを有効にする" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "JavaScript 활성화" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "启用JavaScript" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Activar JavaScript" } }
+      }
+    },
+    "Storage & Cache" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bộ nhớ & Bộ đệm" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ストレージとキャッシュ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "저장 공간 및 캐시" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "存储与缓存" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Almacenamiento y caché" } }
+      }
+    },
+    "Performance" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hiệu suất" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "パフォーマンス" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "성능" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "性能" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Rendimiento" } }
+      }
+    },
+    "Suspend Inactive Tabs" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tạm ngưng tab không hoạt động" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "非アクティブなタブを一時停止" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "비활성 탭 일시 중지" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂停不活跃标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Suspender pestañas inactivas" } }
+      }
+    },
+    "Suspend After" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tạm ngưng sau" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "一時停止まで" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "일시 중지 시간" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂停时间" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Suspender después de" } }
+      }
+    },
+    "Ad Blocker" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chặn quảng cáo" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "広告ブロッカー" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "광고 차단기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "广告拦截器" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Bloqueador de anuncios" } }
+      }
+    },
+    "Enable ad blocking" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bật chặn quảng cáo" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "広告ブロックを有効にする" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "광고 차단 활성화" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "启用广告拦截" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Activar bloqueo de anuncios" } }
+      }
+    },
+    "Blocks ads and trackers for faster, cleaner browsing." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chặn quảng cáo và trình theo dõi để duyệt web nhanh hơn." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "広告とトラッカーをブロックして、より高速でクリーンなブラウジングを。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "광고와 추적기를 차단하여 더 빠르고 깨끗한 브라우징을 제공합니다." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "拦截广告和跟踪器，让浏览更快更干净。" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Bloquea anuncios y rastreadores para una navegación más rápida y limpia." } }
+      }
+    },
+    "Whitelisted Sites" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Trang web được phép" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ホワイトリスト" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "허용 목록" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "白名单站点" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sitios permitidos" } }
+      }
+    },
+    "No whitelisted sites" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có trang web được phép" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ホワイトリストなし" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "허용된 사이트 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有白名单站点" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No hay sitios permitidos" } }
+      }
+    },
+    "Privacy & Security" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Riêng tư & Bảo mật" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "プライバシーとセキュリティ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "개인정보 및 보안" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "隐私与安全" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Privacidad y seguridad" } }
+      }
+    },
+    "Privacy Dashboard" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bảng điều khiển quyền riêng tư" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "プライバシーダッシュボード" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "개인정보 대시보드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "隐私仪表板" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Panel de privacidad" } }
+      }
+    },
+    "HTTPS-Only Mode" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chế độ chỉ HTTPS" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "HTTPSのみモード" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "HTTPS 전용 모드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "仅HTTPS模式" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Modo solo HTTPS" } }
+      }
+    },
+    "Auto-upgrade HTTP to HTTPS" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tự động nâng cấp HTTP lên HTTPS" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "HTTPをHTTPSに自動アップグレード" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "HTTP를 HTTPS로 자동 업그레이드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自动将HTTP升级为HTTPS" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Actualizar HTTP a HTTPS automáticamente" } }
+      }
+    },
+    "Remove Tracking Parameters" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa tham số theo dõi" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "トラッキングパラメータを除去" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "추적 매개변수 제거" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "移除跟踪参数" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Eliminar parámetros de seguimiento" } }
+      }
+    },
+    "Fingerprint Protection" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bảo vệ dấu vân tay" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フィンガープリント保護" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "핑거프린트 보호" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "指纹保护" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Protección contra huellas digitales" } }
+      }
+    },
+    "Some sites may not work correctly" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Một số trang web có thể không hoạt động đúng" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "一部のサイトが正常に動作しない場合があります" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "일부 사이트가 올바르게 작동하지 않을 수 있습니다" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "部分网站可能无法正常工作" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Algunos sitios pueden no funcionar correctamente" } }
+      }
+    },
+    "Lock After" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Khóa sau" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ロックまでの時間" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "잠금 시간" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "锁定时间" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Bloquear después de" } }
+      }
+    },
+    "Manage Cookies" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Quản lý Cookie" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "Cookie管理" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "쿠키 관리" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "管理Cookie" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Administrar cookies" } }
+      }
+    },
+    "Clear Browsing Data" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa dữ liệu duyệt web" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "閲覧データを消去" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "인터넷 사용 기록 삭제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "清除浏览数据" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Borrar datos de navegación" } }
+      }
+    },
+    "This will remove all history, cookies, and cached data. This action cannot be undone." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thao tác này sẽ xóa tất cả lịch sử, cookie và dữ liệu bộ đệm. Không thể hoàn tác." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "すべての履歴、Cookie、キャッシュデータが削除されます。この操作は元に戻せません。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "모든 방문 기록, 쿠키, 캐시 데이터가 삭제됩니다. 이 작업은 취소할 수 없습니다." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "这将删除所有历史记录、Cookie和缓存数据。此操作无法撤消。" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Esto eliminará todo el historial, cookies y datos en caché. Esta acción no se puede deshacer." } }
+      }
+    },
+    "Clearing…" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang xóa…" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "消去中…" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "삭제 중…" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "正在清除…" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Borrando…" } }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hủy" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "キャンセル" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "취소" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "取消" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar" } }
+      }
+    },
+    "Clear All" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa tất cả" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "すべて消去" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "모두 삭제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "全部清除" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Borrar todo" } }
+      }
+    },
+    "About" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thông tin" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "このアプリについて" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "정보" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "关于" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Acerca de" } }
+      }
+    },
+    "Version" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Phiên bản" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "バージョン" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "버전" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "版本" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Versión" } }
+      }
+    },
+    "Build" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bản dựng" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ビルド" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "빌드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "构建" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Compilación" } }
+      }
+    },
+    "Show Tab Bar" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hiển thị thanh tab" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "タブバーを表示" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "탭 바 표시" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "显示标签栏" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mostrar barra de pestañas" } }
+      }
+    },
+    "Show Sidebar" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hiển thị thanh bên" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "サイドバーを表示" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "사이드바 표시" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "显示侧边栏" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mostrar barra lateral" } }
+      }
+    },
+    "Desktop Mode by Default" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chế độ máy tính mặc định" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "デスクトップモードをデフォルト" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "기본 데스크톱 모드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "默认桌面模式" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Modo escritorio por defecto" } }
+      }
+    },
+    "iPad Display" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hiển thị iPad" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "iPadディスプレイ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "iPad 디스플레이" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "iPad显示" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pantalla iPad" } }
+      }
+    },
+    "New Tab" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tab mới" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "新しいタブ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "새 탭" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "新标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nueva pestaña" } }
+      }
+    },
+    "New Private Tab" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tab riêng tư mới" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "新しいプライベートタブ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "새 시크릿 탭" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "新无痕标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nueva pestaña privada" } }
+      }
+    },
+    "Home" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Trang chủ" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ホーム" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "홈" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "主页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Inicio" } }
+      }
+    },
+    "Reload" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tải lại" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "再読み込み" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "새로고침" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "重新加载" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Recargar" } }
+      }
+    },
+    "Add Bookmark" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thêm dấu trang" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ブックマークに追加" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "북마크 추가" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加书签" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Añadir marcador" } }
+      }
+    },
+    "Play in Background" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Phát nền" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "バックグラウンド再生" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "백그라운드 재생" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "后台播放" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Reproducir en segundo plano" } }
+      }
+    },
+    "Find on Page" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tìm trên trang" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ページ内検索" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "페이지에서 찾기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "在页面中查找" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buscar en la página" } }
+      }
+    },
+    "Reader Mode" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chế độ đọc" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "リーダーモード" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "읽기 모드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阅读模式" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Modo lectura" } }
+      }
+    },
+    "Bookmarks" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Dấu trang" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ブックマーク" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "북마크" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "书签" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Marcadores" } }
+      }
+    },
+    "History" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Lịch sử" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "履歴" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "방문 기록" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "历史记录" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Historial" } }
+      }
+    },
+    "Downloads" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tải xuống" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ダウンロード" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "다운로드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "下载" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Descargas" } }
+      }
+    },
+    "Reading List" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Danh sách đọc" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "リーディングリスト" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "읽기 목록" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阅读列表" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Lista de lectura" } }
+      }
+    },
+    "Add to Reading List" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thêm vào danh sách đọc" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "リーディングリストに追加" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "읽기 목록에 추가" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "添加到阅读列表" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Añadir a lista de lectura" } }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "확인" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "好" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Aceptar" } }
+      }
+    },
+    "Back" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Quay lại" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "戻る" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "뒤로" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "返回" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Atrás" } }
+      }
+    },
+    "Forward" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tiến" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "進む" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "앞으로" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "前进" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Adelante" } }
+      }
+    },
+    "More options" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thêm tùy chọn" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "その他のオプション" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "더 보기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "更多选项" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Más opciones" } }
+      }
+    },
+    "Tab Limit Reached" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đã đạt giới hạn tab" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "タブの上限に達しました" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "탭 한도 도달" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已达标签页上限" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Límite de pestañas alcanzado" } }
+      }
+    },
+    "No Media Found" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không tìm thấy phương tiện" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "メディアが見つかりません" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "미디어를 찾을 수 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未找到媒体" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No se encontraron medios" } }
+      }
+    },
+    "Try Again" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thử lại" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "再試行" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "다시 시도" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "重试" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Reintentar" } }
+      }
+    },
+    "Failed to Load Page" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không tải được trang" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ページを読み込めませんでした" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "페이지를 로드하지 못했습니다" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "页面加载失败" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Error al cargar la página" } }
+      }
+    },
+    "No Internet Connection" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có kết nối Internet" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "インターネット接続なし" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "인터넷 연결 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有互联网连接" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin conexión a Internet" } }
+      }
+    },
+    "Check your connection and try again." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Kiểm tra kết nối và thử lại." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "接続を確認して、もう一度お試しください。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "연결을 확인하고 다시 시도하세요." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "请检查网络连接后重试。" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Comprueba tu conexión e inténtalo de nuevo." } }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xong" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "完了" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "완료" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "完成" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Listo" } }
+      }
+    },
+    "Tabs" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Các tab" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "タブ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "탭" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pestañas" } }
+      }
+    },
+    "Private Tabs" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tab riêng tư" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "プライベートタブ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "시크릿 탭" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "无痕标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pestañas privadas" } }
+      }
+    },
+    "Close All Private Tabs" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đóng tất cả tab riêng tư" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "すべてのプライベートタブを閉じる" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "모든 시크릿 탭 닫기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "关闭所有无痕标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cerrar todas las pestañas privadas" } }
+      }
+    },
+    "Close tab" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đóng tab" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "タブを閉じる" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "탭 닫기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "关闭标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cerrar pestaña" } }
+      }
+    },
+    "Private" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Riêng tư" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "プライベート" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "시크릿" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "无痕" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Privado" } }
+      }
+    },
+    "Paste & Go" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Dán & Truy cập" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ペーストして移動" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "붙여넣기 및 이동" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "粘贴并前往" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pegar e ir" } }
+      }
+    },
+    "Not Secure" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không an toàn" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "安全ではありません" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "안전하지 않음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "不安全" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No seguro" } }
+      }
+    },
+    "Private browsing mode" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chế độ duyệt riêng tư" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "プライベートブラウジングモード" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "시크릿 브라우징 모드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "无痕浏览模式" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Modo de navegación privada" } }
+      }
+    },
+    "Address bar" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thanh địa chỉ" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アドレスバー" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "주소 표시줄" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "地址栏" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Barra de direcciones" } }
+      }
+    },
+    "Clear address bar" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa thanh địa chỉ" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アドレスバーをクリア" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "주소 표시줄 지우기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "清除地址栏" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Borrar barra de direcciones" } }
+      }
+    },
+    "Reader mode" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chế độ đọc" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "リーダーモード" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "읽기 모드" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阅读模式" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Modo lectura" } }
+      }
+    },
+    "Ad blocker active" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chặn quảng cáo đang hoạt động" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "広告ブロッカー有効" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "광고 차단 활성" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "广告拦截已启用" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Bloqueador de anuncios activo" } }
+      }
+    },
+    "Stop loading" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Dừng tải" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "読み込みを停止" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "로딩 중지" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "停止加载" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Detener carga" } }
+      }
+    },
+    "Reload page" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tải lại trang" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ページを再読み込み" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "페이지 새로고침" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "重新加载页面" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Recargar página" } }
+      }
+    },
+    "Previous match" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Kết quả trước" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "前の一致" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "이전 일치 항목" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "上一个匹配" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Coincidencia anterior" } }
+      }
+    },
+    "Next match" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Kết quả sau" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "次の一致" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "다음 일치 항목" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "下一个匹配" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Siguiente coincidencia" } }
+      }
+    },
+    "Velo Browser" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Velo Browser" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "Velo Browser" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "Velo Browser" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Velo Browser" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Velo Browser" } }
+      }
+    },
+    "Quick Access" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Truy cập nhanh" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "クイックアクセス" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "빠른 액세스" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "快速访问" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Acceso rápido" } }
+      }
+    },
+    "Favorites" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Yêu thích" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "お気に入り" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "즐겨찾기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "收藏夹" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Favoritos" } }
+      }
+    },
+    "No Bookmarks" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có dấu trang" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ブックマークなし" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "북마크 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有书签" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin marcadores" } }
+      }
+    },
+    "Tap + to save the current page." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Nhấn + để lưu trang hiện tại." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "+をタップして現在のページを保存。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "+를 탭하여 현재 페이지를 저장하세요." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "点击+保存当前页面。" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Toca + para guardar la página actual." } }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Lưu" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "保存" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "저장" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "保存" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Guardar" } }
+      }
+    },
+    "Clear History" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa lịch sử" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "履歴を消去" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "방문 기록 삭제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "清除历史记录" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Borrar historial" } }
+      }
+    },
+    "No History" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có lịch sử" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "履歴なし" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "방문 기록 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有历史记录" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin historial" } }
+      }
+    },
+    "Pages you visit will appear here." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Các trang bạn truy cập sẽ hiện ở đây." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "訪問したページがここに表示されます。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "방문한 페이지가 여기에 표시됩니다." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "您访问的页面将显示在此处。" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Las páginas que visites aparecerán aquí." } }
+      }
+    },
+    "No Results" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có kết quả" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "結果なし" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "결과 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "无结果" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin resultados" } }
+      }
+    },
+    "Clear" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "消去" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "삭제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "清除" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Borrar" } }
+      }
+    },
+    "No Downloads" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có tải xuống" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ダウンロードなし" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "다운로드 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有下载" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin descargas" } }
+      }
+    },
+    "Downloaded files will appear here." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Các tệp đã tải xuống sẽ hiện ở đây." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ダウンロードしたファイルがここに表示されます。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "다운로드한 파일이 여기에 표시됩니다." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "下载的文件将显示在此处。" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Los archivos descargados aparecerán aquí." } }
+      }
+    },
+    "Waiting..." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đang chờ..." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "待機中..." } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "대기 중..." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "等待中..." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Esperando..." } }
+      }
+    },
+    "Paused" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đã tạm dừng" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "一時停止中" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "일시 중지됨" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已暂停" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "En pausa" } }
+      }
+    },
+    "Completed" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hoàn tất" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "完了" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "완료됨" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已完成" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Completado" } }
+      }
+    },
+    "Failed" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thất bại" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "失敗" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "실패" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "失败" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Fallido" } }
+      }
+    },
+    "Cancelled" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đã hủy" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "キャンセル済み" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "취소됨" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已取消" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cancelado" } }
+      }
+    },
+    "Retry" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thử lại" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "再試行" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "다시 시도" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "重试" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Reintentar" } }
+      }
+    },
+    "Cancel download" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hủy tải xuống" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ダウンロードをキャンセル" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "다운로드 취소" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "取消下载" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cancelar descarga" } }
+      }
+    },
+    "No Reading List Items" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có mục đọc" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "リーディングリストにアイテムなし" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "읽기 목록 항목 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有阅读列表项目" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sin artículos en la lista de lectura" } }
+      }
+    },
+    "Save articles to read later from the browser menu." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Lưu bài viết để đọc sau từ menu trình duyệt." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ブラウザメニューから記事を保存して後で読みましょう。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "브라우저 메뉴에서 나중에 읽을 기사를 저장하세요." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "从浏览器菜单保存文章以便稍后阅读。" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Guarda artículos para leer más tarde desde el menú del navegador." } }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "削除" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "삭제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "删除" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Eliminar" } }
+      }
+    },
+    "Close reader mode" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Đóng chế độ đọc" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "リーダーモードを閉じる" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "읽기 모드 닫기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "关闭阅读模式" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cerrar modo lectura" } }
+      }
+    },
+    "Reader settings" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cài đặt đọc" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "リーダー設定" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "읽기 설정" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阅读器设置" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes del lector" } }
+      }
+    },
+    "Share" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chia sẻ" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "共有" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "공유" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "分享" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Compartir" } }
+      }
+    },
+    "Font" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Phông chữ" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォント" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "글꼴" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "字体" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Fuente" } }
+      }
+    },
+    "Family" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Họ" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ファミリー" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "서체" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "字体系列" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Familia" } }
+      }
+    },
+    "Line Spacing" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Khoảng cách dòng" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "行間" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "줄 간격" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "行距" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Interlineado" } }
+      }
+    },
+    "Theme" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Chủ đề" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テーマ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "테마" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "主题" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tema" } }
+      }
+    },
+    "Reader Settings" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cài đặt chế độ đọc" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "リーダー設定" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "읽기 설정" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "阅读器设置" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes del lector" } }
+      }
+    },
+    "Unlock to continue" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Mở khóa để tiếp tục" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ロック解除して続行" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "계속하려면 잠금 해제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "解锁以继续" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Desbloquea para continuar" } }
+      }
+    },
+    "Unlock with biometrics" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Mở khóa bằng sinh trắc học" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "生体認証でロック解除" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "생체 인식으로 잠금 해제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "使用生物识别解锁" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Desbloquear con biometría" } }
+      }
+    },
+    "Rewind 15 seconds" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tua lại 15 giây" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "15秒巻き戻し" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "15초 뒤로" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "后退15秒" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Retroceder 15 segundos" } }
+      }
+    },
+    "Pause" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tạm dừng" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "一時停止" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "일시 중지" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂停" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pausar" } }
+      }
+    },
+    "Play" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Phát" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "再生" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "재생" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "播放" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Reproducir" } }
+      }
+    },
+    "Forward 15 seconds" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tua tới 15 giây" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "15秒早送り" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "15초 앞으로" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "快进15秒" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Avanzar 15 segundos" } }
+      }
+    },
+    "Exit Picture in Picture" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thoát Hình trong Hình" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ピクチャインピクチャを終了" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "화면 속 화면 종료" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "退出画中画" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Salir de imagen en imagen" } }
+      }
+    },
+    "Enter Picture in Picture" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Vào Hình trong Hình" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ピクチャインピクチャに入る" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "화면 속 화면 시작" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "进入画中画" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Entrar en imagen en imagen" } }
+      }
+    },
+    "Get Started" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bắt đầu" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "始めましょう" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "시작하기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "开始使用" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Comenzar" } }
+      }
+    },
+    "Continue" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tiếp tục" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "続ける" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "계속" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "继续" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Continuar" } }
+      }
+    },
+    "Skip" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bỏ qua" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "スキップ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "건너뛰기" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "跳过" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Omitir" } }
+      }
+    },
+    "Your Privacy Protection" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bảo vệ quyền riêng tư của bạn" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "あなたのプライバシー保護" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "개인정보 보호" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "您的隐私保护" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Tu protección de privacidad" } }
+      }
+    },
+    "Enable all protections for maximum privacy." : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Bật tất cả bảo vệ để có quyền riêng tư tối đa." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "最大限のプライバシーのためにすべての保護を有効にしてください。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "최대 개인정보 보호를 위해 모든 보호를 활성화하세요." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "启用所有保护以获得最大隐私。" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Activa todas las protecciones para máxima privacidad." } }
+      }
+    },
+    "Cookies" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Cookie" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "Cookie" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "쿠키" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "Cookie" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Cookies" } }
+      }
+    },
+    "Delete All" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa tất cả" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "すべて削除" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "모두 삭제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "全部删除" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Eliminar todo" } }
+      }
+    },
+    "No website data stored" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Không có dữ liệu trang web" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ウェブサイトデータなし" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "저장된 웹사이트 데이터 없음" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "没有存储的网站数据" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "No hay datos de sitios web almacenados" } }
+      }
+    },
+    "Clear Cache" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa bộ đệm" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "キャッシュを消去" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "캐시 삭제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "清除缓存" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Borrar caché" } }
+      }
+    },
+    "Clear All Website Data" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Xóa tất cả dữ liệu trang web" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "すべてのウェブサイトデータを消去" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "모든 웹사이트 데이터 삭제" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "清除所有网站数据" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Borrar todos los datos de sitios web" } }
+      }
+    },
+    "New tab" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tab mới" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "新しいタブ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "새 탭" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "新标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Nueva pestaña" } }
+      }
+    },
+    "Show all tabs" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Hiển thị tất cả tab" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "すべてのタブを表示" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "모든 탭 표시" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "显示所有标签页" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mostrar todas las pestañas" } }
+      }
+    },
+    "Search" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tìm kiếm" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "検索" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "검색" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "搜索" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Buscar" } }
+      }
+    },
+    "Overview" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tổng quan" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "概要" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "개요" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "概览" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Descripción general" } }
+      }
+    },
+    "Total Sites" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Tổng số trang" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "サイト合計" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "전체 사이트" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "站点总数" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Total de sitios" } }
+      }
+    },
+    "Actions" : {
+      "localizations" : {
+        "vi" : { "stringUnit" : { "state" : "translated", "value" : "Thao tác" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アクション" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "작업" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "操作" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Acciones" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
