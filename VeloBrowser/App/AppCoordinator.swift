@@ -84,31 +84,24 @@ final class AppCoordinator {
 /// The root view managed by AppCoordinator.
 ///
 /// Wraps the browser view in a NavigationStack and provides
-/// sheet presentation for secondary screens.
+/// sheet presentation for secondary screens. On iPad with regular
+/// width, uses iPadLayoutView with optional sidebar and tab bar.
 struct AppCoordinatorView: View {
     @State private var coordinator = AppCoordinator()
     @Environment(DIContainer.self) private var container
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
+    /// Whether to use iPad layout (regular size class on iPad hardware).
+    private var useIPadLayout: Bool {
+        DeviceHelper.isIPad && horizontalSizeClass == .regular
+    }
 
     var body: some View {
-        NavigationStack(path: $coordinator.path) {
-            ZStack {
-                mainBrowserView
-                    .navigationDestination(for: AppDestination.self) { destination in
-                        destinationView(for: destination)
-                    }
-
-                // PiP host view (invisible, hosts AVPlayerLayer for PiP)
-                if container.mediaPlayerService.player != nil {
-                    PiPPlayerView(
-                        player: container.mediaPlayerService.player,
-                        onPiPControllerReady: { pip in
-                            container.mediaPlayerService.pipController = pip
-                        }
-                    )
-                    .frame(width: 1, height: 1)
-                    .opacity(0)
-                    .allowsHitTesting(false)
-                }
+        Group {
+            if useIPadLayout {
+                iPadBody
+            } else {
+                iPhoneBody
             }
         }
         .environment(coordinator)
@@ -174,6 +167,51 @@ struct AppCoordinatorView: View {
         .task {
             await container.adBlockService.compileRules()
             container.networkMonitor.start()
+        }
+    }
+
+    // MARK: - iPad Layout
+
+    @ViewBuilder
+    private var iPadBody: some View {
+        ZStack {
+            iPadLayoutView()
+
+            // PiP host view
+            pipHostView
+        }
+    }
+
+    // MARK: - iPhone Layout
+
+    @ViewBuilder
+    private var iPhoneBody: some View {
+        NavigationStack(path: $coordinator.path) {
+            ZStack {
+                mainBrowserView
+                    .navigationDestination(for: AppDestination.self) { destination in
+                        destinationView(for: destination)
+                    }
+
+                pipHostView
+            }
+        }
+    }
+
+    // MARK: - Shared Components
+
+    @ViewBuilder
+    private var pipHostView: some View {
+        if container.mediaPlayerService.player != nil {
+            PiPPlayerView(
+                player: container.mediaPlayerService.player,
+                onPiPControllerReady: { pip in
+                    container.mediaPlayerService.pipController = pip
+                }
+            )
+            .frame(width: 1, height: 1)
+            .opacity(0)
+            .allowsHitTesting(false)
         }
     }
 

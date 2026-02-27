@@ -71,6 +71,10 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		87D72E95CC769C2A9BD76DF6 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */; };
 		F48F4B42A3DD8F0F371860CD /* TrackingProtectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */; };
 		D3D5AEBE3C5D4A8C3C36B971 /* HTTPSUpgradeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */; };
+		CBB1408FBA711114F4D2220F /* DeviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F312E43AAC76ACAF8EC1F3 /* DeviceHelper.swift */; };
+		E80AB063AB8711D6190CBB09 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027B77B665EF51B2C65783B0 /* SidebarView.swift */; };
+		4C45D7A9977F559EED46E319 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B8A44C882024F58925879F /* TabBarView.swift */; };
+		81ABF6AC2BC2D216919FEA79 /* iPadLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +155,10 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
 		C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingProtectionServiceTests.swift; sourceTree = "<group>"; };
 		E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSUpgradeServiceTests.swift; sourceTree = "<group>"; };
+		A4F312E43AAC76ACAF8EC1F3 /* DeviceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHelper.swift; sourceTree = "<group>"; };
+		027B77B665EF51B2C65783B0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		25B8A44C882024F58925879F /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadLayoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +292,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				READLISTGRP0000000000001 /* ReadingList */,
 				A0DCBE2537C53A9A6B81DB87 /* Settings */,
 				D366B379FC59425070385DCF /* Shared */,
+				DEADBEEF1234567890ABCDEF /* iPad */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -360,6 +369,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				285DBB4F92340576E80A2727 /* HapticManager.swift */,
 				0E050D8D6456447838CD19A1 /* ShareSheet.swift */,
 				354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */,
+				A4F312E43AAC76ACAF8EC1F3 /* DeviceHelper.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -444,6 +454,16 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			path = ReadingList;
 			sourceTree = "<group>";
 		};
+DEADBEEF1234567890ABCDEF /* iPad */ = {
+isa = PBXGroup;
+children = (
+				027B77B665EF51B2C65783B0 /* SidebarView.swift */,
+				25B8A44C882024F58925879F /* TabBarView.swift */,
+				3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */,
+);
+path = iPad;
+sourceTree = "<group>";
+};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -575,6 +595,10 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */,
 				A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */,
 				430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */,
+				81ABF6AC2BC2D216919FEA79 /* iPadLayoutView.swift in Sources */,
+				4C45D7A9977F559EED46E319 /* TabBarView.swift in Sources */,
+				E80AB063AB8711D6190CBB09 /* SidebarView.swift in Sources */,
+				CBB1408FBA711114F4D2220F /* DeviceHelper.swift in Sources */,
 				76E75D7C34A5EE00798861D9 /* HTTPSUpgradeService.swift in Sources */,
 				4713F38100A038AD9696C315 /* AppLockService.swift in Sources */,
 				F87A9E952975971BC30EB304 /* TrackingProtectionService.swift in Sources */,

@@ -49,6 +49,9 @@ struct SettingsView: View {
             generalSection
             adBlockerSection
             privacySection
+            if DeviceHelper.isIPad {
+                iPadSection
+            }
             aboutSection
         }
         .navigationTitle("Settings")
@@ -244,6 +247,27 @@ struct SettingsView: View {
             }
         } header: {
             Label("About", systemImage: "info.circle")
+        }
+    }
+
+    // MARK: - iPad Section
+
+    @AppStorage("iPadShowTabBar") private var iPadShowTabBar: Bool = true
+    @AppStorage("iPadShowSidebar") private var iPadShowSidebar: Bool = false
+    @AppStorage("iPadDesktopByDefault") private var iPadDesktopByDefault: Bool = true
+
+    private var iPadSection: some View {
+        Section {
+            Toggle("Show Tab Bar", isOn: $iPadShowTabBar)
+                .accessibilityHint("Show horizontal tab bar at the top of the screen")
+
+            Toggle("Show Sidebar", isOn: $iPadShowSidebar)
+                .accessibilityHint("Show sidebar with bookmarks, history, and downloads")
+
+            Toggle("Desktop Mode by Default", isOn: $iPadDesktopByDefault)
+                .accessibilityHint("Automatically request desktop versions of websites")
+        } header: {
+            Label("iPad Display", systemImage: "ipad.landscape")
         }
     }
 

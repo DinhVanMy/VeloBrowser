@@ -131,6 +131,19 @@ struct AddressBarView: View {
             }
         }
         .animation(.easeOut(duration: DesignSystem.AnimationDuration.fast), value: viewModel.isLoading)
+        .draggable(viewModel.currentURL?.absoluteString ?? "") {
+            // Drag preview: show domain
+            Label(viewModel.displayDomain, systemImage: "link")
+                .padding(DesignSystem.Spacing.sm)
+                .background(DesignSystem.Colors.backgroundSecondary)
+                .clipShape(RoundedRectangle(cornerRadius: DesignSystem.Radius.button))
+        }
+        .dropDestination(for: String.self) { items, _ in
+            guard let dropped = items.first, !dropped.isEmpty else { return false }
+            viewModel.addressBarText = dropped
+            viewModel.submitAddressBar()
+            return true
+        }
         .onChange(of: viewModel.isAddressBarFocused) { _, newValue in
             isFocused = newValue
         }
@@ -199,6 +212,7 @@ struct AddressBarView: View {
                 .contentShape(Rectangle())
         }
         .accessibilityLabel(viewModel.isLoading ? "Stop loading" : "Reload page")
+        .hoverEffect(.highlight)
     }
 
     @ViewBuilder

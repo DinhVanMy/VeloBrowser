@@ -12,14 +12,16 @@ import SwiftUI
 struct TabSwitcherView: View {
     @Bindable var tabManager: TabManager
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     /// Whether showing private tabs.
     @State private var showingPrivateTabs = false
 
-    private let columns = [
-        GridItem(.flexible(), spacing: DesignSystem.Spacing.sm),
-        GridItem(.flexible(), spacing: DesignSystem.Spacing.sm)
-    ]
+    /// Adaptive column count: 3 on iPad/landscape, 2 on iPhone portrait.
+    private var columns: [GridItem] {
+        let count = (horizontalSizeClass == .regular || DeviceHelper.isIPad) ? 3 : 2
+        return Array(repeating: GridItem(.flexible(), spacing: DesignSystem.Spacing.sm), count: count)
+    }
 
     var body: some View {
         NavigationStack {
@@ -214,6 +216,7 @@ struct TabThumbnailView: View {
             )
         }
         .buttonStyle(.plain)
+        .hoverEffect(.lift)
         .offset(y: dragOffset.height)
         .opacity(isDismissing ? 0 : max(0, 1.0 - abs(dragOffset.height) / CGFloat(200)))
         .gesture(

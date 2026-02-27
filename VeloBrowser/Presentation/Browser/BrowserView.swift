@@ -536,6 +536,7 @@ struct BrowserView: View {
                 .contentShape(Rectangle())
         }
         .disabled(disabled)
+        .hoverEffect(.highlight)
         .accessibilityLabel(label)
     }
 
