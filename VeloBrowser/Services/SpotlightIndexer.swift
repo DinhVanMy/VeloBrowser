@@ -4,7 +4,7 @@
 // Indexes bookmarks and history into Core Spotlight for system-wide search
 // and configures NSUserActivity for Handoff support.
 
-import CoreSpotlight
+@preconcurrency import CoreSpotlight
 import MobileCoreServices
 import UniformTypeIdentifiers
 

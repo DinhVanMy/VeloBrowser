@@ -16,29 +16,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <!-- App Logo (100x100, centered) -->
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="velo-logo-img">
-                                <rect key="frame" x="146.5" y="346" width="100" height="100"/>
+                                <rect key="frame" x="136.5" y="336" width="120" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="logo-w"/>
-                                    <constraint firstAttribute="height" constant="100" id="logo-h"/>
+                                    <constraint firstAttribute="width" constant="120" id="logo-w"/>
+                                    <constraint firstAttribute="height" constant="120" id="logo-h"/>
                                 </constraints>
                             </imageView>
-                            <!-- App Name Label ("Velo Browser") -->
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Velo Browser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="velo-name-lbl">
-                                <rect key="frame" x="126.5" y="466" width="140" height="24"/>
+                                <rect key="frame" x="126.5" y="476" width="140" height="24"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <!-- Dark navy background matching Velo brand logo -->
                         <color key="backgroundColor" red="0.004" green="0.020" blue="0.114" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <!-- Logo: center horizontally and vertically (offset -20 to leave room for text) -->
                             <constraint firstItem="velo-logo-img" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="logo-cx"/>
                             <constraint firstItem="velo-logo-img" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-30" id="logo-cy"/>
-                            <!-- Label: center horizontally, 20pt below logo -->
                             <constraint firstItem="velo-name-lbl" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="name-cx"/>
                             <constraint firstItem="velo-name-lbl" firstAttribute="top" secondItem="velo-logo-img" secondAttribute="bottom" constant="20" id="name-top"/>
                         </constraints>
@@ -50,6 +45,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchIcon" width="100" height="100"/>
+        <image name="LaunchIcon" width="120" height="120"/>
     </resources>
 </document>

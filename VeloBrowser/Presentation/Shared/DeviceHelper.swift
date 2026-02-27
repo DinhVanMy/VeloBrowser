@@ -11,11 +11,13 @@ import SwiftUI
 /// and environment size classes for adaptive behavior.
 enum DeviceHelper {
     /// Whether the current device is an iPad.
+    @MainActor
     static var isIPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
 
     /// Whether the current device is an iPhone.
+    @MainActor
     static var isIPhone: Bool {
         UIDevice.current.userInterfaceIdiom == .phone
     }
@@ -23,16 +25,19 @@ enum DeviceHelper {
     /// Adaptive spacing that increases on iPad.
     enum AdaptiveSpacing {
         /// Toolbar horizontal padding: 16pt iPhone, 24pt iPad.
+        @MainActor
         static var toolbarHorizontal: CGFloat {
             isIPad ? DesignSystem.Spacing.lg : DesignSystem.Spacing.md
         }
 
         /// Toolbar vertical padding: 8pt iPhone, 12pt iPad.
+        @MainActor
         static var toolbarVertical: CGFloat {
             isIPad ? 12 : DesignSystem.Spacing.sm
         }
 
         /// Address bar horizontal padding: 16pt iPhone, 24pt iPad.
+        @MainActor
         static var addressBarHorizontal: CGFloat {
             isIPad ? DesignSystem.Spacing.lg : DesignSystem.Spacing.md
         }
@@ -41,6 +46,7 @@ enum DeviceHelper {
     /// Adaptive touch target sizes.
     enum AdaptiveTouchTarget {
         /// Minimum touch target: 44pt iPhone, 48pt iPad.
+        @MainActor
         static var minimum: CGFloat {
             isIPad ? 48 : DesignSystem.minimumTouchTarget
         }

@@ -22,16 +22,21 @@ private enum Platform: String, CaseIterable, Sendable {
         }
     }
 
+    // swiftlint:disable force_unwrapping
+    /// The well-known URL is a compile-time constant that will never fail.
+    private static let fallbackURL = URL(string: "about:blank")!
+    // swiftlint:enable force_unwrapping
+
     var url: URL {
         switch self {
-        case .youtube: URL(string: "https://m.youtube.com") ?? URL(string: "about:blank")!
-        case .facebook: URL(string: "https://m.facebook.com") ?? URL(string: "about:blank")!
-        case .tiktok: URL(string: "https://www.tiktok.com") ?? URL(string: "about:blank")!
-        case .twitter: URL(string: "https://x.com") ?? URL(string: "about:blank")!
-        case .instagram: URL(string: "https://www.instagram.com") ?? URL(string: "about:blank")!
-        case .reddit: URL(string: "https://www.reddit.com") ?? URL(string: "about:blank")!
-        case .wikipedia: URL(string: "https://en.m.wikipedia.org") ?? URL(string: "about:blank")!
-        case .gmail: URL(string: "https://mail.google.com") ?? URL(string: "about:blank")!
+        case .youtube: URL(string: "https://m.youtube.com") ?? Self.fallbackURL
+        case .facebook: URL(string: "https://m.facebook.com") ?? Self.fallbackURL
+        case .tiktok: URL(string: "https://www.tiktok.com") ?? Self.fallbackURL
+        case .twitter: URL(string: "https://x.com") ?? Self.fallbackURL
+        case .instagram: URL(string: "https://www.instagram.com") ?? Self.fallbackURL
+        case .reddit: URL(string: "https://www.reddit.com") ?? Self.fallbackURL
+        case .wikipedia: URL(string: "https://en.m.wikipedia.org") ?? Self.fallbackURL
+        case .gmail: URL(string: "https://mail.google.com") ?? Self.fallbackURL
         }
     }
 

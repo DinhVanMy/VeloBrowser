@@ -120,11 +120,6 @@ struct WebViewContainer: UIViewRepresentable {
         // Performance: show content ASAP
         config.suppressesIncrementalRendering = false
 
-        // Shared process pool (reduces memory by sharing web content processes)
-        config.processPool = isPrivate
-            ? Self.privateProcessPool
-            : Self.sharedProcessPool
-
         // JavaScript preference
         config.defaultWebpagePreferences.allowsContentJavaScript = javaScriptEnabled
 
@@ -259,12 +254,6 @@ struct WebViewContainer: UIViewRepresentable {
     /// Desktop Safari user-agent string for "Request Desktop Site".
     private static let desktopUserAgent =
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
-
-    /// Shared WKProcessPool for all normal (non-private) tabs.
-    private static let sharedProcessPool = WKProcessPool()
-
-    /// Separate WKProcessPool for private browsing tabs.
-    private static let privateProcessPool = WKProcessPool()
 
     /// JavaScript that adds `loading="lazy"` to below-fold images.
     private static let lazyImageLoadingJS = """
@@ -573,15 +562,13 @@ struct WebViewContainer: UIViewRepresentable {
         // Context Menu
         func webView(
             _ webView: WKWebView,
-            contextMenuConfigurationForElement elementInfo: WKContextMenuElementInfo,
-            completionHandler: @escaping (UIContextMenuConfiguration?) -> Void
-        ) {
+            contextMenuConfigurationFor elementInfo: WKContextMenuElementInfo
+        ) async -> UIContextMenuConfiguration? {
             guard let linkURL = elementInfo.linkURL else {
-                completionHandler(nil)
-                return
+                return nil
             }
 
-            let config = UIContextMenuConfiguration(
+            return UIContextMenuConfiguration(
                 identifier: nil,
                 previewProvider: nil
             ) { [weak self] _ in
@@ -651,7 +638,6 @@ struct WebViewContainer: UIViewRepresentable {
 
                 return UIMenu(children: [openMenu, actionsMenu, saveMenu])
             }
-            completionHandler(config)
         }
 
         deinit {

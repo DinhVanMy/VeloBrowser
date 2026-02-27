@@ -81,6 +81,7 @@ struct LockScreenView: View {
         case .faceID: return "Unlock with Face ID"
         case .touchID: return "Unlock with Touch ID"
         case .opticID: return "Unlock with Optic ID"
+        case .none: return "Unlock"
         @unknown default: return "Unlock"
         }
     }
@@ -90,6 +91,7 @@ struct LockScreenView: View {
         case .faceID: return "faceid"
         case .touchID: return "touchid"
         case .opticID: return "opticid"
+        case .none: return "lock.open"
         @unknown default: return "lock.open"
         }
     }
