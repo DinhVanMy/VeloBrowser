@@ -53,6 +53,8 @@
 		C744641F71783567067DF6D2 /* TabManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A896D296C22A0204E85A6 /* TabManagerTests.swift */; };
 		943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */; };
 		24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */; };
+7B4CE0547EA90C903E9A53CC /* PlatformLogos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95796A7183FBB2634B1A1208 /* PlatformLogos.swift */; };
+A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,8 @@
 		292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeloBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewModelTests.swift; sourceTree = "<group>"; };
 		5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepositoryTests.swift; sourceTree = "<group>"; };
+95796A7183FBB2634B1A1208 /* PlatformLogos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformLogos.swift; sourceTree = "<group>"; };
+86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloLogoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,10 +221,20 @@
 			path = Downloads;
 			sourceTree = "<group>";
 		};
-		7EF43E2270DA7ACA4382E5FE /* Presentation */ = {
+		C0MM0NGROUPID00000000001 /* Common */ = {
+isa = PBXGroup;
+children = (
+95796A7183FBB2634B1A1208 /* PlatformLogos.swift */,
+86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */,
+);
+path = Common;
+sourceTree = "<group>";
+};
+7EF43E2270DA7ACA4382E5FE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				D6D08C862BED256CC66164A5 /* Bookmarks */,
+				C0MM0NGROUPID00000000001 /* Common */,
+D6D08C862BED256CC66164A5 /* Bookmarks */,
 				E2FAA3BAF03357BCAFF46023 /* Browser */,
 				9E0CADC4E1918C91F0947484 /* DesignSystem */,
 				78A6E72CC8EF3F8229EA4AEB /* Downloads */,
@@ -497,6 +511,8 @@
 				4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */,
 				A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */,
 				430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */,
+				7B4CE0547EA90C903E9A53CC /* PlatformLogos.swift in Sources */,
+				A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

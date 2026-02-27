@@ -161,7 +161,15 @@ struct AppCoordinatorView: View {
                 viewModel: vm,
                 onShowTabSwitcher: {
                     HapticManager.light()
-                    coordinator.showTabSwitcher = true
+                    // Capture snapshot of the active tab before showing switcher
+                    // (inactive tabs already have snapshots from when they were switched away)
+                    if let activeTab = container.tabManager.activeTab {
+                        container.tabManager.captureSnapshot(for: activeTab.id)
+                    }
+                    // Small delay for snapshot completion before showing sheet
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        coordinator.showTabSwitcher = true
+                    }
                 },
                 tabCount: container.tabManager.tabCount
             )

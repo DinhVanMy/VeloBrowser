@@ -138,6 +138,21 @@ final class BrowserViewModel {
         stopToken += 1
     }
 
+    /// Navigates the current tab to the home (new tab) page.
+    ///
+    /// Clears the URL, title, and address bar to show the NewTabPageView.
+    func goHome() {
+        currentURL = nil
+        pendingURL = nil
+        pageTitle = ""
+        addressBarText = ""
+        isLoading = false
+        loadingProgress = 0
+        errorMessage = nil
+        // Increment stop to halt any current load
+        stopToken += 1
+    }
+
     // MARK: - WebView Callbacks
 
     /// Called by WebViewContainer when the page title changes.

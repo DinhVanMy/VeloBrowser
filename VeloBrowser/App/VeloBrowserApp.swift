@@ -5,6 +5,7 @@
 
 import SwiftUI
 import SwiftData
+import AVFoundation
 
 /// Main application entry point for VeloBrowser.
 ///
@@ -18,6 +19,11 @@ struct VeloBrowserApp: App {
 
     /// Whether onboarding has been completed.
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+
+    init() {
+        // Configure audio session at launch for WKWebView background audio
+        configureAudioSession()
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -35,6 +41,24 @@ struct VeloBrowserApp: App {
                     }
                 }
             }
+        }
+    }
+
+    // MARK: - Audio Session
+
+    /// Configures AVAudioSession for background audio playback.
+    ///
+    /// Must be called early so WKWebView audio continues when the app
+    /// is backgrounded or the screen is locked (e.g., YouTube music).
+    /// Uses `.playback` category WITHOUT `.mixWithOthers` so iOS treats
+    /// this as the primary audio source and does not suspend the process.
+    private func configureAudioSession() {
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playback, mode: .default, options: [])
+            try session.setActive(true)
+        } catch {
+            // Audio session setup failed — background audio may not work
         }
     }
 

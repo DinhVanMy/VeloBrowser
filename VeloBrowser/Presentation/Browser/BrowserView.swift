@@ -260,6 +260,17 @@ struct BrowserView: View {
                 Label("New Tab", systemImage: "plus")
             }
 
+            // Home — navigate current tab back to the start page
+            Button {
+                viewModel.goHome()
+                if let activeTab = container.tabManager.activeTab {
+                    container.tabManager.resetTabToHome(id: activeTab.id)
+                }
+                HapticManager.light()
+            } label: {
+                Label("Home", systemImage: "house")
+            }
+
             Button {
                 viewModel.reload()
             } label: {

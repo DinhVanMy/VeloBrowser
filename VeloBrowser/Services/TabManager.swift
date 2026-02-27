@@ -111,6 +111,18 @@ final class TabManager: TabManagerProtocol {
         }
     }
 
+    /// Resets a tab to the home/new-tab state.
+    ///
+    /// Clears the URL, resets the title, and removes the snapshot.
+    /// - Parameter id: The tab ID to reset.
+    func resetTabToHome(id: UUID) {
+        guard let index = tabs.firstIndex(where: { $0.id == id }) else { return }
+        tabs[index].url = nil
+        tabs[index].title = "New Tab"
+        tabs[index].faviconURL = nil
+        snapshots.removeValue(forKey: id)
+    }
+
     /// Returns the current search engine URL template from user preferences.
     private var searchEngineTemplate: String {
         let savedEngine = UserDefaults.standard.string(forKey: "searchEngine") ?? SearchEngine.google.rawValue

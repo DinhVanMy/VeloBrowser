@@ -81,8 +81,14 @@ struct WebViewContainer: UIViewRepresentable {
             let cfg = WKWebViewConfiguration()
             cfg.allowsInlineMediaPlayback = true
             cfg.mediaTypesRequiringUserActionForPlayback = []
+            cfg.allowsPictureInPictureMediaPlayback = true
             return cfg
         }()
+
+        // Enable background media playback (keeps WKWebView audio alive when backgrounded)
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = []
+        config.allowsPictureInPictureMediaPlayback = true
 
         // JavaScript preference
         config.defaultWebpagePreferences.allowsContentJavaScript = javaScriptEnabled

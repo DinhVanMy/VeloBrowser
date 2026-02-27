@@ -5,66 +5,50 @@
 
 import SwiftUI
 
-/// A built-in quick-access site shown on the new tab page.
-private struct QuickAccessSite: Identifiable {
-    let id = UUID()
-    let name: String
-    let url: URL
-    let icon: String
-    let color: Color
-}
+/// Platform identifier for quick-access sites.
+private enum Platform: String, CaseIterable, Sendable {
+    case youtube, facebook, tiktok, twitter, instagram, reddit, wikipedia, gmail
 
-/// Built-in popular sites for instant access from the home screen.
-private let builtInSites: [QuickAccessSite] = [
-    QuickAccessSite(
-        name: "YouTube",
-        url: URL(string: "https://m.youtube.com")!,
-        icon: "play.rectangle.fill",
-        color: .red
-    ),
-    QuickAccessSite(
-        name: "Facebook",
-        url: URL(string: "https://m.facebook.com")!,
-        icon: "person.2.fill",
-        color: .blue
-    ),
-    QuickAccessSite(
-        name: "TikTok",
-        url: URL(string: "https://www.tiktok.com")!,
-        icon: "music.note",
-        color: .pink
-    ),
-    QuickAccessSite(
-        name: "Twitter",
-        url: URL(string: "https://x.com")!,
-        icon: "at",
-        color: .cyan
-    ),
-    QuickAccessSite(
-        name: "Instagram",
-        url: URL(string: "https://www.instagram.com")!,
-        icon: "camera.fill",
-        color: .purple
-    ),
-    QuickAccessSite(
-        name: "Reddit",
-        url: URL(string: "https://www.reddit.com")!,
-        icon: "bubble.left.and.bubble.right.fill",
-        color: .orange
-    ),
-    QuickAccessSite(
-        name: "Wikipedia",
-        url: URL(string: "https://en.m.wikipedia.org")!,
-        icon: "book.fill",
-        color: .gray
-    ),
-    QuickAccessSite(
-        name: "Gmail",
-        url: URL(string: "https://mail.google.com")!,
-        icon: "envelope.fill",
-        color: .red.opacity(0.8)
-    ),
-]
+    var name: String {
+        switch self {
+        case .youtube: "YouTube"
+        case .facebook: "Facebook"
+        case .tiktok: "TikTok"
+        case .twitter: "Twitter"
+        case .instagram: "Instagram"
+        case .reddit: "Reddit"
+        case .wikipedia: "Wikipedia"
+        case .gmail: "Gmail"
+        }
+    }
+
+    var url: URL {
+        switch self {
+        case .youtube: URL(string: "https://m.youtube.com") ?? URL(string: "about:blank")!
+        case .facebook: URL(string: "https://m.facebook.com") ?? URL(string: "about:blank")!
+        case .tiktok: URL(string: "https://www.tiktok.com") ?? URL(string: "about:blank")!
+        case .twitter: URL(string: "https://x.com") ?? URL(string: "about:blank")!
+        case .instagram: URL(string: "https://www.instagram.com") ?? URL(string: "about:blank")!
+        case .reddit: URL(string: "https://www.reddit.com") ?? URL(string: "about:blank")!
+        case .wikipedia: URL(string: "https://en.m.wikipedia.org") ?? URL(string: "about:blank")!
+        case .gmail: URL(string: "https://mail.google.com") ?? URL(string: "about:blank")!
+        }
+    }
+
+    @ViewBuilder
+    func logoView(size: CGFloat) -> some View {
+        switch self {
+        case .youtube: YouTubeLogo(size: size)
+        case .facebook: FacebookLogo(size: size)
+        case .tiktok: TikTokLogo(size: size)
+        case .twitter: TwitterXLogo(size: size)
+        case .instagram: InstagramLogo(size: size)
+        case .reddit: RedditLogo(size: size)
+        case .wikipedia: WikipediaLogo(size: size)
+        case .gmail: GmailLogo(size: size)
+        }
+    }
+}
 
 /// The new tab start page displayed when no URL is loaded.
 ///
@@ -91,9 +75,7 @@ struct NewTabPageView: View {
 
                 // App branding
                 VStack(spacing: DesignSystem.Spacing.xs) {
-                    Image(systemName: "globe")
-                        .font(.system(size: 44, weight: .light))
-                        .foregroundStyle(DesignSystem.Colors.accent)
+                    VeloLogoView(size: 56)
 
                     Text("Velo Browser")
                         .font(.system(size: 26, weight: .bold, design: .rounded))
@@ -130,14 +112,14 @@ struct NewTabPageView: View {
                         .padding(.horizontal, DesignSystem.Spacing.md)
 
                     LazyVGrid(columns: quickAccessColumns, spacing: DesignSystem.Spacing.md) {
-                        ForEach(builtInSites) { site in
+                        ForEach(Platform.allCases, id: \.self) { platform in
                             Button {
-                                onOpenURL(site.url)
+                                onOpenURL(platform.url)
                             } label: {
-                                quickAccessCard(site: site)
+                                quickAccessCard(platform: platform)
                             }
                             .buttonStyle(.plain)
-                            .accessibilityLabel("Open \(site.name)")
+                            .accessibilityLabel("Open \(platform.name)")
                         }
                     }
                     .padding(.horizontal, DesignSystem.Spacing.md)
@@ -183,19 +165,13 @@ struct NewTabPageView: View {
     // MARK: - Card Views
 
     /// A quick-access card for a built-in popular site.
-    private func quickAccessCard(site: QuickAccessSite) -> some View {
+    private func quickAccessCard(platform: Platform) -> some View {
         VStack(spacing: DesignSystem.Spacing.xs) {
-            ZStack {
-                RoundedRectangle(cornerRadius: DesignSystem.Radius.card)
-                    .fill(site.color.opacity(0.12))
-                    .frame(width: 56, height: 56)
+            platform.logoView(size: 52)
+                .clipShape(RoundedRectangle(cornerRadius: DesignSystem.Radius.card))
+                .frame(width: 56, height: 56)
 
-                Image(systemName: site.icon)
-                    .font(.system(size: 22, weight: .medium))
-                    .foregroundStyle(site.color)
-            }
-
-            Text(site.name)
+            Text(platform.name)
                 .font(DesignSystem.Typography.caption2)
                 .fontWeight(.medium)
                 .foregroundStyle(DesignSystem.Colors.textPrimary)
