@@ -167,6 +167,11 @@ struct AppCoordinatorView: View {
         .task {
             await container.adBlockService.compileRules()
             container.networkMonitor.start()
+            container.tabSuspensionManager.start()
+            // Wire memory warning handler
+            container.networkMonitor.onMemoryWarning = { [weak container] in
+                container?.tabSuspensionManager.handleMemoryWarning()
+            }
         }
     }
 

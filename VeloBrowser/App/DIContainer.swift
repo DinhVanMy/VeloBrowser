@@ -10,7 +10,7 @@ import SwiftData
 ///
 /// All services and repositories are registered as protocols,
 /// enabling easy testing and swapping of implementations.
-/// Uses `@Observable` for SwiftUI integration.
+/// Non-critical services are lazily initialized for faster startup.
 @Observable
 @MainActor
 final class DIContainer {
@@ -30,7 +30,7 @@ final class DIContainer {
     /// Repository for download item operations.
     let downloadRepository: DownloadRepositoryProtocol
 
-    // MARK: - Services
+    // MARK: - Core Services (eager)
 
     /// Tab management service.
     let tabManager: TabManager
@@ -38,20 +38,49 @@ final class DIContainer {
     /// Ad blocking service.
     let adBlockService: AdBlockService
 
-    /// Media player service for background audio and PiP.
-    let mediaPlayerService: MediaPlayerService
-
-    /// Now playing info manager for lock screen controls.
-    let nowPlayingManager: NowPlayingManager
-
-    /// Download manager service.
-    let downloadManager: DownloadManagerService
-
-    /// Network connectivity monitor.
+    /// Network connectivity and system monitor.
     let networkMonitor: NetworkMonitor
 
+    /// Tab suspension manager for memory optimization.
+    let tabSuspensionManager: TabSuspensionManager
+
+    // MARK: - Lazy Services (initialized on first access)
+
+    /// Media player service for background audio and PiP.
+    var mediaPlayerService: MediaPlayerService {
+        if let existing = _mediaPlayerService { return existing }
+        let service = MediaPlayerService(nowPlayingManager: nowPlayingManager)
+        _mediaPlayerService = service
+        return service
+    }
+    private var _mediaPlayerService: MediaPlayerService?
+
+    /// Now playing info manager for lock screen controls.
+    var nowPlayingManager: NowPlayingManager {
+        if let existing = _nowPlayingManager { return existing }
+        let manager = NowPlayingManager()
+        _nowPlayingManager = manager
+        return manager
+    }
+    private var _nowPlayingManager: NowPlayingManager?
+
+    /// Download manager service.
+    var downloadManager: DownloadManagerService {
+        if let existing = _downloadManager { return existing }
+        let service = DownloadManagerService(downloadRepository: downloadRepository)
+        _downloadManager = service
+        return service
+    }
+    private var _downloadManager: DownloadManagerService?
+
     /// Reader mode content extraction service.
-    let readerModeService: ReaderModeServiceProtocol
+    var readerModeService: ReaderModeServiceProtocol {
+        if let existing = _readerModeService { return existing }
+        let service = ReaderModeService()
+        _readerModeService = service
+        return service
+    }
+    private var _readerModeService: ReaderModeService?
 
     /// Repository for reading list operations.
     let readingListRepository: ReadingListRepositoryProtocol
@@ -98,19 +127,19 @@ final class DIContainer {
             self.historyRepository = SwiftDataHistoryRepository(modelContext: context)
             self.downloadRepository = SwiftDataDownloadRepository(modelContext: context)
 
-            // Services
+            // Core services (eager — needed at startup)
             self.tabManager = TabManager(historyRepository: self.historyRepository)
             self.adBlockService = AdBlockService()
-            self.nowPlayingManager = NowPlayingManager()
-            self.mediaPlayerService = MediaPlayerService(nowPlayingManager: self.nowPlayingManager)
-            self.downloadManager = DownloadManagerService(downloadRepository: self.downloadRepository)
             self.networkMonitor = NetworkMonitor()
-            self.readerModeService = ReaderModeService()
+            self.tabSuspensionManager = TabSuspensionManager()
             self.readingListRepository = SwiftDataReadingListRepository(modelContext: context)
             self.httpsUpgradeService = HTTPSUpgradeService()
             self.appLockService = AppLockService()
             self.trackingProtectionService = TrackingProtectionService()
             self.fingerprintProtectionService = FingerprintProtectionService()
+
+            // Wire tab suspension to tab manager and memory warnings
+            self.tabSuspensionManager.configure(tabManager: self.tabManager)
         } catch {
             fatalError("Failed to initialize SwiftData ModelContainer: \(error.localizedDescription)")
         }

@@ -47,6 +47,7 @@ struct SettingsView: View {
     var body: some View {
         Form {
             generalSection
+            performanceSection
             adBlockerSection
             privacySection
             if DeviceHelper.isIPad {
@@ -82,8 +83,36 @@ struct SettingsView: View {
             Toggle("JavaScript", isOn: $javaScriptEnabled)
                 .accessibilityLabel("Enable JavaScript")
 
+            // Storage & Cache
+            NavigationLink {
+                CacheManagerView()
+            } label: {
+                Label("Storage & Cache", systemImage: "internaldrive")
+            }
         } header: {
             Label("General", systemImage: "gearshape")
+        }
+    }
+
+    // MARK: - Performance Section
+
+    @AppStorage("tabSuspensionEnabled") private var tabSuspensionEnabled: Bool = true
+    @AppStorage("tabSuspensionTimeout") private var tabSuspensionTimeout: Int = SuspensionTimeout.fiveMinutes.rawValue
+
+    private var performanceSection: some View {
+        Section {
+            Toggle("Suspend Inactive Tabs", isOn: $tabSuspensionEnabled)
+                .accessibilityHint("Automatically free memory from tabs you haven't used recently")
+
+            if tabSuspensionEnabled {
+                Picker("Suspend After", selection: $tabSuspensionTimeout) {
+                    ForEach(SuspensionTimeout.allCases.filter { $0 != .never }, id: \.rawValue) { timeout in
+                        Text(timeout.label).tag(timeout.rawValue)
+                    }
+                }
+            }
+        } header: {
+            Label("Performance", systemImage: "gauge.with.dots.needle.33percent")
         }
     }
 

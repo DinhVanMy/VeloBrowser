@@ -117,6 +117,14 @@ struct WebViewContainer: UIViewRepresentable {
         config.mediaTypesRequiringUserActionForPlayback = []
         config.allowsPictureInPictureMediaPlayback = true
 
+        // Performance: show content ASAP
+        config.suppressesIncrementalRendering = false
+
+        // Shared process pool (reduces memory by sharing web content processes)
+        config.processPool = isPrivate
+            ? Self.privateProcessPool
+            : Self.sharedProcessPool
+
         // JavaScript preference
         config.defaultWebpagePreferences.allowsContentJavaScript = javaScriptEnabled
 
@@ -153,6 +161,14 @@ struct WebViewContainer: UIViewRepresentable {
             forMainFrameOnly: true
         )
         config.userContentController.addUserScript(fullscreenScript)
+
+        // Lazy image loading script (adds loading="lazy" to off-screen images)
+        let lazyImageScript = WKUserScript(
+            source: Self.lazyImageLoadingJS,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: false
+        )
+        config.userContentController.addUserScript(lazyImageScript)
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
@@ -233,6 +249,26 @@ struct WebViewContainer: UIViewRepresentable {
     /// Desktop Safari user-agent string for "Request Desktop Site".
     private static let desktopUserAgent =
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+
+    /// Shared WKProcessPool for all normal (non-private) tabs.
+    private static let sharedProcessPool = WKProcessPool()
+
+    /// Separate WKProcessPool for private browsing tabs.
+    private static let privateProcessPool = WKProcessPool()
+
+    /// JavaScript that adds `loading="lazy"` to below-fold images.
+    private static let lazyImageLoadingJS = """
+    (function() {
+        var images = document.querySelectorAll('img:not([loading])');
+        var viewH = window.innerHeight || document.documentElement.clientHeight;
+        images.forEach(function(img) {
+            var rect = img.getBoundingClientRect();
+            if (rect.top > viewH * 1.5) {
+                img.setAttribute('loading', 'lazy');
+            }
+        });
+    })();
+    """
 
     /// JavaScript that counts hidden ad elements and reports to native code.
     private static let adBlockCounterJS = """

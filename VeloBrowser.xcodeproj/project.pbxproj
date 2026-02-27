@@ -75,6 +75,9 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		E80AB063AB8711D6190CBB09 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027B77B665EF51B2C65783B0 /* SidebarView.swift */; };
 		4C45D7A9977F559EED46E319 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B8A44C882024F58925879F /* TabBarView.swift */; };
 		81ABF6AC2BC2D216919FEA79 /* iPadLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */; };
+		7B4E60C121A6C49A646F66BD /* TabSuspensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179456FF36417004BB5DF235 /* TabSuspensionManager.swift */; };
+		8201BD2625C4755A3256084C /* CacheManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */; };
+		D2614397A726ABD44C352B83 /* TabSuspensionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +162,9 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		027B77B665EF51B2C65783B0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		25B8A44C882024F58925879F /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadLayoutView.swift; sourceTree = "<group>"; };
+		179456FF36417004BB5DF235 /* TabSuspensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSuspensionManager.swift; sourceTree = "<group>"; };
+		E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerView.swift; sourceTree = "<group>"; };
+		0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSuspensionManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +210,7 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 				A96B10B4A2FCAB774284E973 /* AppLockService.swift */,
 				9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */,
 				6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */,
+				179456FF36417004BB5DF235 /* TabSuspensionManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -313,6 +320,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				300DAC4D05673DF80F035CAF /* SettingsView.swift */,
 				87786380319CB48C12E9B43E /* CookieManagerView.swift */,
 				A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */,
+				E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -425,6 +433,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */,
 				3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */,
 				136A896D296C22A0204E85A6 /* TabManagerTests.swift */,
+				0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */,
 			);
 			path = VeloBrowserTests;
 			sourceTree = "<group>";
@@ -595,6 +604,8 @@ sourceTree = "<group>";
 				4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */,
 				A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */,
 				430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */,
+				7B4E60C121A6C49A646F66BD /* TabSuspensionManager.swift in Sources */,
+				8201BD2625C4755A3256084C /* CacheManagerView.swift in Sources */,
 				81ABF6AC2BC2D216919FEA79 /* iPadLayoutView.swift in Sources */,
 				4C45D7A9977F559EED46E319 /* TabBarView.swift in Sources */,
 				E80AB063AB8711D6190CBB09 /* SidebarView.swift in Sources */,
@@ -626,6 +637,7 @@ sourceTree = "<group>";
 				943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */,
 				24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */,
 				A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */,
+				D2614397A726ABD44C352B83 /* TabSuspensionManagerTests.swift in Sources */,
 				D3D5AEBE3C5D4A8C3C36B971 /* HTTPSUpgradeServiceTests.swift in Sources */,
 				F48F4B42A3DD8F0F371860CD /* TrackingProtectionServiceTests.swift in Sources */,
 			);
