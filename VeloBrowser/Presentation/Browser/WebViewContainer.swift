@@ -328,6 +328,14 @@ struct WebViewContainer: UIViewRepresentable {
                 return .allow
             }
 
+            // Allow system-handled schemes (mailto, tel, sms) via UIApplication
+            if scheme == "mailto" || scheme == "tel" || scheme == "sms" {
+                Task { @MainActor in
+                    await UIApplication.shared.open(url)
+                }
+                return .cancel
+            }
+
             // Block all other schemes (itms-appss://, youtube://, twitter://, etc.)
             return .cancel
         }
@@ -362,7 +370,7 @@ struct WebViewContainer: UIViewRepresentable {
 
         // MARK: - WKUIDelegate
 
-        /// Handle target="_blank" links by loading in the same web view.
+        /// Handle target="_blank" links by opening in a new tab or loading in current view.
         func webView(
             _ webView: WKWebView,
             createWebViewWith configuration: WKWebViewConfiguration,
@@ -371,7 +379,12 @@ struct WebViewContainer: UIViewRepresentable {
         ) -> WKWebView? {
             if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
                 if let url = navigationAction.request.url {
-                    webView.load(URLRequest(url: url))
+                    // Try to open in a new tab via callback; fall back to same view
+                    if let openInNewTab = parent.onOpenInNewTab {
+                        openInNewTab(url)
+                    } else {
+                        webView.load(URLRequest(url: url))
+                    }
                 }
             }
             return nil

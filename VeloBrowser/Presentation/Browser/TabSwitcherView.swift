@@ -48,6 +48,7 @@ struct TabSwitcherView: View {
                                 onClose: {
                                     withAnimation(.easeOut(duration: DesignSystem.AnimationDuration.fast)) {
                                         tabManager.closeTab(id: tab.id)
+                                        HapticManager.light()
                                     }
                                 }
                             )

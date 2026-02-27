@@ -23,6 +23,7 @@ struct BrowserView: View {
 
     @State private var showTabLimitAlert = false
     @State private var showFindInPage = false
+    @State private var showNoMediaAlert = false
     @AppStorage("javaScriptEnabled") private var javaScriptEnabled: Bool = true
 
     var body: some View {
@@ -78,6 +79,11 @@ struct BrowserView: View {
             Button("OK", role: .cancel) {}
         } message: {
             Text("You've reached the maximum of \(TabManager.maxTabs) tabs. Please close some tabs to open new ones.")
+        }
+        .alert("No Media Found", isPresented: $showNoMediaAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("No playable audio or video was found on this page. Try playing a video first, then use this option.")
         }
     }
 
@@ -287,11 +293,17 @@ struct BrowserView: View {
                 Button {
                     Task {
                         guard let webView = viewModel.webView else { return }
-                        await container.mediaPlayerService.extractAndPlay(
+                        let found = await container.mediaPlayerService.extractAndPlay(
                             from: webView,
                             pageTitle: viewModel.pageTitle,
                             pageURL: viewModel.currentURL
                         )
+                        if found {
+                            HapticManager.success()
+                        } else {
+                            showNoMediaAlert = true
+                            HapticManager.warning()
+                        }
                     }
                 } label: {
                     Label("Play in Background", systemImage: "play.circle")

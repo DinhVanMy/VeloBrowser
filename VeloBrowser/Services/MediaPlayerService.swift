@@ -35,7 +35,9 @@ protocol MediaPlayerServiceProtocol {
     var isPiPSupported: Bool { get }
 
     /// Extracts a media URL from the web view and begins playback.
-    func extractAndPlay(from webView: WKWebView, pageTitle: String, pageURL: URL?) async
+    /// Returns `true` if media was found (extracted or already playing in-browser).
+    @discardableResult
+    func extractAndPlay(from webView: WKWebView, pageTitle: String, pageURL: URL?) async -> Bool
 
     /// Resumes playback.
     func play()
@@ -134,7 +136,7 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
     ///   - webView: The WKWebView to extract media from.
     ///   - pageTitle: Title to display in Now Playing info.
     ///   - pageURL: The web page URL (used as artist/source info).
-    func extractAndPlay(from webView: WKWebView, pageTitle: String, pageURL: URL?) async {
+    func extractAndPlay(from webView: WKWebView, pageTitle: String, pageURL: URL?) async -> Bool {
         let js = """
         (function() {
             // Search all video elements
@@ -161,6 +163,13 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
                     if (s && !s.startsWith('blob:')) return s;
                 }
             }
+            // Check if any media is currently playing (blob or otherwise)
+            for (var i = 0; i < videos.length; i++) {
+                if (!videos[i].paused) return '__BLOB_PLAYING__';
+            }
+            for (var i = 0; i < audios.length; i++) {
+                if (!audios[i].paused) return '__BLOB_PLAYING__';
+            }
             // Fallback: look for embedded iframes with video sources
             var iframes = document.querySelectorAll('iframe[src*="embed"], iframe[src*="video"]');
             for (var i = 0; i < iframes.length; i++) {
@@ -172,12 +181,19 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
 
         do {
             let result = try await webView.evaluateJavaScript(js)
-            guard let urlString = result as? String,
-                  let url = URL(string: urlString) else { return }
+            guard let urlString = result as? String else { return false }
 
+            // If media is playing via blob URLs (e.g. YouTube), background audio
+            // works directly through WKWebView — no extraction needed
+            if urlString == "__BLOB_PLAYING__" {
+                return true
+            }
+
+            guard let url = URL(string: urlString) else { return false }
             startPlayback(url: url, title: pageTitle, pageURL: pageURL)
+            return true
         } catch {
-            // JavaScript evaluation failed — no media found
+            return false
         }
     }
 

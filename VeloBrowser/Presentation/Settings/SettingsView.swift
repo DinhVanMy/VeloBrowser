@@ -38,6 +38,7 @@ struct SettingsView: View {
     @AppStorage("javaScriptEnabled") private var javaScriptEnabled: Bool = true
 
     @State private var showClearDataAlert = false
+    @State private var isClearing = false
 
     var body: some View {
         Form {
@@ -113,8 +114,17 @@ struct SettingsView: View {
             Button(role: .destructive) {
                 showClearDataAlert = true
             } label: {
-                Label("Clear Browsing Data", systemImage: "trash")
+                if isClearing {
+                    HStack {
+                        ProgressView()
+                            .controlSize(.small)
+                        Text("Clearing…")
+                    }
+                } else {
+                    Label("Clear Browsing Data", systemImage: "trash")
+                }
             }
+            .disabled(isClearing)
         } header: {
             Label("Privacy", systemImage: "hand.raised.fill")
         }
@@ -168,14 +178,14 @@ struct SettingsView: View {
     // MARK: - Private
 
     private func clearBrowsingData() {
+        isClearing = true
         Task {
-            // Clear website data (cookies, cache)
             let dataStore = WKWebsiteDataStore.default()
             let types = WKWebsiteDataStore.allWebsiteDataTypes()
             await dataStore.removeData(ofTypes: types, modifiedSince: .distantPast)
-
-            // Clear SwiftData browsing history
             try? await historyRepository.clearAll()
+            isClearing = false
+            HapticManager.success()
         }
     }
 
