@@ -35,28 +35,64 @@ struct AddressBarView: View {
 
                 // URL text field — show domain only when unfocused
                 if isFocused {
-                    TextField("Search or enter URL", text: $viewModel.addressBarText)
-                        .font(DesignSystem.Typography.body)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .keyboardType(.webSearch)
-                        .submitLabel(.go)
-                        .focused($isFocused)
-                        .onSubmit {
-                            viewModel.submitAddressBar()
+                    HStack(spacing: 4) {
+                        TextField("Search or enter URL", text: $viewModel.addressBarText)
+                            .font(DesignSystem.Typography.body)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                            .keyboardType(.webSearch)
+                            .submitLabel(.go)
+                            .focused($isFocused)
+                            .onSubmit {
+                                viewModel.submitAddressBar()
+                            }
+                            .accessibilityLabel("Address bar")
+
+                        // Clear button
+                        if !viewModel.addressBarText.isEmpty {
+                            Button {
+                                viewModel.addressBarText = ""
+                            } label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.caption)
+                                    .foregroundStyle(DesignSystem.Colors.textTertiary)
+                            }
+                            .accessibilityLabel("Clear address bar")
                         }
-                        .accessibilityLabel("Address bar")
+                    }
                 } else {
-                    Text(displayText)
-                        .font(DesignSystem.Typography.body)
-                        .foregroundStyle(DesignSystem.Colors.textPrimary)
-                        .lineLimit(1)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            viewModel.isAddressBarFocused = true
+                    VStack(spacing: 0) {
+                        Text(displayText)
+                            .font(DesignSystem.Typography.body)
+                            .foregroundStyle(DesignSystem.Colors.textPrimary)
+                            .lineLimit(1)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                viewModel.isAddressBarFocused = true
+                            }
+                            .accessibilityLabel("Address bar, \(displayText)")
+
+                        // Paste & Go hint
+                        if clipboardHasURL, let clip = clipboardString,
+                           clip != viewModel.addressBarText {
+                            Button {
+                                viewModel.addressBarText = clip
+                                viewModel.submitAddressBar()
+                                HapticManager.light()
+                            } label: {
+                                HStack(spacing: 4) {
+                                    Image(systemName: "doc.on.clipboard")
+                                        .font(.caption2)
+                                    Text("Paste & Go")
+                                        .font(DesignSystem.Typography.caption2)
+                                }
+                                .foregroundStyle(DesignSystem.Colors.accent)
+                                .padding(.top, 2)
+                            }
+                            .accessibilityLabel("Paste and navigate to clipboard URL")
                         }
-                        .accessibilityLabel("Address bar, \(displayText)")
+                    }
                 }
 
                 // Reload / Stop button
@@ -108,9 +144,20 @@ struct AddressBarView: View {
     /// Displays domain-only when unfocused, full URL when focused.
     private var displayText: String {
         if let url = viewModel.currentURL {
-            return url.host() ?? url.absoluteString
+            return viewModel.displayDomain.isEmpty ? url.absoluteString : viewModel.displayDomain
         }
         return viewModel.addressBarText.isEmpty ? "Search or enter URL" : viewModel.addressBarText
+    }
+
+    /// Whether the clipboard contains a URL that can be pasted.
+    private var clipboardHasURL: Bool {
+        guard let string = UIPasteboard.general.string else { return false }
+        return string.contains(".") || string.hasPrefix("http")
+    }
+
+    /// The URL string from clipboard for Paste & Go.
+    private var clipboardString: String? {
+        UIPasteboard.general.string
     }
 
     private var securityIcon: some View {

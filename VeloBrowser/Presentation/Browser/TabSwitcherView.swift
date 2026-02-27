@@ -118,6 +118,11 @@ struct TabThumbnailView: View {
     let onSelect: () -> Void
     let onClose: () -> Void
 
+    /// Vertical drag offset for swipe-up-to-close gesture.
+    @State private var dragOffset: CGSize = .zero
+    /// Whether the card is being dismissed by swipe gesture.
+    @State private var isDismissing: Bool = false
+
     var body: some View {
         Button(action: onSelect) {
             VStack(alignment: .leading, spacing: 0) {
@@ -209,6 +214,36 @@ struct TabThumbnailView: View {
             )
         }
         .buttonStyle(.plain)
+        .offset(y: dragOffset.height)
+        .opacity(isDismissing ? 0 : max(0, 1.0 - abs(dragOffset.height) / CGFloat(200)))
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    // Only allow upward swipe
+                    if value.translation.height < 0 {
+                        dragOffset = value.translation
+                    }
+                }
+                .onEnded { value in
+                    if value.translation.height < -80 {
+                        // Threshold met — dismiss
+                        isDismissing = true
+                        HapticManager.light()
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            dragOffset = CGSize(width: 0, height: -300)
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            onClose()
+                        }
+                    } else {
+                        // Snap back
+                        withAnimation(.spring(duration: 0.3)) {
+                            dragOffset = .zero
+                        }
+                    }
+                }
+        )
         .accessibilityLabel("\(tab.title), \(isActive ? "active" : "inactive") tab")
+        .accessibilityHint("Swipe up to close")
     }
 }

@@ -91,6 +91,18 @@ struct WebViewContainer: UIViewRepresentable {
     /// Optional fingerprint protection user script.
     var fingerprintProtectionScript: WKUserScript?
 
+    /// Callback to share a URL.
+    var onShareURL: ((URL) -> Void)?
+
+    /// Callback to add a URL to the reading list.
+    var onAddToReadingList: ((URL, String) -> Void)?
+
+    /// Callback to open a URL in a private tab.
+    var onOpenInPrivateTab: ((URL) -> Void)?
+
+    /// Callback invoked when fullscreen state changes.
+    var onFullscreenChange: ((Bool) -> Void)?
+
     func makeUIView(context: Context) -> WKWebView {
         let config = configuration ?? {
             let cfg = WKWebViewConfiguration()
@@ -134,6 +146,14 @@ struct WebViewContainer: UIViewRepresentable {
             config.userContentController.addUserScript(fpScript)
         }
 
+        // Fullscreen detection script
+        let fullscreenScript = WKUserScript(
+            source: Self.fullscreenDetectionJS,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        )
+        config.userContentController.addUserScript(fullscreenScript)
+
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
         webView.scrollView.delegate = context.coordinator
@@ -143,6 +163,7 @@ struct WebViewContainer: UIViewRepresentable {
         // Register script message handlers
         config.userContentController.add(context.coordinator, name: "adBlockCounter")
         config.userContentController.add(context.coordinator, name: "faviconDetected")
+        config.userContentController.add(context.coordinator, name: "fullscreenChange")
 
         // Pull-to-refresh
         let refreshControl = UIRefreshControl()
@@ -250,6 +271,18 @@ struct WebViewContainer: UIViewRepresentable {
     })();
     """
 
+    /// JavaScript that detects fullscreen video changes.
+    private static let fullscreenDetectionJS = """
+    (function() {
+        function onFSChange() {
+            var isFS = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            window.webkit.messageHandlers.fullscreenChange.postMessage(isFS);
+        }
+        document.addEventListener('fullscreenchange', onFSChange);
+        document.addEventListener('webkitfullscreenchange', onFSChange);
+    })();
+    """
+
     // MARK: - Coordinator
 
     /// Coordinator acting as WKNavigationDelegate, UIScrollViewDelegate, WKUIDelegate,
@@ -294,9 +327,15 @@ struct WebViewContainer: UIViewRepresentable {
                 Task { @MainActor in self?.parent.onURLChange?(url) }
             }
 
-            loadingObservation = webView.observe(\.isLoading, options: .new) { [weak self] _, change in
+            loadingObservation = webView.observe(\.isLoading, options: .new) { [weak self] wv, change in
                 guard let isLoading = change.newValue else { return }
-                Task { @MainActor in self?.parent.onLoadingChange?(isLoading) }
+                Task { @MainActor in
+                    self?.parent.onLoadingChange?(isLoading)
+                    // End pull-to-refresh when loading completes
+                    if !isLoading {
+                        wv.scrollView.refreshControl?.endRefreshing()
+                    }
+                }
             }
 
             progressObservation = webView.observe(\.estimatedProgress, options: .new) { [weak self] _, change in
@@ -332,6 +371,10 @@ struct WebViewContainer: UIViewRepresentable {
                 Task { @MainActor in
                     self.parent.onFaviconDetected?(faviconURL)
                 }
+            } else if message.name == "fullscreenChange", let isFullscreen = message.body as? Bool {
+                Task { @MainActor in
+                    self.parent.onFullscreenChange?(isFullscreen)
+                }
             }
         }
 
@@ -339,9 +382,7 @@ struct WebViewContainer: UIViewRepresentable {
 
         @objc func handleRefresh(_ sender: UIRefreshControl) {
             webView?.reload()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                sender.endRefreshing()
-            }
+            // Refresh control will end in loading observer when isLoading becomes false
         }
 
         // MARK: - WKNavigationDelegate
@@ -453,37 +494,71 @@ struct WebViewContainer: UIViewRepresentable {
                 identifier: nil,
                 previewProvider: nil
             ) { [weak self] _ in
-                var actions: [UIAction] = []
+                guard let self else { return UIMenu(children: []) }
 
-                let openAction = UIAction(
+                let openNewTab = UIAction(
                     title: "Open in New Tab",
                     image: UIImage(systemName: "plus.square")
                 ) { _ in
                     Task { @MainActor in
-                        self?.parent.onOpenInNewTab?(linkURL)
+                        self.parent.onOpenInNewTab?(linkURL)
+                        HapticManager.light()
                     }
                 }
-                actions.append(openAction)
 
-                let copyAction = UIAction(
+                let openPrivateTab = UIAction(
+                    title: "Open in Private Tab",
+                    image: UIImage(systemName: "eye.slash")
+                ) { _ in
+                    Task { @MainActor in
+                        self.parent.onOpenInPrivateTab?(linkURL)
+                        HapticManager.light()
+                    }
+                }
+
+                let copyLink = UIAction(
                     title: "Copy Link",
                     image: UIImage(systemName: "doc.on.doc")
                 ) { _ in
                     UIPasteboard.general.url = linkURL
+                    HapticManager.light()
                 }
-                actions.append(copyAction)
 
-                let downloadAction = UIAction(
+                let shareLink = UIAction(
+                    title: "Share…",
+                    image: UIImage(systemName: "square.and.arrow.up")
+                ) { _ in
+                    Task { @MainActor in
+                        self.parent.onShareURL?(linkURL)
+                    }
+                }
+
+                let downloadLink = UIAction(
                     title: "Download Link",
                     image: UIImage(systemName: "arrow.down.circle")
                 ) { _ in
                     Task { @MainActor in
-                        self?.parent.onDownloadLink?(linkURL)
+                        self.parent.onDownloadLink?(linkURL)
+                        HapticManager.medium()
                     }
                 }
-                actions.append(downloadAction)
 
-                return UIMenu(children: actions)
+                let addToReadingList = UIAction(
+                    title: "Add to Reading List",
+                    image: UIImage(systemName: "eyeglasses")
+                ) { _ in
+                    Task { @MainActor in
+                        let title = linkURL.host() ?? linkURL.absoluteString
+                        self.parent.onAddToReadingList?(linkURL, title)
+                        HapticManager.success()
+                    }
+                }
+
+                let openMenu = UIMenu(title: "", options: .displayInline, children: [openNewTab, openPrivateTab])
+                let actionsMenu = UIMenu(title: "", options: .displayInline, children: [copyLink, shareLink])
+                let saveMenu = UIMenu(title: "", options: .displayInline, children: [downloadLink, addToReadingList])
+
+                return UIMenu(children: [openMenu, actionsMenu, saveMenu])
             }
             completionHandler(config)
         }

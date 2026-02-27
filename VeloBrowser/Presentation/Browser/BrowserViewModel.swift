@@ -64,6 +64,9 @@ final class BrowserViewModel {
     /// Incremented to signal a user-agent change requiring reload.
     var desktopModeToken: Int = 0
 
+    /// Whether a video is currently in fullscreen mode.
+    var isFullscreen: Bool = false
+
     /// Weak reference to the WKWebView for media extraction and JS evaluation.
     weak var webView: WKWebView?
 
@@ -304,6 +307,29 @@ final class BrowserViewModel {
         }
         return url
     }()
+
+    /// The domain-only string for display when address bar is not focused.
+    var displayDomain: String {
+        guard let currentURL, let host = currentURL.host() else { return "" }
+        // Remove "www." prefix for cleaner display
+        if host.hasPrefix("www.") {
+            return String(host.dropFirst(4))
+        }
+        return host
+    }
+
+    /// Called by WebViewContainer when fullscreen state changes (video fullscreen).
+    func handleFullscreenChange(_ fullscreen: Bool) {
+        withAnimation(.easeInOut(duration: DesignSystem.AnimationDuration.fast)) {
+            isFullscreen = fullscreen
+            isToolbarVisible = !fullscreen
+        }
+    }
+
+    /// Scrolls the WKWebView content to the top.
+    func scrollToTop() {
+        webView?.scrollView.setContentOffset(.zero, animated: true)
+    }
 
     /// Resolves user input into a URL — either a direct URL or a search query.
     private func resolveInput(_ input: String) -> URL {

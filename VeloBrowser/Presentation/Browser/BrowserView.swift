@@ -96,6 +96,86 @@ struct BrowserView: View {
                 )
             }
         }
+        .statusBarHidden(viewModel.isFullscreen)
+        // iPad keyboard shortcuts
+        .background {
+            keyboardShortcuts
+        }
+    }
+
+    // MARK: - Keyboard Shortcuts
+
+    /// Hidden buttons providing iPad keyboard shortcuts.
+    @ViewBuilder
+    private var keyboardShortcuts: some View {
+        Group {
+            // Cmd+T — New tab
+            Button("") {
+                if container.tabManager.tabCount < TabManager.maxTabs {
+                    container.tabManager.createTab(url: nil, isPrivate: false)
+                    HapticManager.light()
+                }
+            }
+            .keyboardShortcut("t", modifiers: .command)
+
+            // Cmd+W — Close tab
+            Button("") {
+                if let activeTab = container.tabManager.activeTab {
+                    container.tabManager.closeTab(id: activeTab.id)
+                    HapticManager.light()
+                }
+            }
+            .keyboardShortcut("w", modifiers: .command)
+
+            // Cmd+L — Focus address bar
+            Button("") {
+                viewModel.isAddressBarFocused = true
+            }
+            .keyboardShortcut("l", modifiers: .command)
+
+            // Cmd+R — Reload
+            Button("") { viewModel.reload() }
+                .keyboardShortcut("r", modifiers: .command)
+
+            // Cmd+[ — Go back
+            Button("") { viewModel.goBack() }
+                .keyboardShortcut("[", modifiers: .command)
+
+            // Cmd+] — Go forward
+            Button("") { viewModel.goForward() }
+                .keyboardShortcut("]", modifiers: .command)
+
+            // Cmd+Shift+N — New private tab
+            Button("") {
+                if container.tabManager.tabCount < TabManager.maxTabs {
+                    container.tabManager.createTab(url: nil, isPrivate: true)
+                    HapticManager.light()
+                }
+            }
+            .keyboardShortcut("n", modifiers: [.command, .shift])
+        }
+        Group {
+            // Cmd+F — Find on page
+            Button("") {
+                withAnimation { showFindInPage.toggle() }
+            }
+            .keyboardShortcut("f", modifiers: .command)
+
+            // Cmd+D — Add bookmark
+            Button("") { addBookmark() }
+                .keyboardShortcut("d", modifiers: .command)
+
+            // Cmd+Y — History
+            Button("") { coordinator.navigate(to: .history) }
+                .keyboardShortcut("y", modifiers: .command)
+
+            // Cmd+, — Settings
+            Button("") { coordinator.navigate(to: .settings) }
+                .keyboardShortcut(",", modifiers: .command)
+        }
+        .frame(width: 0, height: 0)
+        .opacity(0)
+        .allowsHitTesting(false)
     }
 
     // MARK: - Web Content
@@ -164,7 +244,30 @@ struct BrowserView: View {
                 cleanTrackingParams: { url in
                     container.trackingProtectionService.cleanURL(url)
                 },
-                fingerprintProtectionScript: container.fingerprintProtectionService.makeUserScript()
+                fingerprintProtectionScript: container.fingerprintProtectionService.makeUserScript(),
+                onShareURL: { url in
+                    coordinator.shareURL = url
+                    coordinator.showShareSheet = true
+                },
+                onAddToReadingList: { url, title in
+                    let item = ReadingListItem(url: url, title: title)
+                    Task {
+                        try? await container.readingListRepository.save(item)
+                        HapticManager.success()
+                    }
+                },
+                onOpenInPrivateTab: { url in
+                    if container.tabManager.tabCount < TabManager.maxTabs {
+                        container.tabManager.createTab(url: url, isPrivate: true)
+                        HapticManager.light()
+                    } else {
+                        showTabLimitAlert = true
+                        HapticManager.warning()
+                    }
+                },
+                onFullscreenChange: { fullscreen in
+                    viewModel.handleFullscreenChange(fullscreen)
+                }
             )
 
             // New Tab Page overlay (when no URL loaded)

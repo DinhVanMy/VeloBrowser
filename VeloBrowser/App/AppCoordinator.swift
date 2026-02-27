@@ -48,6 +48,9 @@ final class AppCoordinator {
     /// Whether the share sheet is presented.
     var showShareSheet = false
 
+    /// URL to share when share sheet is presented (defaults to active tab URL).
+    var shareURL: URL?
+
     /// Navigates to a specific app destination.
     ///
     /// - Parameter destination: The destination to navigate to.
@@ -159,8 +162,13 @@ struct AppCoordinatorView: View {
             )
         }
         .sheet(isPresented: $coordinator.showShareSheet) {
-            if let url = container.tabManager.activeViewModel?.currentURL {
+            if let url = coordinator.shareURL ?? container.tabManager.activeViewModel?.currentURL {
                 ShareSheet(items: [url])
+            }
+        }
+        .onChange(of: coordinator.showShareSheet) { _, isPresented in
+            if !isPresented {
+                coordinator.shareURL = nil
             }
         }
         .task {
