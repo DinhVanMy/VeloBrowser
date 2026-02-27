@@ -62,6 +62,15 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		3FD694990492F49052164757 /* ReadingListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */; };
 		D4D9666134B1B6F59D706792 /* ReadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */; };
 		A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */; };
+		76E75D7C34A5EE00798861D9 /* HTTPSUpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A30578E3C1479CDA30C2F /* HTTPSUpgradeService.swift */; };
+		4713F38100A038AD9696C315 /* AppLockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B10B4A2FCAB774284E973 /* AppLockService.swift */; };
+		F87A9E952975971BC30EB304 /* TrackingProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */; };
+		FE11A7CCB3C54C00303BAB18 /* FingerprintProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */; };
+		EF35300DDA8FA922D716C018 /* CookieManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87786380319CB48C12E9B43E /* CookieManagerView.swift */; };
+		E0532957217EEDA9898D5F7A /* PrivacyDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */; };
+		87D72E95CC769C2A9BD76DF6 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */; };
+		F48F4B42A3DD8F0F371860CD /* TrackingProtectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */; };
+		D3D5AEBE3C5D4A8C3C36B971 /* HTTPSUpgradeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +142,15 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 		EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepository.swift; sourceTree = "<group>"; };
 		6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListView.swift; sourceTree = "<group>"; };
 		C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepositoryTests.swift; sourceTree = "<group>"; };
+		380A30578E3C1479CDA30C2F /* HTTPSUpgradeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSUpgradeService.swift; sourceTree = "<group>"; };
+		A96B10B4A2FCAB774284E973 /* AppLockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockService.swift; sourceTree = "<group>"; };
+		9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingProtectionService.swift; sourceTree = "<group>"; };
+		6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintProtectionService.swift; sourceTree = "<group>"; };
+		87786380319CB48C12E9B43E /* CookieManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieManagerView.swift; sourceTree = "<group>"; };
+		A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyDashboardView.swift; sourceTree = "<group>"; };
+		354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
+		C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingProtectionServiceTests.swift; sourceTree = "<group>"; };
+		E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSUpgradeServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +192,10 @@ A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFi
 				52A6AAF5D2A3DC8A0A2F2D62 /* NowPlayingManager.swift */,
 				6B2C7CBBD08C16C61CDF9A98 /* TabManager.swift */,
 				EFE9F559CBF7EF391AAE1B3B /* ReaderModeService.swift */,
+				380A30578E3C1479CDA30C2F /* HTTPSUpgradeService.swift */,
+				A96B10B4A2FCAB774284E973 /* AppLockService.swift */,
+				9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */,
+				6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -280,6 +302,8 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			isa = PBXGroup;
 			children = (
 				300DAC4D05673DF80F035CAF /* SettingsView.swift */,
+				87786380319CB48C12E9B43E /* CookieManagerView.swift */,
+				A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -335,6 +359,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			children = (
 				285DBB4F92340576E80A2727 /* HapticManager.swift */,
 				0E050D8D6456447838CD19A1 /* ShareSheet.swift */,
+				354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -386,6 +411,8 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */,
 				5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */,
 				C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */,
+				E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */,
+				C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */,
 				3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */,
 				136A896D296C22A0204E85A6 /* TabManagerTests.swift */,
 			);
@@ -548,6 +575,13 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */,
 				A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */,
 				430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */,
+				76E75D7C34A5EE00798861D9 /* HTTPSUpgradeService.swift in Sources */,
+				4713F38100A038AD9696C315 /* AppLockService.swift in Sources */,
+				F87A9E952975971BC30EB304 /* TrackingProtectionService.swift in Sources */,
+				FE11A7CCB3C54C00303BAB18 /* FingerprintProtectionService.swift in Sources */,
+				EF35300DDA8FA922D716C018 /* CookieManagerView.swift in Sources */,
+				E0532957217EEDA9898D5F7A /* PrivacyDashboardView.swift in Sources */,
+				87D72E95CC769C2A9BD76DF6 /* LockScreenView.swift in Sources */,
 				A1C0303E171AE3594CFEBA92 /* ReaderModeService.swift in Sources */,
 				B5C2131F9942BBE3D7A8CEE3 /* ReaderModeView.swift in Sources */,
 				BE7EADA1C119793104A6F35F /* ReadingListItem.swift in Sources */,
@@ -568,6 +602,8 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */,
 				24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */,
 				A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */,
+				D3D5AEBE3C5D4A8C3C36B971 /* HTTPSUpgradeServiceTests.swift in Sources */,
+				F48F4B42A3DD8F0F371860CD /* TrackingProtectionServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

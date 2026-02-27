@@ -116,7 +116,11 @@ struct AppCoordinatorView: View {
             NavigationStack {
                 SettingsView(
                     adBlockService: container.adBlockService,
-                    historyRepository: container.historyRepository
+                    historyRepository: container.historyRepository,
+                    httpsUpgradeService: container.httpsUpgradeService,
+                    appLockService: container.appLockService,
+                    trackingProtectionService: container.trackingProtectionService,
+                    fingerprintProtectionService: container.fingerprintProtectionService
                 )
             }
         }
@@ -198,7 +202,11 @@ struct AppCoordinatorView: View {
         case .settings:
             SettingsView(
                 adBlockService: container.adBlockService,
-                historyRepository: container.historyRepository
+                historyRepository: container.historyRepository,
+                httpsUpgradeService: container.httpsUpgradeService,
+                appLockService: container.appLockService,
+                trackingProtectionService: container.trackingProtectionService,
+                fingerprintProtectionService: container.fingerprintProtectionService
             )
         case .bookmarks:
             BookmarksView(

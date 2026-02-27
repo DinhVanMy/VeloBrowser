@@ -27,22 +27,36 @@ struct VeloBrowserApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if hasCompletedOnboarding {
-                AppCoordinatorView()
-                    .environment(container)
-                    .modelContainer(container.modelContainer)
-                    .onOpenURL { url in
-                        handleIncomingURL(url)
-                    }
-            } else {
-                FirstLaunchView {
-                    withAnimation(.easeInOut(duration: DesignSystem.AnimationDuration.standard)) {
-                        hasCompletedOnboarding = true
+            ZStack {
+                if hasCompletedOnboarding {
+                    AppCoordinatorView()
+                        .environment(container)
+                        .modelContainer(container.modelContainer)
+                        .onOpenURL { url in
+                            handleIncomingURL(url)
+                        }
+                } else {
+                    FirstLaunchView {
+                        withAnimation(.easeInOut(duration: DesignSystem.AnimationDuration.standard)) {
+                            hasCompletedOnboarding = true
+                        }
                     }
                 }
+
+                // Lock screen overlay
+                if container.appLockService.isLocked {
+                    LockScreenView(appLockService: container.appLockService)
+                        .transition(.opacity)
+                        .zIndex(100)
+                }
+            }
+            .onChange(of: scenePhase) { _, newPhase in
+                handleScenePhaseChange(newPhase)
             }
         }
     }
+
+    @Environment(\.scenePhase) private var scenePhase
 
     // MARK: - Audio Session
 
@@ -77,6 +91,20 @@ struct VeloBrowserApp: App {
             }
         } else if url.scheme == "https" || url.scheme == "http" {
             container.tabManager.createTab(url: url)
+        }
+    }
+
+    // MARK: - Scene Phase
+
+    /// Handles app lifecycle changes for biometric lock.
+    private func handleScenePhaseChange(_ phase: ScenePhase) {
+        switch phase {
+        case .background, .inactive:
+            container.appLockService.appDidEnterBackground()
+        case .active:
+            container.appLockService.appDidBecomeActive()
+        @unknown default:
+            break
         }
     }
 }

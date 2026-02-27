@@ -56,6 +56,18 @@ final class DIContainer {
     /// Repository for reading list operations.
     let readingListRepository: ReadingListRepositoryProtocol
 
+    /// HTTPS upgrade service for secure browsing.
+    let httpsUpgradeService: HTTPSUpgradeServiceProtocol
+
+    /// Biometric app lock service.
+    let appLockService: AppLockServiceProtocol
+
+    /// Tracking parameter removal service.
+    let trackingProtectionService: TrackingProtectionServiceProtocol
+
+    /// Browser fingerprint protection service.
+    let fingerprintProtectionService: FingerprintProtectionServiceProtocol
+
     // MARK: - Initialization
 
     /// Creates a new DIContainer with all dependencies wired up.
@@ -95,6 +107,10 @@ final class DIContainer {
             self.networkMonitor = NetworkMonitor()
             self.readerModeService = ReaderModeService()
             self.readingListRepository = SwiftDataReadingListRepository(modelContext: context)
+            self.httpsUpgradeService = HTTPSUpgradeService()
+            self.appLockService = AppLockService()
+            self.trackingProtectionService = TrackingProtectionService()
+            self.fingerprintProtectionService = FingerprintProtectionService()
         } catch {
             fatalError("Failed to initialize SwiftData ModelContainer: \(error.localizedDescription)")
         }

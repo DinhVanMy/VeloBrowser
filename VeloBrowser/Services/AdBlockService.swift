@@ -52,6 +52,12 @@ final class AdBlockService: AdBlockServiceProtocol {
     /// Domains where ad blocking is disabled.
     private(set) var whitelist: Set<String>
 
+    /// Total number of ads blocked across all sessions.
+    var totalAdsBlocked: Int {
+        get { UserDefaults.standard.integer(forKey: "totalAdsBlocked") }
+        set { UserDefaults.standard.set(newValue, forKey: "totalAdsBlocked") }
+    }
+
     /// The compiled content rule list for network blocking.
     private var compiledRuleList: WKContentRuleList?
 

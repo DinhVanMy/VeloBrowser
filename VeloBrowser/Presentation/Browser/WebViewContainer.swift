@@ -82,6 +82,15 @@ struct WebViewContainer: UIViewRepresentable {
     /// Callback invoked when a favicon URL is detected on the page.
     var onFaviconDetected: ((URL) -> Void)?
 
+    /// Callback to attempt HTTPS upgrade for a URL. Returns upgraded URL or nil.
+    var httpsUpgradeURL: ((URL) -> URL?)?
+
+    /// Callback to clean tracking parameters from a URL. Returns (cleanedURL, removedCount) or nil.
+    var cleanTrackingParams: ((URL) -> (url: URL, removedCount: Int)?)?
+
+    /// Optional fingerprint protection user script.
+    var fingerprintProtectionScript: WKUserScript?
+
     func makeUIView(context: Context) -> WKWebView {
         let config = configuration ?? {
             let cfg = WKWebViewConfiguration()
@@ -119,6 +128,11 @@ struct WebViewContainer: UIViewRepresentable {
             forMainFrameOnly: true
         )
         config.userContentController.addUserScript(faviconScript)
+
+        // Add fingerprint protection script if enabled
+        if let fpScript = fingerprintProtectionScript {
+            config.userContentController.addUserScript(fpScript)
+        }
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
@@ -340,11 +354,6 @@ struct WebViewContainer: UIViewRepresentable {
 
             let scheme = url.scheme?.lowercased() ?? ""
 
-            // Allow standard web schemes only — block external app deep links
-            if scheme == "http" || scheme == "https" || scheme == "about" || scheme == "blob" || scheme == "data" {
-                return .allow
-            }
-
             // Allow system-handled schemes (mailto, tel, sms) via UIApplication
             if scheme == "mailto" || scheme == "tel" || scheme == "sms" {
                 Task { @MainActor in
@@ -353,8 +362,30 @@ struct WebViewContainer: UIViewRepresentable {
                 return .cancel
             }
 
-            // Block all other schemes (itms-appss://, youtube://, twitter://, etc.)
-            return .cancel
+            // Block all non-web schemes (itms-appss://, youtube://, twitter://, etc.)
+            guard scheme == "http" || scheme == "https" || scheme == "about" || scheme == "blob" || scheme == "data" else {
+                return .cancel
+            }
+
+            // HTTPS upgrade: redirect http → https
+            if scheme == "http",
+               let upgraded = parent.httpsUpgradeURL?(url) {
+                Task { @MainActor in
+                    webView.load(URLRequest(url: upgraded))
+                }
+                return .cancel
+            }
+
+            // Tracking parameter removal
+            if scheme == "http" || scheme == "https",
+               let cleaned = parent.cleanTrackingParams?(url) {
+                Task { @MainActor in
+                    webView.load(URLRequest(url: cleaned.url))
+                }
+                return .cancel
+            }
+
+            return .allow
         }
 
         func webView(

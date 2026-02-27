@@ -157,7 +157,14 @@ struct BrowserView: View {
                     if let activeTab = container.tabManager.activeTab {
                         container.tabManager.updateTab(id: activeTab.id, faviconURL: faviconURL)
                     }
-                }
+                },
+                httpsUpgradeURL: { url in
+                    container.httpsUpgradeService.upgradeURL(url)
+                },
+                cleanTrackingParams: { url in
+                    container.trackingProtectionService.cleanURL(url)
+                },
+                fingerprintProtectionScript: container.fingerprintProtectionService.makeUserScript()
             )
 
             // New Tab Page overlay (when no URL loaded)

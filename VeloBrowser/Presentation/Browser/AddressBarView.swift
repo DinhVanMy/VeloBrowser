@@ -114,17 +114,26 @@ struct AddressBarView: View {
     }
 
     private var securityIcon: some View {
-        Image(systemName: viewModel.currentURL?.scheme == "https" ? "lock.fill" : "lock.open")
-            .font(.caption)
-            .foregroundStyle(
-                viewModel.currentURL?.scheme == "https"
-                    ? DesignSystem.Colors.success
-                    : DesignSystem.Colors.textTertiary
-            )
-            .frame(minWidth: 20)
-            .accessibilityLabel(
-                viewModel.currentURL?.scheme == "https" ? "Secure connection" : "Not secure"
-            )
+        let isHTTPS = viewModel.currentURL?.scheme == "https"
+        let isHTTP = viewModel.currentURL?.scheme == "http"
+        return HStack(spacing: 2) {
+            Image(systemName: isHTTPS ? "lock.fill" : (isHTTP ? "lock.open.fill" : "lock.open"))
+                .font(.caption)
+                .foregroundStyle(
+                    isHTTPS
+                        ? DesignSystem.Colors.success
+                        : (isHTTP ? DesignSystem.Colors.destructive : DesignSystem.Colors.textTertiary)
+                )
+            if isHTTP {
+                Text("Not Secure")
+                    .font(.system(size: 9, weight: .medium))
+                    .foregroundStyle(DesignSystem.Colors.destructive)
+            }
+        }
+        .frame(minWidth: 20)
+        .accessibilityLabel(
+            isHTTPS ? "Secure connection" : "Not secure"
+        )
     }
 
     private var reloadStopButton: some View {

@@ -32,6 +32,10 @@ enum SearchEngine: String, CaseIterable, Identifiable {
 struct SettingsView: View {
     @Bindable var adBlockService: AdBlockService
     let historyRepository: HistoryRepositoryProtocol
+    let httpsUpgradeService: HTTPSUpgradeServiceProtocol
+    let appLockService: AppLockServiceProtocol
+    let trackingProtectionService: TrackingProtectionServiceProtocol
+    let fingerprintProtectionService: FingerprintProtectionServiceProtocol
     @Environment(\.dismiss) private var dismiss
 
     @AppStorage("searchEngine") private var searchEngine: String = SearchEngine.google.rawValue
@@ -111,6 +115,97 @@ struct SettingsView: View {
 
     private var privacySection: some View {
         Section {
+            // Privacy Dashboard link
+            NavigationLink {
+                PrivacyDashboardView(
+                    adBlockService: adBlockService,
+                    trackingProtection: trackingProtectionService,
+                    httpsUpgrade: httpsUpgradeService,
+                    fingerprintProtection: fingerprintProtectionService
+                )
+            } label: {
+                Label("Privacy Dashboard", systemImage: "chart.bar.fill")
+            }
+
+            // HTTPS-Only Mode
+            Toggle(isOn: Binding(
+                get: { httpsUpgradeService.isEnabled },
+                set: { (httpsUpgradeService as? HTTPSUpgradeService)?.isEnabled = $0 }
+            )) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("HTTPS-Only Mode")
+                    Text("Auto-upgrade HTTP to HTTPS")
+                        .font(DesignSystem.Typography.caption)
+                        .foregroundStyle(DesignSystem.Colors.textSecondary)
+                }
+            }
+            .accessibilityLabel("HTTPS-Only Mode")
+
+            // Tracking Protection
+            Toggle(isOn: Binding(
+                get: { trackingProtectionService.isEnabled },
+                set: { (trackingProtectionService as? TrackingProtectionService)?.isEnabled = $0 }
+            )) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Remove Tracking Parameters")
+                    if trackingProtectionService.strippedCount > 0 {
+                        Text("\(trackingProtectionService.strippedCount) parameters removed")
+                            .font(DesignSystem.Typography.caption)
+                            .foregroundStyle(DesignSystem.Colors.textSecondary)
+                    }
+                }
+            }
+            .accessibilityLabel("Remove tracking parameters from URLs")
+
+            // Fingerprint Protection
+            Toggle(isOn: Binding(
+                get: { fingerprintProtectionService.isEnabled },
+                set: { (fingerprintProtectionService as? FingerprintProtectionService)?.isEnabled = $0 }
+            )) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Fingerprint Protection")
+                    Text("Some sites may not work correctly")
+                        .font(DesignSystem.Typography.caption)
+                        .foregroundStyle(DesignSystem.Colors.textSecondary)
+                }
+            }
+            .accessibilityLabel("Enable fingerprint protection")
+
+            // App Lock
+            if appLockService.isBiometricAvailable {
+                Toggle(isOn: Binding(
+                    get: { appLockService.isLockEnabled },
+                    set: { (appLockService as? AppLockService)?.isLockEnabled = $0 }
+                )) {
+                    let label = appLockService.biometryType == .faceID ? "Face ID Lock" : "Touch ID Lock"
+                    Text(label)
+                }
+                .accessibilityLabel("Biometric app lock")
+
+                if appLockService.isLockEnabled {
+                    Picker("Lock After", selection: Binding(
+                        get: { appLockService.lockTimeout.rawValue },
+                        set: {
+                            if let timeout = LockTimeout(rawValue: $0) {
+                                (appLockService as? AppLockService)?.lockTimeout = timeout
+                            }
+                        }
+                    )) {
+                        ForEach(LockTimeout.allCases) { timeout in
+                            Text(timeout.rawValue).tag(timeout.rawValue)
+                        }
+                    }
+                }
+            }
+
+            // Cookie Management
+            NavigationLink {
+                CookieManagerView()
+            } label: {
+                Label("Manage Cookies", systemImage: "list.bullet.rectangle")
+            }
+
+            // Clear Browsing Data
             Button(role: .destructive) {
                 showClearDataAlert = true
             } label: {
@@ -126,7 +221,7 @@ struct SettingsView: View {
             }
             .disabled(isClearing)
         } header: {
-            Label("Privacy", systemImage: "hand.raised.fill")
+            Label("Privacy & Security", systemImage: "hand.raised.fill")
         }
     }
 
