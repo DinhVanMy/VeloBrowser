@@ -40,6 +40,7 @@ struct SettingsView: View {
 
     @AppStorage("searchEngine") private var searchEngine: String = SearchEngine.google.rawValue
     @AppStorage("javaScriptEnabled") private var javaScriptEnabled: Bool = true
+    @AppStorage("blockThirdPartyCookies") private var blockThirdPartyCookies: Bool = false
 
     @State private var showClearDataAlert = false
     @State private var isClearing = false
@@ -125,12 +126,12 @@ struct SettingsView: View {
 
             if adBlockService.isEnabled {
                 NavigationLink {
-                    whitelistView
+                    allowlistView
                 } label: {
                     HStack {
-                        Text("Whitelisted Sites")
+                        Text("Allowlisted Sites")
                         Spacer()
-                        Text("\(adBlockService.whitelist.count)")
+                        Text("\(adBlockService.allowlist.count)")
                             .foregroundStyle(DesignSystem.Colors.textSecondary)
                     }
                 }
@@ -202,6 +203,17 @@ struct SettingsView: View {
                 }
             }
             .accessibilityLabel("Enable fingerprint protection")
+
+            // Block Third-Party Cookies
+            Toggle(isOn: $blockThirdPartyCookies) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Block Third-Party Cookies")
+                    Text("Restart tabs for changes to take effect")
+                        .font(DesignSystem.Typography.caption)
+                        .foregroundStyle(DesignSystem.Colors.textSecondary)
+                }
+            }
+            .accessibilityLabel("Block third-party cookies")
 
             // App Lock
             if appLockService.isBiometricAvailable {
@@ -300,27 +312,27 @@ struct SettingsView: View {
         }
     }
 
-    // MARK: - Whitelist Subview
+    // MARK: - Allowlist Subview
 
-    private var whitelistView: some View {
+    private var allowlistView: some View {
         List {
-            if adBlockService.whitelist.isEmpty {
-                Text("No whitelisted sites")
+            if adBlockService.allowlist.isEmpty {
+                Text("No allowlisted sites")
                     .foregroundStyle(DesignSystem.Colors.textTertiary)
                     .font(DesignSystem.Typography.subheadline)
             } else {
-                ForEach(Array(adBlockService.whitelist.sorted()), id: \.self) { domain in
+                ForEach(Array(adBlockService.allowlist.sorted()), id: \.self) { domain in
                     Text(domain)
                 }
                 .onDelete { indexSet in
-                    let sorted = adBlockService.whitelist.sorted()
+                    let sorted = adBlockService.allowlist.sorted()
                     for index in indexSet {
-                        adBlockService.removeFromWhitelist(sorted[index])
+                        adBlockService.removeFromAllowlist(sorted[index])
                     }
                 }
             }
         }
-        .navigationTitle("Whitelisted Sites")
+        .navigationTitle("Allowlisted Sites")
     }
 
     // MARK: - Private

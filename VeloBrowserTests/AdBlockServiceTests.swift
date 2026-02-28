@@ -1,7 +1,7 @@
 // AdBlockServiceTests.swift
 // VeloBrowserTests
 //
-// Unit tests for AdBlockService whitelist and toggle logic.
+// Unit tests for AdBlockService allowlist and toggle logic.
 
 import Testing
 import Foundation
@@ -14,7 +14,7 @@ struct AdBlockServiceTests {
     private func makeService() -> AdBlockService {
         // Clean up UserDefaults before each test
         UserDefaults.standard.removeObject(forKey: "adBlockEnabled")
-        UserDefaults.standard.removeObject(forKey: "adBlockWhitelist")
+        UserDefaults.standard.removeObject(forKey: "adBlockAllowlist")
         return AdBlockService()
     }
 
@@ -26,10 +26,10 @@ struct AdBlockServiceTests {
         #expect(service.isEnabled == true)
     }
 
-    @Test("Whitelist is empty by default")
-    func testDefaultEmptyWhitelist() {
+    @Test("Allowlist is empty by default")
+    func testDefaultEmptyAllowlist() {
         let service = makeService()
-        #expect(service.whitelist.isEmpty)
+        #expect(service.allowlist.isEmpty)
     }
 
     // MARK: - Toggle
@@ -53,49 +53,49 @@ struct AdBlockServiceTests {
         #expect(UserDefaults.standard.bool(forKey: "adBlockEnabled") == true)
     }
 
-    // MARK: - Whitelist
+    // MARK: - Allowlist
 
-    @Test("Add domain to whitelist")
-    func testAddToWhitelist() {
+    @Test("Add domain to allowlist")
+    func testAddToAllowlist() {
         let service = makeService()
-        service.addToWhitelist("example.com")
+        service.addToAllowlist("example.com")
 
-        #expect(service.isWhitelisted("example.com") == true)
-        #expect(service.whitelist.count == 1)
+        #expect(service.isAllowlisted("example.com") == true)
+        #expect(service.allowlist.count == 1)
     }
 
-    @Test("Whitelist is case-insensitive")
-    func testWhitelistCaseInsensitive() {
+    @Test("Allowlist is case-insensitive")
+    func testAllowlistCaseInsensitive() {
         let service = makeService()
-        service.addToWhitelist("Example.COM")
+        service.addToAllowlist("Example.COM")
 
-        #expect(service.isWhitelisted("example.com") == true)
-        #expect(service.isWhitelisted("EXAMPLE.COM") == true)
+        #expect(service.isAllowlisted("example.com") == true)
+        #expect(service.isAllowlisted("EXAMPLE.COM") == true)
     }
 
-    @Test("Remove domain from whitelist")
-    func testRemoveFromWhitelist() {
+    @Test("Remove domain from allowlist")
+    func testRemoveFromAllowlist() {
         let service = makeService()
-        service.addToWhitelist("example.com")
-        service.removeFromWhitelist("example.com")
+        service.addToAllowlist("example.com")
+        service.removeFromAllowlist("example.com")
 
-        #expect(service.isWhitelisted("example.com") == false)
-        #expect(service.whitelist.isEmpty)
+        #expect(service.isAllowlisted("example.com") == false)
+        #expect(service.allowlist.isEmpty)
     }
 
-    @Test("Non-whitelisted domain returns false")
-    func testNonWhitelistedDomain() {
+    @Test("Non-allowlisted domain returns false")
+    func testNonAllowlistedDomain() {
         let service = makeService()
-        #expect(service.isWhitelisted("unknown.com") == false)
+        #expect(service.isAllowlisted("unknown.com") == false)
     }
 
-    @Test("Whitelist persists to UserDefaults")
-    func testWhitelistPersistence() {
+    @Test("Allowlist persists to UserDefaults")
+    func testAllowlistPersistence() {
         let service = makeService()
-        service.addToWhitelist("example.com")
-        service.addToWhitelist("test.org")
+        service.addToAllowlist("example.com")
+        service.addToAllowlist("test.org")
 
-        let saved = UserDefaults.standard.stringArray(forKey: "adBlockWhitelist") ?? []
+        let saved = UserDefaults.standard.stringArray(forKey: "adBlockAllowlist") ?? []
         #expect(saved.count == 2)
         #expect(saved.contains("example.com"))
         #expect(saved.contains("test.org"))
@@ -124,19 +124,19 @@ struct AdBlockServiceTests {
 
     // MARK: - Cleanup
 
-    @Test("Cleanup removes all whitelist entries")
+    @Test("Cleanup removes all allowlist entries")
     func testMultipleAddRemove() {
         let service = makeService()
-        service.addToWhitelist("a.com")
-        service.addToWhitelist("b.com")
-        service.addToWhitelist("c.com")
+        service.addToAllowlist("a.com")
+        service.addToAllowlist("b.com")
+        service.addToAllowlist("c.com")
 
-        #expect(service.whitelist.count == 3)
+        #expect(service.allowlist.count == 3)
 
-        service.removeFromWhitelist("b.com")
-        #expect(service.whitelist.count == 2)
-        #expect(service.isWhitelisted("a.com") == true)
-        #expect(service.isWhitelisted("b.com") == false)
-        #expect(service.isWhitelisted("c.com") == true)
+        service.removeFromAllowlist("b.com")
+        #expect(service.allowlist.count == 2)
+        #expect(service.isAllowlisted("a.com") == true)
+        #expect(service.isAllowlisted("b.com") == false)
+        #expect(service.isAllowlisted("c.com") == true)
     }
 }

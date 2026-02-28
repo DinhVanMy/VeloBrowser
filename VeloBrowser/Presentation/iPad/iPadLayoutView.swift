@@ -1,4 +1,4 @@
-// iPadLayoutView.swift
+// IPadLayoutView.swift
 // VeloBrowser
 //
 // Adaptive layout for iPad using NavigationSplitView with sidebar
@@ -12,7 +12,7 @@ import SwiftUI
 /// Uses NavigationSplitView when sidebar is enabled, falls back to
 /// a simple VStack with tab bar otherwise. Adapts gracefully to
 /// Split View and Slide Over multitasking modes.
-struct iPadLayoutView: View {
+struct IPadLayoutView: View {
     @Environment(DIContainer.self) private var container
     @Environment(AppCoordinator.self) private var coordinator
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass

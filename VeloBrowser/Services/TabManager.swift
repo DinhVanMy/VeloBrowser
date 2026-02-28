@@ -5,6 +5,7 @@
 
 import SwiftUI
 import WebKit
+import os.log
 
 /// Protocol defining tab management operations.
 @MainActor
@@ -116,7 +117,11 @@ final class TabManager: TabManagerProtocol {
                 isActive: tab.isActive
             )
         }
-        guard !persistable.isEmpty else { return }
+        guard !persistable.isEmpty else {
+            // Nothing to persist — clear any stale data
+            UserDefaults.standard.removeObject(forKey: Self.tabsStorageKey)
+            return
+        }
         if let data = try? JSONEncoder().encode(persistable) {
             UserDefaults.standard.set(data, forKey: Self.tabsStorageKey)
         }
@@ -127,14 +132,18 @@ final class TabManager: TabManagerProtocol {
     /// - Returns: `true` if tabs were successfully restored.
     @discardableResult
     private func restoreTabs() -> Bool {
-        guard let data = UserDefaults.standard.data(forKey: Self.tabsStorageKey),
-              let persisted = try? JSONDecoder().decode([PersistedTab].self, from: data),
-              !persisted.isEmpty else {
+        guard let data = UserDefaults.standard.data(forKey: Self.tabsStorageKey) else {
             return false
         }
 
         // Clear storage after reading to avoid stale state
         UserDefaults.standard.removeObject(forKey: Self.tabsStorageKey)
+
+        guard let persisted = try? JSONDecoder().decode([PersistedTab].self, from: data),
+              !persisted.isEmpty else {
+            os_log(.error, "Failed to decode persisted tabs — starting fresh")
+            return false
+        }
 
         var restoredAny = false
         var hasActiveTab = false

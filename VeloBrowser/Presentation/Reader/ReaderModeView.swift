@@ -382,65 +382,24 @@ struct ReaderWebContent: UIViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator() }
 
     private func loadContent(_ webView: WKWebView) {
+        let css = Self.readerCSS(
+            fontFamily: fontFamily,
+            fontSize: Int(fontSize),
+            lineHeight: lineHeight,
+            textColor: textColor,
+            backgroundColor: backgroundColor
+        )
         let fullHTML = """
         <!DOCTYPE html>
         <html>
         <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-        <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body {
-                font-family: \(fontFamily);
-                font-size: \(Int(fontSize))px;
-                line-height: \(lineHeight);
-                color: \(textColor);
-                background: \(backgroundColor);
-                -webkit-text-size-adjust: 100%;
-                word-wrap: break-word;
-                overflow-wrap: break-word;
-            }
-            img {
-                max-width: 100%;
-                height: auto;
-                border-radius: 8px;
-                margin: 12px 0;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                margin-top: 1.2em;
-                margin-bottom: 0.5em;
-                line-height: 1.3;
-            }
-            p { margin-bottom: 0.8em; }
-            blockquote {
-                border-left: 3px solid \(textColor)40;
-                padding-left: 16px;
-                margin: 16px 0;
-                font-style: italic;
-                opacity: 0.85;
-            }
-            pre, code {
-                font-family: 'SF Mono', Menlo, monospace;
-                font-size: 0.9em;
-                background: \(textColor)10;
-                border-radius: 4px;
-                padding: 2px 6px;
-            }
-            pre { padding: 12px; overflow-x: auto; margin: 12px 0; }
-            pre code { padding: 0; background: none; }
-            table { border-collapse: collapse; width: 100%; margin: 12px 0; }
-            th, td { border: 1px solid \(textColor)30; padding: 8px; text-align: left; }
-            a { color: #007AFF; text-decoration: none; }
-            ul, ol { padding-left: 1.5em; margin-bottom: 0.8em; }
-            li { margin-bottom: 0.3em; }
-            figure { margin: 12px 0; }
-            figcaption { font-size: 0.85em; opacity: 0.7; text-align: center; margin-top: 4px; }
-        </style>
+        <style>\(css)</style>
         </head>
         <body>
         \(html)
         <script>
-            // Report content height to native
             function reportHeight() {
                 window.webkit.messageHandlers.heightHandler.postMessage(
                     document.body.scrollHeight
@@ -453,6 +412,64 @@ struct ReaderWebContent: UIViewRepresentable {
         </html>
         """
         webView.loadHTMLString(fullHTML, baseURL: nil)
+    }
+
+    /// Generates CSS for the reader mode HTML template.
+    private static func readerCSS(
+        fontFamily: String,
+        fontSize: Int,
+        lineHeight: CGFloat,
+        textColor: String,
+        backgroundColor: String
+    ) -> String {
+        """
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: \(fontFamily);
+            font-size: \(fontSize)px;
+            line-height: \(lineHeight);
+            color: \(textColor);
+            background: \(backgroundColor);
+            -webkit-text-size-adjust: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 12px 0;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 1.2em;
+            margin-bottom: 0.5em;
+            line-height: 1.3;
+        }
+        p { margin-bottom: 0.8em; }
+        blockquote {
+            border-left: 3px solid \(textColor)40;
+            padding-left: 16px;
+            margin: 16px 0;
+            font-style: italic;
+            opacity: 0.85;
+        }
+        pre, code {
+            font-family: 'SF Mono', Menlo, monospace;
+            font-size: 0.9em;
+            background: \(textColor)10;
+            border-radius: 4px;
+            padding: 2px 6px;
+        }
+        pre { padding: 12px; overflow-x: auto; margin: 12px 0; }
+        pre code { padding: 0; background: none; }
+        table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+        th, td { border: 1px solid \(textColor)30; padding: 8px; text-align: left; }
+        a { color: #007AFF; text-decoration: none; }
+        ul, ol { padding-left: 1.5em; margin-bottom: 0.8em; }
+        li { margin-bottom: 0.3em; }
+        figure { margin: 12px 0; }
+        figcaption { font-size: 0.85em; opacity: 0.7; text-align: center; margin-top: 4px; }
+        """
     }
 
     final class Coordinator: NSObject, WKNavigationDelegate {

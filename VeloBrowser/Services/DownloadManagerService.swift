@@ -17,6 +17,9 @@ protocol DownloadManagerServiceProtocol {
     /// Cancels an active download.
     func cancelDownload(id: UUID)
 
+    /// Retries a failed or cancelled download, resuming if possible.
+    func retryDownload(id: UUID)
+
     /// Removes a download record and its local file.
     func removeDownload(id: UUID) async
 
@@ -29,8 +32,11 @@ protocol DownloadManagerServiceProtocol {
 
 /// Manages file downloads using URLSession with progress tracking.
 ///
-/// Downloads files to the app's Documents directory (accessible via
-/// iOS Files app through `LSSupportsOpeningDocumentsInPlace`).
+/// Uses a background URLSession so downloads continue even when the
+/// app is suspended or terminated. Supports resume on network failure
+/// via stored resume data. Downloads are saved to the app's Documents
+/// directory (accessible via iOS Files app through
+/// `LSSupportsOpeningDocumentsInPlace`).
 /// Persists download records via ``DownloadRepositoryProtocol``.
 @Observable
 @MainActor
@@ -43,8 +49,13 @@ final class DownloadManagerService: DownloadManagerServiceProtocol {
     private let downloadRepository: DownloadRepositoryProtocol
     private var activeTasks: [UUID: URLSessionDownloadTask] = [:]
     private var taskToItem: [Int: UUID] = [:]
+    /// Stored resume data for interrupted downloads, keyed by item ID.
+    private var resumeData: [UUID: Data] = [:]
     private let delegate: DownloadSessionDelegate
     private let session: URLSession
+
+    /// Background session identifier.
+    private static let backgroundSessionID = "com.velobrowser.downloads"
 
     // MARK: - Init
 
@@ -55,8 +66,12 @@ final class DownloadManagerService: DownloadManagerServiceProtocol {
         self.downloadRepository = downloadRepository
         let del = DownloadSessionDelegate()
         self.delegate = del
-        let config = URLSessionConfiguration.default
+        let config = URLSessionConfiguration.background(
+            withIdentifier: Self.backgroundSessionID
+        )
         config.allowsCellularAccess = true
+        config.isDiscretionary = false
+        config.sessionSendsLaunchEvents = true
         self.session = URLSession(configuration: config, delegate: del, delegateQueue: nil)
         setupDelegateCallbacks()
     }
@@ -91,11 +106,19 @@ final class DownloadManagerService: DownloadManagerServiceProtocol {
         task.resume()
     }
 
-    /// Cancels an active download.
+    /// Cancels an active download, storing resume data if available.
     ///
     /// - Parameter id: The download item's unique identifier.
     func cancelDownload(id: UUID) {
-        activeTasks[id]?.cancel()
+        if let task = activeTasks[id] {
+            task.cancel(byProducingResumeData: { [weak self] data in
+                Task { @MainActor [weak self] in
+                    if let data {
+                        self?.resumeData[id] = data
+                    }
+                }
+            })
+        }
         activeTasks.removeValue(forKey: id)
 
         if let index = downloads.firstIndex(where: { $0.id == id }) {
@@ -106,11 +129,37 @@ final class DownloadManagerService: DownloadManagerServiceProtocol {
         }
     }
 
+    /// Retries a failed or cancelled download, resuming from where it stopped if possible.
+    ///
+    /// - Parameter id: The download item's unique identifier.
+    func retryDownload(id: UUID) {
+        guard let index = downloads.firstIndex(where: { $0.id == id }),
+              [.failed, .cancelled].contains(downloads[index].status) else { return }
+
+        downloads[index].status = .downloading
+
+        let task: URLSessionDownloadTask
+        if let data = resumeData.removeValue(forKey: id) {
+            task = session.downloadTask(withResumeData: data)
+        } else {
+            let url = downloads[index].sourceURL
+            task = session.downloadTask(with: url)
+            downloads[index].downloadedBytes = 0
+        }
+
+        activeTasks[id] = task
+        taskToItem[task.taskIdentifier] = id
+        task.resume()
+
+        Task { try? await downloadRepository.update(downloads[index]) }
+    }
+
     /// Removes a download record and deletes the local file if present.
     ///
     /// - Parameter id: The download item's unique identifier.
     func removeDownload(id: UUID) async {
         cancelDownload(id: id)
+        resumeData.removeValue(forKey: id)
 
         if let index = downloads.firstIndex(where: { $0.id == id }) {
             if let localURL = downloads[index].localURL {
@@ -185,13 +234,18 @@ final class DownloadManagerService: DownloadManagerServiceProtocol {
         taskToItem.removeValue(forKey: taskId)
     }
 
-    /// Handles download errors.
+    /// Handles download errors, storing resume data when available.
     private func handleError(taskId: Int, error: Error) {
         guard let itemId = taskToItem[taskId],
               let index = downloads.firstIndex(where: { $0.id == itemId }) else { return }
 
         let nsError = error as NSError
         guard nsError.code != NSURLErrorCancelled else { return }
+
+        // Store resume data for later retry
+        if let data = nsError.userInfo[NSURLSessionDownloadTaskResumeData] as? Data {
+            resumeData[itemId] = data
+        }
 
         downloads[index].status = .failed
         Task {

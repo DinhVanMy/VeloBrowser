@@ -85,7 +85,7 @@ final class AppCoordinator {
 ///
 /// Wraps the browser view in a NavigationStack and provides
 /// sheet presentation for secondary screens. On iPad with regular
-/// width, uses iPadLayoutView with optional sidebar and tab bar.
+/// width, uses IPadLayoutView with optional sidebar and tab bar.
 struct AppCoordinatorView: View {
     @State private var coordinator = AppCoordinator()
     @Environment(DIContainer.self) private var container
@@ -180,7 +180,7 @@ struct AppCoordinatorView: View {
     @ViewBuilder
     private var iPadBody: some View {
         ZStack {
-            iPadLayoutView()
+            IPadLayoutView()
 
             // PiP host view
             pipHostView

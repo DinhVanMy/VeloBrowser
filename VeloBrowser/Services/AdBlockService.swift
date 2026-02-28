@@ -4,6 +4,7 @@
 // Ad blocking engine using WKContentRuleListStore and WKUserScript.
 
 import WebKit
+import os.log
 
 /// Protocol for ad blocking operations.
 @MainActor
@@ -11,8 +12,8 @@ protocol AdBlockServiceProtocol {
     /// Whether ad blocking is globally enabled.
     var isEnabled: Bool { get set }
 
-    /// The set of whitelisted domains where ads are allowed.
-    var whitelist: Set<String> { get }
+    /// The set of allowlisted domains where ads are allowed.
+    var allowlist: Set<String> { get }
 
     /// Compiles ad block rules. Call once at app launch.
     func compileRules() async
@@ -23,14 +24,14 @@ protocol AdBlockServiceProtocol {
     /// Returns a user script for cosmetic ad filtering.
     func cosmeticFilterScript() -> WKUserScript
 
-    /// Adds a domain to the whitelist.
-    func addToWhitelist(_ domain: String)
+    /// Adds a domain to the allowlist.
+    func addToAllowlist(_ domain: String)
 
-    /// Removes a domain from the whitelist.
-    func removeFromWhitelist(_ domain: String)
+    /// Removes a domain from the allowlist.
+    func removeFromAllowlist(_ domain: String)
 
-    /// Checks if a domain is whitelisted.
-    func isWhitelisted(_ domain: String) -> Bool
+    /// Checks if a domain is allowlisted.
+    func isAllowlisted(_ domain: String) -> Bool
 }
 
 /// Ad blocking service using WebKit content rules.
@@ -50,13 +51,16 @@ final class AdBlockService: AdBlockServiceProtocol {
     }
 
     /// Domains where ad blocking is disabled.
-    private(set) var whitelist: Set<String>
+    private(set) var allowlist: Set<String>
 
     /// Total number of ads blocked across all sessions.
     var totalAdsBlocked: Int {
         get { UserDefaults.standard.integer(forKey: "totalAdsBlocked") }
         set { UserDefaults.standard.set(newValue, forKey: "totalAdsBlocked") }
     }
+
+    /// Whether ad block rule compilation has failed.
+    var compilationFailed: Bool = false
 
     /// The compiled content rule list for network blocking.
     private var compiledRuleList: WKContentRuleList?
@@ -66,8 +70,8 @@ final class AdBlockService: AdBlockServiceProtocol {
     /// Creates a new AdBlockService, loading persisted state.
     init() {
         self.isEnabled = UserDefaults.standard.object(forKey: "adBlockEnabled") as? Bool ?? true
-        let saved = UserDefaults.standard.stringArray(forKey: "adBlockWhitelist") ?? []
-        self.whitelist = Set(saved)
+        let saved = UserDefaults.standard.stringArray(forKey: "adBlockAllowlist") ?? []
+        self.allowlist = Set(saved)
     }
 
     // MARK: - Rule Compilation
@@ -89,9 +93,11 @@ final class AdBlockService: AdBlockServiceProtocol {
                     encodedContentRuleList: rules
                 )
             compiledRuleList = ruleList
+            compilationFailed = false
         } catch {
-            // Compilation failed — ad blocking won't work but app continues
             compiledRuleList = nil
+            compilationFailed = true
+            os_log(.error, "Ad block rule compilation failed: %{public}@", error.localizedDescription)
         }
     }
 
@@ -123,36 +129,36 @@ final class AdBlockService: AdBlockServiceProtocol {
         )
     }
 
-    // MARK: - Whitelist
+    // MARK: - Allowlist
 
-    /// Adds a domain to the ad-block whitelist.
+    /// Adds a domain to the ad-block allowlist.
     ///
-    /// - Parameter domain: The domain to whitelist (e.g., "example.com").
-    func addToWhitelist(_ domain: String) {
-        whitelist.insert(domain.lowercased())
-        persistWhitelist()
+    /// - Parameter domain: The domain to allowlist (e.g., "example.com").
+    func addToAllowlist(_ domain: String) {
+        allowlist.insert(domain.lowercased())
+        persistAllowlist()
     }
 
-    /// Removes a domain from the whitelist.
+    /// Removes a domain from the allowlist.
     ///
     /// - Parameter domain: The domain to remove.
-    func removeFromWhitelist(_ domain: String) {
-        whitelist.remove(domain.lowercased())
-        persistWhitelist()
+    func removeFromAllowlist(_ domain: String) {
+        allowlist.remove(domain.lowercased())
+        persistAllowlist()
     }
 
-    /// Checks whether a domain is whitelisted.
+    /// Checks whether a domain is allowlisted.
     ///
     /// - Parameter domain: The domain to check.
-    /// - Returns: `true` if the domain is whitelisted.
-    func isWhitelisted(_ domain: String) -> Bool {
-        whitelist.contains(domain.lowercased())
+    /// - Returns: `true` if the domain is allowlisted.
+    func isAllowlisted(_ domain: String) -> Bool {
+        allowlist.contains(domain.lowercased())
     }
 
     // MARK: - Private
 
-    private func persistWhitelist() {
-        UserDefaults.standard.set(Array(whitelist), forKey: "adBlockWhitelist")
+    private func persistAllowlist() {
+        UserDefaults.standard.set(Array(allowlist), forKey: "adBlockAllowlist")
     }
 
     /// Generates WebKit content blocker JSON rules.
@@ -161,8 +167,17 @@ final class AdBlockService: AdBlockServiceProtocol {
     /// third-party ad frames, and YouTube-specific ad content.
     /// The format follows WebKit's Content Blocker specification.
     private static func generateBlockingRules() -> String {
-        let rules: [[String: Any]] = [
-            // --- Major Ad Networks ---
+        let rules = adNetworkRules + trackerRules + scriptAndPixelRules
+        guard let data = try? JSONSerialization.data(withJSONObject: rules),
+              let json = String(data: data, encoding: .utf8) else {
+            return "[]"
+        }
+        return json
+    }
+
+    /// Ad network and YouTube ad blocking rules.
+    private static var adNetworkRules: [[String: Any]] {
+        [
             blockRule(".*\\.doubleclick\\.net"),
             blockRule(".*\\.googlesyndication\\.com"),
             blockRule(".*\\.googleadservices\\.com"),
@@ -194,7 +209,18 @@ final class AdBlockService: AdBlockServiceProtocol {
             blockRule(".*\\.inmobi\\.com"),
             blockRule(".*\\.unityads\\.unity3d\\.com"),
             blockRule(".*\\.chartboost\\.com"),
-            // --- Trackers ---
+            blockRule(".*\\.youtube\\.com/api/stats/ads"),
+            blockRule(".*\\.youtube\\.com/pagead"),
+            blockRule(".*\\.youtube\\.com/ptracking"),
+            blockRule(".*\\.youtube\\.com/get_midroll"),
+            blockRule(".*googlevideo\\.com/videoplayback.*ctier=L"),
+            blockRule(".*\\.youtube\\.com/api/stats/qoe.*ads"),
+        ]
+    }
+
+    /// Tracker blocking rules.
+    private static var trackerRules: [[String: Any]] {
+        [
             blockRule(".*\\.facebook\\.com/tr"),
             blockRule(".*\\.scorecardresearch\\.com"),
             blockRule(".*\\.quantserve\\.com"),
@@ -211,20 +237,17 @@ final class AdBlockService: AdBlockServiceProtocol {
             blockRule(".*\\.demdex\\.net"),
             blockRule(".*\\.omtrdc\\.net"),
             blockRule(".*\\.everesttech\\.net"),
-            // --- YouTube Ads ---
-            blockRule(".*\\.youtube\\.com/api/stats/ads"),
-            blockRule(".*\\.youtube\\.com/pagead"),
-            blockRule(".*\\.youtube\\.com/ptracking"),
-            blockRule(".*\\.youtube\\.com/get_midroll"),
-            blockRule(".*googlevideo\\.com/videoplayback.*ctier=L"),
-            blockRule(".*\\.youtube\\.com/api/stats/qoe.*ads"),
-            // --- Ad script patterns ---
+        ]
+    }
+
+    /// Ad script and tracking pixel blocking rules.
+    private static var scriptAndPixelRules: [[String: Any]] {
+        [
             blockRule(".*/ads\\.js"),
             blockRule(".*/ad[s]?[_-]?banner"),
             blockRule(".*/prebid"),
             blockRule(".*/gpt\\.js"),
             blockRule(".*/adsbygoogle\\.js"),
-            // --- Tracking pixels ---
             [
                 "trigger": [
                     "url-filter": ".*",
@@ -234,12 +257,6 @@ final class AdBlockService: AdBlockServiceProtocol {
                 "action": ["type": "block"]
             ]
         ]
-
-        guard let data = try? JSONSerialization.data(withJSONObject: rules),
-              let json = String(data: data, encoding: .utf8) else {
-            return "[]"
-        }
-        return json
     }
 
     /// Helper to create a simple block rule.

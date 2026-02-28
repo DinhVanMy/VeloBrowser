@@ -104,76 +104,8 @@ struct WebViewContainer: UIViewRepresentable {
     var onFullscreenChange: ((Bool) -> Void)?
 
     func makeUIView(context: Context) -> WKWebView {
-        let config = configuration ?? {
-            let cfg = WKWebViewConfiguration()
-            cfg.allowsInlineMediaPlayback = true
-            cfg.mediaTypesRequiringUserActionForPlayback = []
-            cfg.allowsPictureInPictureMediaPlayback = true
-            return cfg
-        }()
-
-        // Enable background media playback (keeps WKWebView audio alive when backgrounded)
-        config.allowsInlineMediaPlayback = true
-        config.mediaTypesRequiringUserActionForPlayback = []
-        config.allowsPictureInPictureMediaPlayback = true
-
-        // Performance: show content ASAP
-        config.suppressesIncrementalRendering = false
-
-        // JavaScript preference
-        config.defaultWebpagePreferences.allowsContentJavaScript = javaScriptEnabled
-
-        // Private browsing uses non-persistent data store
-        if isPrivate {
-            config.websiteDataStore = .nonPersistent()
-        }
-
-        // Background audio: prevent sites from detecting backgrounded state
-        // Must be injected at documentStart (before site scripts load) so
-        // YouTube and similar sites cannot pause media on visibilitychange.
-        let backgroundAudioScript = WKUserScript(
-            source: Self.backgroundAudioJS,
-            injectionTime: .atDocumentStart,
-            forMainFrameOnly: false
-        )
-        config.userContentController.addUserScript(backgroundAudioScript)
-
-        // Add ad-block counter script
-        let counterScript = WKUserScript(
-            source: Self.adBlockCounterJS,
-            injectionTime: .atDocumentEnd,
-            forMainFrameOnly: true
-        )
-        config.userContentController.addUserScript(counterScript)
-
-        // Add favicon extraction script
-        let faviconScript = WKUserScript(
-            source: Self.faviconExtractionJS,
-            injectionTime: .atDocumentEnd,
-            forMainFrameOnly: true
-        )
-        config.userContentController.addUserScript(faviconScript)
-
-        // Add fingerprint protection script if enabled
-        if let fpScript = fingerprintProtectionScript {
-            config.userContentController.addUserScript(fpScript)
-        }
-
-        // Fullscreen detection script
-        let fullscreenScript = WKUserScript(
-            source: Self.fullscreenDetectionJS,
-            injectionTime: .atDocumentEnd,
-            forMainFrameOnly: true
-        )
-        config.userContentController.addUserScript(fullscreenScript)
-
-        // Lazy image loading script (adds loading="lazy" to off-screen images)
-        let lazyImageScript = WKUserScript(
-            source: Self.lazyImageLoadingJS,
-            injectionTime: .atDocumentEnd,
-            forMainFrameOnly: false
-        )
-        config.userContentController.addUserScript(lazyImageScript)
+        let config = prepareConfiguration()
+        injectUserScripts(into: config)
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
@@ -208,6 +140,68 @@ struct WebViewContainer: UIViewRepresentable {
         }
 
         return webView
+    }
+
+    /// Prepares the WKWebViewConfiguration with media, privacy, and cookie settings.
+    private func prepareConfiguration() -> WKWebViewConfiguration {
+        let config = configuration ?? {
+            let cfg = WKWebViewConfiguration()
+            cfg.allowsInlineMediaPlayback = true
+            cfg.mediaTypesRequiringUserActionForPlayback = []
+            cfg.allowsPictureInPictureMediaPlayback = true
+            return cfg
+        }()
+
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = []
+        config.allowsPictureInPictureMediaPlayback = true
+        config.suppressesIncrementalRendering = false
+        config.defaultWebpagePreferences.allowsContentJavaScript = javaScriptEnabled
+
+        if isPrivate {
+            config.websiteDataStore = .nonPersistent()
+        }
+
+        let blockCookies = UserDefaults.standard.bool(forKey: "blockThirdPartyCookies")
+        if blockCookies {
+            config.websiteDataStore.httpCookieStore.setCookiePolicy(.allow) { }
+        }
+
+        return config
+    }
+
+    /// Injects all required user scripts into the configuration's content controller.
+    private func injectUserScripts(into config: WKWebViewConfiguration) {
+        let controller = config.userContentController
+
+        controller.addUserScript(WKUserScript(
+            source: Self.backgroundAudioJS,
+            injectionTime: .atDocumentStart,
+            forMainFrameOnly: false
+        ))
+        controller.addUserScript(WKUserScript(
+            source: Self.adBlockCounterJS,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        ))
+        controller.addUserScript(WKUserScript(
+            source: Self.faviconExtractionJS,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        ))
+        if let fpScript = fingerprintProtectionScript {
+            controller.addUserScript(fpScript)
+        }
+        controller.addUserScript(WKUserScript(
+            source: Self.fullscreenDetectionJS,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        ))
+        controller.addUserScript(WKUserScript(
+            source: Self.lazyImageLoadingJS,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: false
+        ))
     }
 
     func updateUIView(_ webView: WKWebView, context: Context) {
@@ -573,71 +567,62 @@ struct WebViewContainer: UIViewRepresentable {
                 previewProvider: nil
             ) { [weak self] _ in
                 guard let self else { return UIMenu(children: []) }
+                return self.buildLinkContextMenu(for: linkURL)
+            }
+        }
 
-                let openNewTab = UIAction(
-                    title: "Open in New Tab",
-                    image: UIImage(systemName: "plus.square")
-                ) { _ in
-                    Task { @MainActor in
-                        self.parent.onOpenInNewTab?(linkURL)
-                        HapticManager.light()
-                    }
+        /// Builds the context menu for a long-pressed link.
+        private func buildLinkContextMenu(for linkURL: URL) -> UIMenu {
+            let openMenu = UIMenu(
+                title: "", options: .displayInline,
+                children: linkOpenActions(for: linkURL)
+            )
+            let actionsMenu = UIMenu(
+                title: "", options: .displayInline,
+                children: linkShareActions(for: linkURL)
+            )
+            let saveMenu = UIMenu(
+                title: "", options: .displayInline,
+                children: linkSaveActions(for: linkURL)
+            )
+            return UIMenu(children: [openMenu, actionsMenu, saveMenu])
+        }
+
+        private func linkOpenActions(for linkURL: URL) -> [UIAction] {
+            [
+                UIAction(title: "Open in New Tab", image: UIImage(systemName: "plus.square")) { _ in
+                    Task { @MainActor in self.parent.onOpenInNewTab?(linkURL); HapticManager.light() }
+                },
+                UIAction(title: "Open in Private Tab", image: UIImage(systemName: "eye.slash")) { _ in
+                    Task { @MainActor in self.parent.onOpenInPrivateTab?(linkURL); HapticManager.light() }
                 }
+            ]
+        }
 
-                let openPrivateTab = UIAction(
-                    title: "Open in Private Tab",
-                    image: UIImage(systemName: "eye.slash")
-                ) { _ in
-                    Task { @MainActor in
-                        self.parent.onOpenInPrivateTab?(linkURL)
-                        HapticManager.light()
-                    }
+        private func linkShareActions(for linkURL: URL) -> [UIAction] {
+            [
+                UIAction(title: "Copy Link", image: UIImage(systemName: "doc.on.doc")) { _ in
+                    UIPasteboard.general.url = linkURL; HapticManager.light()
+                },
+                UIAction(title: "Share…", image: UIImage(systemName: "square.and.arrow.up")) { _ in
+                    Task { @MainActor in self.parent.onShareURL?(linkURL) }
                 }
+            ]
+        }
 
-                let copyLink = UIAction(
-                    title: "Copy Link",
-                    image: UIImage(systemName: "doc.on.doc")
-                ) { _ in
-                    UIPasteboard.general.url = linkURL
-                    HapticManager.light()
-                }
-
-                let shareLink = UIAction(
-                    title: "Share…",
-                    image: UIImage(systemName: "square.and.arrow.up")
-                ) { _ in
-                    Task { @MainActor in
-                        self.parent.onShareURL?(linkURL)
-                    }
-                }
-
-                let downloadLink = UIAction(
-                    title: "Download Link",
-                    image: UIImage(systemName: "arrow.down.circle")
-                ) { _ in
-                    Task { @MainActor in
-                        self.parent.onDownloadLink?(linkURL)
-                        HapticManager.medium()
-                    }
-                }
-
-                let addToReadingList = UIAction(
-                    title: "Add to Reading List",
-                    image: UIImage(systemName: "eyeglasses")
-                ) { _ in
+        private func linkSaveActions(for linkURL: URL) -> [UIAction] {
+            [
+                UIAction(title: "Download Link", image: UIImage(systemName: "arrow.down.circle")) { _ in
+                    Task { @MainActor in self.parent.onDownloadLink?(linkURL); HapticManager.medium() }
+                },
+                UIAction(title: "Add to Reading List", image: UIImage(systemName: "eyeglasses")) { _ in
                     Task { @MainActor in
                         let title = linkURL.host() ?? linkURL.absoluteString
                         self.parent.onAddToReadingList?(linkURL, title)
                         HapticManager.success()
                     }
                 }
-
-                let openMenu = UIMenu(title: "", options: .displayInline, children: [openNewTab, openPrivateTab])
-                let actionsMenu = UIMenu(title: "", options: .displayInline, children: [copyLink, shareLink])
-                let saveMenu = UIMenu(title: "", options: .displayInline, children: [downloadLink, addToReadingList])
-
-                return UIMenu(children: [openMenu, actionsMenu, saveMenu])
-            }
+            ]
         }
 
         deinit {

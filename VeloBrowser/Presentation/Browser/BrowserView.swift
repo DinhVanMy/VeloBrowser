@@ -565,8 +565,12 @@ struct BrowserView: View {
             HapticManager.success()
         }
     }
+}
 
-    private func errorOverlay(message: String) -> some View {
+// MARK: - Overlay Views
+
+extension BrowserView {
+    func errorOverlay(message: String) -> some View {
         VStack(spacing: DesignSystem.Spacing.md) {
             Image(systemName: "exclamationmark.triangle")
                 .font(.largeTitle)
@@ -592,7 +596,7 @@ struct BrowserView: View {
         .background(DesignSystem.Colors.backgroundPrimary)
     }
 
-    private var offlineOverlay: some View {
+    var offlineOverlay: some View {
         VStack(spacing: DesignSystem.Spacing.md) {
             Image(systemName: "wifi.slash")
                 .font(.system(size: 48, weight: .light))
