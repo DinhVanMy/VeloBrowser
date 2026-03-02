@@ -515,6 +515,17 @@ struct WebViewContainer: UIViewRepresentable {
             Task { @MainActor in parent.onError?(error) }
         }
 
+        /// Handles web content process termination (crash recovery).
+        ///
+        /// iOS may terminate the web content process when the app is in background
+        /// (e.g., FigApplicationStateMonitor err=-19431 from video rendering).
+        /// Without this handler, the crash propagates to the main app process.
+        func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+            Task { @MainActor in
+                webView.reload()
+            }
+        }
+
         // MARK: - UIScrollViewDelegate
 
         func scrollViewDidScroll(_ scrollView: UIScrollView) {

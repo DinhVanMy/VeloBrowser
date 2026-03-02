@@ -626,8 +626,9 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
 
     /// Starts WebView mode for blob media that can't be extracted natively.
     ///
-    /// Activates a silent audio keepalive to maintain the app's audio session
-    /// in background, allowing WKWebView's visibility override to keep media playing.
+    /// Sets up state and Now Playing info. The silent keepalive is NOT started
+    /// here — it's deferred to `handleEnterBackground` to avoid conflicting
+    /// with WKWebView's active video decoder (FigApplicationStateMonitor err=-19431).
     private func startWebViewMode(webView: WKWebView, title: String, pageURL: URL?) {
         stopWebViewMode()
         isWebViewMode = true
@@ -636,7 +637,6 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
         currentMediaURL = pageURL
         self.pageURL = pageURL
         isPlaying = true
-        startSilentKeepAlive()
 
         nowPlayingManager.update(
             title: title,
@@ -729,9 +729,9 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
         beginBackgroundTaskForTransition()
         try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
 
-        // Ensure keepalive is running if player might buffer
-        if player != nil && silentPlayer == nil {
-            log.info("handleEnterBackground: restarting keepalive for safety")
+        // Ensure keepalive is running for both AVPlayer buffering and WebView blob mode
+        if silentPlayer == nil && (player != nil || isWebViewMode) {
+            log.info("handleEnterBackground: starting keepalive")
             keepaliveStoppedForPlayback = false
             startSilentKeepAlive()
         }
@@ -742,6 +742,12 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
         log.info("handleEnterForeground: isPlaying=\(self.isPlaying)")
         endBackgroundTaskIfNeeded()
         try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+
+        // Stop keepalive in foreground for WebView mode — avoids conflict with WKWebView video
+        if isWebViewMode && silentPlayer != nil {
+            log.info("handleEnterForeground: stopping keepalive (WebView mode, no longer needed)")
+            stopSilentKeepAlive()
+        }
     }
 
     /// Begins a background task for smooth audio transitions.
