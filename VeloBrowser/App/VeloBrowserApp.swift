@@ -76,10 +76,11 @@ struct VeloBrowserApp: App {
         do {
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playback, mode: .default, options: [])
-            try session.setActive(true)
+            try session.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             // Audio session setup failed — background audio may not work
         }
+        UIApplication.shared.beginReceivingRemoteControlEvents()
     }
 
     // MARK: - URL Handling

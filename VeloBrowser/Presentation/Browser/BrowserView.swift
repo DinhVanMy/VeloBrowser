@@ -216,7 +216,10 @@ struct BrowserView: View {
                 },
                 onError: { viewModel.handleError($0) },
                 onScrollDirectionChange: { viewModel.handleScroll(isScrollingDown: $0) },
-                onWebViewCreated: { viewModel.webView = $0 },
+                onWebViewCreated: { webView in
+                    viewModel.webView = webView
+                    container.mediaPlayerService.setActiveWebView(webView)
+                },
                 onDownloadLink: { url in
                     Task { await container.downloadManager.startDownload(url: url) }
                     HapticManager.medium()
