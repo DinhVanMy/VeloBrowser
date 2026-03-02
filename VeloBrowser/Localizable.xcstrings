@@ -3114,6 +3114,7 @@
       }
     },
     "Play in Background" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {

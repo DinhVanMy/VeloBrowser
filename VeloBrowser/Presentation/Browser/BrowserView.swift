@@ -420,25 +420,6 @@ struct BrowserView: View {
                 }
 
                 Button {
-                    Task {
-                        guard let webView = viewModel.webView else { return }
-                        let found = await container.mediaPlayerService.extractAndPlay(
-                            from: webView,
-                            pageTitle: viewModel.pageTitle,
-                            pageURL: viewModel.currentURL
-                        )
-                        if found {
-                            HapticManager.success()
-                        } else {
-                            showNoMediaAlert = true
-                            HapticManager.warning()
-                        }
-                    }
-                } label: {
-                    Label("Play in Background", systemImage: "play.circle")
-                }
-
-                Button {
                     withAnimation(.easeOut(duration: DesignSystem.AnimationDuration.fast)) {
                         showFindInPage = true
                     }
