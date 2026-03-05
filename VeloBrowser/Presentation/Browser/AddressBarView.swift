@@ -35,8 +35,9 @@ struct AddressBarView: View {
                 // Security indicator
                 securityIcon
 
-                // URL text field — show domain only when unfocused
-                if isFocused {
+                // URL field — TextField always in hierarchy for reliable @FocusState
+                ZStack(alignment: .leading) {
+                    // TextField layer (invisible when unfocused, but always mounted)
                     HStack(spacing: 4) {
                         TextField("Search or enter URL", text: $viewModel.addressBarText)
                             .font(DesignSystem.Typography.body)
@@ -51,7 +52,7 @@ struct AddressBarView: View {
                             .accessibilityLabel("Address bar")
 
                         // Clear button
-                        if !viewModel.addressBarText.isEmpty {
+                        if isFocused && !viewModel.addressBarText.isEmpty {
                             Button {
                                 viewModel.addressBarText = ""
                             } label: {
@@ -62,38 +63,45 @@ struct AddressBarView: View {
                             .accessibilityLabel("Clear address bar")
                         }
                     }
-                } else {
-                    VStack(spacing: 0) {
-                        Text(displayText)
-                            .font(DesignSystem.Typography.body)
-                            .foregroundStyle(DesignSystem.Colors.textPrimary)
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                viewModel.isAddressBarFocused = true
-                            }
-                            .accessibilityLabel("Address bar, \(displayText)")
+                    .opacity(isFocused ? 1 : 0)
+                    .allowsHitTesting(isFocused)
 
-                        // Paste & Go hint
-                        if clipboardHasURL, let clip = clipboardString,
-                           clip != viewModel.addressBarText {
-                            Button {
-                                viewModel.addressBarText = clip
-                                viewModel.submitAddressBar()
-                                HapticManager.light()
-                            } label: {
-                                HStack(spacing: 4) {
-                                    Image(systemName: "doc.on.clipboard")
-                                        .font(.caption2)
-                                    Text("Paste & Go")
-                                        .font(DesignSystem.Typography.caption2)
+                    // Display overlay when unfocused
+                    if !isFocused {
+                        VStack(spacing: 0) {
+                            Text(displayText)
+                                .font(DesignSystem.Typography.body)
+                                .foregroundStyle(DesignSystem.Colors.textPrimary)
+                                .lineLimit(1)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
+                            // Paste & Go hint
+                            if clipboardHasURL, let clip = clipboardString,
+                               clip != viewModel.addressBarText {
+                                Button {
+                                    viewModel.addressBarText = clip
+                                    viewModel.submitAddressBar()
+                                    HapticManager.light()
+                                } label: {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "doc.on.clipboard")
+                                            .font(.caption2)
+                                        Text("Paste & Go")
+                                            .font(DesignSystem.Typography.caption2)
+                                    }
+                                    .foregroundStyle(DesignSystem.Colors.accent)
+                                    .padding(.top, 2)
                                 }
-                                .foregroundStyle(DesignSystem.Colors.accent)
-                                .padding(.top, 2)
+                                .accessibilityLabel("Paste and navigate to clipboard URL")
                             }
-                            .accessibilityLabel("Paste and navigate to clipboard URL")
                         }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.addressBarText = viewModel.currentURL?.absoluteString ?? viewModel.addressBarText
+                            isFocused = true
+                            viewModel.isAddressBarFocused = true
+                        }
+                        .accessibilityLabel("Address bar, \(displayText)")
                     }
                 }
 
@@ -195,14 +203,7 @@ struct AddressBarView: View {
             return true
         }
         .onChange(of: viewModel.isAddressBarFocused) { _, newValue in
-            if newValue {
-                // Small delay ensures TextField is in the hierarchy before focus
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    isFocused = true
-                }
-            } else {
-                isFocused = false
-            }
+            isFocused = newValue
         }
         .onChange(of: isFocused) { _, newValue in
             viewModel.isAddressBarFocused = newValue

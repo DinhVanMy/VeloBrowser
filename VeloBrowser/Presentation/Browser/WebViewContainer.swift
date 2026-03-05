@@ -6,7 +6,34 @@
 import SwiftUI
 import WebKit
 
+/// A UIView wrapper that holds a WKWebView as a subview.
+/// Stays permanently in the SwiftUI hierarchy; only the child WKWebView is swapped on tab switch.
+/// This avoids iOS recycling the WKWebView content process when removed from the view hierarchy.
+final class WebViewWrapperView: UIView {
+    private(set) var currentWebView: WKWebView?
+
+    func setWebView(_ webView: WKWebView?) {
+        guard webView !== currentWebView else { return }
+        currentWebView?.removeFromSuperview()
+        currentWebView = webView
+        if let webView {
+            webView.frame = bounds
+            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            addSubview(webView)
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        currentWebView?.frame = bounds
+    }
+}
+
 /// A SwiftUI view that wraps a `WKWebView` for displaying web content.
+///
+/// Uses a `WebViewWrapperView` as a stable container. On tab switches, only the
+/// child WKWebView is swapped — the wrapper stays in the hierarchy permanently,
+/// preventing iOS from recycling the web content process.
 ///
 /// Supports URL loading, imperative navigation commands (via token signals),
 /// KVO observation for state changes, scroll direction detection, and
@@ -106,63 +133,27 @@ struct WebViewContainer: UIViewRepresentable {
     /// An existing WKWebView to reuse (from the WebView pool). Avoids reload on tab switch.
     var existingWebView: WKWebView?
 
-    func makeUIView(context: Context) -> WKWebView {
-        // Reuse pooled webview if available (tab switch back)
-        if let existingWebView {
-            let controller = existingWebView.configuration.userContentController
-            // Remove old handlers (pointing to previous Coordinator) and re-add with new one
-            for name in ["adBlockCounter", "faviconDetected", "fullscreenChange"] {
-                controller.removeScriptMessageHandler(forName: name)
-            }
-            controller.add(context.coordinator, name: "adBlockCounter")
-            controller.add(context.coordinator, name: "faviconDetected")
-            controller.add(context.coordinator, name: "fullscreenChange")
+    func makeUIView(context: Context) -> WebViewWrapperView {
+        WebViewWrapperView()
+    }
 
-            existingWebView.navigationDelegate = context.coordinator
-            existingWebView.scrollView.delegate = context.coordinator
-            existingWebView.uiDelegate = context.coordinator
-
-            context.coordinator.webView = existingWebView
-            // Set lastLoadedURL to pendingURL so updateUIView won't trigger a spurious reload
-            context.coordinator.lastLoadedURL = url
-            context.coordinator.setupObservers()
-            onWebViewCreated?(existingWebView)
-
-            // Fire initial state for pooled webview (KVO only fires on value changes)
-            DispatchQueue.main.async { [self] in
-                onNavigationChange?(existingWebView.canGoBack, existingWebView.canGoForward)
-                onLoadingChange?(existingWebView.isLoading)
-                onProgressChange?(existingWebView.estimatedProgress)
-                if let title = existingWebView.title, !title.isEmpty {
-                    onTitleChange?(title)
-                }
-                if let currentURL = existingWebView.url {
-                    onURLChange?(currentURL)
-                }
-            }
-
-            return existingWebView
-        }
-
-        // Create new webview
+    /// Creates a new WKWebView with full configuration, user scripts, and pull-to-refresh.
+    private func createNewWebView(coordinator: Coordinator) -> WKWebView {
         let config = prepareConfiguration()
         injectUserScripts(into: config)
 
         let webView = WKWebView(frame: .zero, configuration: config)
-        webView.navigationDelegate = context.coordinator
-        webView.scrollView.delegate = context.coordinator
-        webView.uiDelegate = context.coordinator
         webView.allowsBackForwardNavigationGestures = true
 
         // Register script message handlers
-        config.userContentController.add(context.coordinator, name: "adBlockCounter")
-        config.userContentController.add(context.coordinator, name: "faviconDetected")
-        config.userContentController.add(context.coordinator, name: "fullscreenChange")
+        config.userContentController.add(coordinator, name: "adBlockCounter")
+        config.userContentController.add(coordinator, name: "faviconDetected")
+        config.userContentController.add(coordinator, name: "fullscreenChange")
 
         // Pull-to-refresh
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(
-            context.coordinator,
+            coordinator,
             action: #selector(Coordinator.handleRefresh(_:)),
             for: .valueChanged
         )
@@ -172,16 +163,135 @@ struct WebViewContainer: UIViewRepresentable {
         webView.isInspectable = true
         #endif
 
-        context.coordinator.webView = webView
-        context.coordinator.setupObservers()
-        onWebViewCreated?(webView)
+        return webView
+    }
 
-        if let url {
+    /// Configures delegates and script message handlers on a WKWebView.
+    private func configureWebView(_ webView: WKWebView, coordinator: Coordinator, isPooled: Bool) {
+        webView.navigationDelegate = coordinator
+        webView.scrollView.delegate = coordinator
+        webView.uiDelegate = coordinator
+        webView.allowsBackForwardNavigationGestures = true
+
+        if isPooled {
+            let controller = webView.configuration.userContentController
+            for name in ["adBlockCounter", "faviconDetected", "fullscreenChange"] {
+                controller.removeScriptMessageHandler(forName: name)
+            }
+            controller.add(coordinator, name: "adBlockCounter")
+            controller.add(coordinator, name: "faviconDetected")
+            controller.add(coordinator, name: "fullscreenChange")
+        }
+
+        // Re-target pull-to-refresh to current coordinator
+        if let refreshControl = webView.scrollView.refreshControl {
+            refreshControl.removeTarget(nil, action: nil, for: .valueChanged)
+            refreshControl.addTarget(
+                coordinator,
+                action: #selector(Coordinator.handleRefresh(_:)),
+                for: .valueChanged
+            )
+        }
+    }
+
+    func updateUIView(_ wrapper: WebViewWrapperView, context: Context) {
+        let coord = context.coordinator
+        coord.parent = self
+
+        // Determine the target WKWebView
+        let targetWebView: WKWebView
+        let isPooled: Bool
+        if let existing = existingWebView {
+            targetWebView = existing
+            isPooled = true
+        } else if let current = wrapper.currentWebView, current === coord.webView {
+            targetWebView = current
+            isPooled = false
+        } else {
+            targetWebView = createNewWebView(coordinator: coord)
+            isPooled = false
+        }
+
+        // Swap webview if identity changed
+        if targetWebView !== coord.webView {
+            coord.teardownObservers()
+            wrapper.setWebView(targetWebView)
+            configureWebView(targetWebView, coordinator: coord, isPooled: isPooled)
+            coord.webView = targetWebView
+            coord.setupObservers()
+            onWebViewCreated?(targetWebView)
+
+            // Sync tokens to prevent spurious commands after swap
+            coord.lastReloadToken = reloadToken
+            coord.lastStopToken = stopToken
+            coord.lastGoBackToken = goBackToken
+            coord.lastGoForwardToken = goForwardToken
+            coord.lastDesktopModeToken = desktopModeToken
+            // Prevent spurious URL reload — use the webview's actual URL for pooled views
+            coord.lastLoadedURL = isPooled ? (targetWebView.url ?? url) : nil
+
+            // Fire initial state for swapped webview
+            DispatchQueue.main.async { [self] in
+                onNavigationChange?(targetWebView.canGoBack, targetWebView.canGoForward)
+                onLoadingChange?(targetWebView.isLoading)
+                onProgressChange?(targetWebView.estimatedProgress)
+                if let title = targetWebView.title, !title.isEmpty {
+                    onTitleChange?(title)
+                }
+                if let currentURL = targetWebView.url {
+                    onURLChange?(currentURL)
+                }
+            }
+
+            // Load URL for newly created (non-pooled) webview
+            if !isPooled, let url {
+                targetWebView.load(URLRequest(url: url))
+                coord.lastLoadedURL = url
+            }
+        }
+
+        // Apply updates to current webview
+        guard let webView = wrapper.currentWebView else { return }
+
+        webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = javaScriptEnabled
+
+        if let url, url != coord.lastLoadedURL {
+            coord.lastLoadedURL = url
             webView.load(URLRequest(url: url))
         }
 
-        return webView
+        if reloadToken != coord.lastReloadToken {
+            coord.lastReloadToken = reloadToken
+            webView.reload()
+        }
+        if stopToken != coord.lastStopToken {
+            coord.lastStopToken = stopToken
+            webView.stopLoading()
+        }
+        if goBackToken != coord.lastGoBackToken {
+            coord.lastGoBackToken = goBackToken
+            if webView.canGoBack { webView.goBack() }
+        }
+        if goForwardToken != coord.lastGoForwardToken {
+            coord.lastGoForwardToken = goForwardToken
+            if webView.canGoForward { webView.goForward() }
+        }
+
+        if desktopModeToken != coord.lastDesktopModeToken {
+            coord.lastDesktopModeToken = desktopModeToken
+            webView.customUserAgent = isDesktopMode ? Self.desktopUserAgent : nil
+        }
     }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(parent: self)
+    }
+
+    /// Desktop Safari user-agent string for "Request Desktop Site".
+    private static let desktopUserAgent =
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+
+    // MARK: - Configuration
 
     /// Prepares the WKWebViewConfiguration with media, privacy, and cookie settings.
     private func prepareConfiguration() -> WKWebViewConfiguration {
@@ -245,53 +355,7 @@ struct WebViewContainer: UIViewRepresentable {
         ))
     }
 
-    func updateUIView(_ webView: WKWebView, context: Context) {
-        let coord = context.coordinator
-
-        // Keep coordinator's parent in sync with latest closures
-        coord.parent = self
-
-        // Update JavaScript preference if changed
-        webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = javaScriptEnabled
-
-        // Load new URL if changed
-        if let url, url != coord.lastLoadedURL {
-            coord.lastLoadedURL = url
-            webView.load(URLRequest(url: url))
-        }
-
-        // Process imperative commands via token comparison
-        if reloadToken != coord.lastReloadToken {
-            coord.lastReloadToken = reloadToken
-            webView.reload()
-        }
-        if stopToken != coord.lastStopToken {
-            coord.lastStopToken = stopToken
-            webView.stopLoading()
-        }
-        if goBackToken != coord.lastGoBackToken {
-            coord.lastGoBackToken = goBackToken
-            if webView.canGoBack { webView.goBack() }
-        }
-        if goForwardToken != coord.lastGoForwardToken {
-            coord.lastGoForwardToken = goForwardToken
-            if webView.canGoForward { webView.goForward() }
-        }
-
-        // Desktop mode user-agent switch
-        if desktopModeToken != coord.lastDesktopModeToken {
-            coord.lastDesktopModeToken = desktopModeToken
-            webView.customUserAgent = isDesktopMode ? Self.desktopUserAgent : nil
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(parent: self)
-    }
-
-    /// Desktop Safari user-agent string for "Request Desktop Site".
-    private static let desktopUserAgent =
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+    // MARK: - JavaScript
 
     /// JavaScript that adds `loading="lazy"` to below-fold images.
     private static let lazyImageLoadingJS = """
@@ -307,16 +371,9 @@ struct WebViewContainer: UIViewRepresentable {
     })();
     """
 
-    /// JavaScript injected at documentStart to prevent sites (YouTube, etc.)
-    /// from pausing media when the app enters background.
-    ///
-    /// Overrides `document.hidden` and `document.visibilityState` to always
-    /// report "visible", and blocks `visibilitychange` events from reaching
-    /// site scripts. This allows WKWebView audio to continue playing via
-    /// the background audio session.
+    /// JavaScript injected at documentStart to prevent sites from pausing media in background.
     private static let backgroundAudioJS = """
     (function() {
-        // Override visibility API so sites think the page is always visible
         Object.defineProperty(document, 'hidden', {
             get: function() { return false; },
             configurable: false
@@ -329,16 +386,12 @@ struct WebViewContainer: UIViewRepresentable {
             get: function() { return false; },
             configurable: false
         });
-
-        // Intercept and block visibilitychange events from reaching site scripts
         document.addEventListener('visibilitychange', function(e) {
             e.stopImmediatePropagation();
         }, true);
         document.addEventListener('webkitvisibilitychange', function(e) {
             e.stopImmediatePropagation();
         }, true);
-
-        // Override hasFocus to always return true
         document.hasFocus = function() { return true; };
     })();
     """
@@ -420,6 +473,22 @@ struct WebViewContainer: UIViewRepresentable {
 
         init(parent: WebViewContainer) {
             self.parent = parent
+        }
+
+        /// Tears down KVO observers before switching to a different WKWebView.
+        func teardownObservers() {
+            titleObservation?.invalidate()
+            urlObservation?.invalidate()
+            loadingObservation?.invalidate()
+            progressObservation?.invalidate()
+            canGoBackObservation?.invalidate()
+            canGoForwardObservation?.invalidate()
+            titleObservation = nil
+            urlObservation = nil
+            loadingObservation = nil
+            progressObservation = nil
+            canGoBackObservation = nil
+            canGoForwardObservation = nil
         }
 
         /// Sets up KVO observers for web view properties.

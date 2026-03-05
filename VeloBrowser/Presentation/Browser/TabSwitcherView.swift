@@ -129,8 +129,7 @@ struct TabThumbnailView: View {
     @State private var isDismissing: Bool = false
 
     var body: some View {
-        Button(action: onSelect) {
-            VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
                 // Header bar
                 HStack {
                     // Favicon
@@ -239,8 +238,8 @@ struct TabThumbnailView: View {
                 color: .black.opacity(isActive ? 0.15 : 0.05),
                 radius: isActive ? 4 : 2
             )
-        }
-        .buttonStyle(.plain)
+        .contentShape(Rectangle())
+        .onTapGesture { onSelect() }
         .hoverEffect(.lift)
         .offset(y: dragOffset.height)
         .opacity(isDismissing ? 0 : max(0, 1.0 - abs(dragOffset.height) / CGFloat(200)))

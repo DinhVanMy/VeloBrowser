@@ -337,7 +337,6 @@ struct BrowserView: View {
                 },
                 existingWebView: container.tabManager.activeTab.flatMap { container.tabManager.webView(for: $0.id) }
             )
-            .id(container.tabManager.activeTab?.id)
 
             // New Tab Page overlay (when no URL loaded)
             if viewModel.currentURL == nil && viewModel.pendingURL == nil {

@@ -134,6 +134,9 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
     /// Whether the keepalive has been stopped because AVPlayer is producing audio.
     private var keepaliveStoppedForPlayback: Bool = false
 
+    /// Whether WebView mode was auto-entered on background (should auto-exit on foreground).
+    private var autoEnteredWebViewMode: Bool = false
+
     /// Work item for delayed keepalive stop (allows cancellation if rate drops).
     private var keepaliveStopWorkItem: DispatchWorkItem?
 
@@ -725,16 +728,47 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
     /// Handles app entering background by maintaining the audio session for existing playback.
     private func handleEnterBackground() {
         log.info("handleEnterBackground: isPlaying=\(self.isPlaying), player=\(self.player != nil), webViewMode=\(self.isWebViewMode)")
-        guard isPlaying || player != nil || isWebViewMode else { return }
+
+        // Path 1: Explicit AVPlayer or WebView mode already active
+        if isPlaying || player != nil || isWebViewMode {
+            beginBackgroundTaskForTransition()
+            try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+            if silentPlayer == nil && (player != nil || isWebViewMode) {
+                log.info("handleEnterBackground: starting keepalive")
+                keepaliveStoppedForPlayback = false
+                startSilentKeepAlive()
+            }
+            return
+        }
+
+        // Path 2: Auto-detect WKWebView media (e.g., YouTube video playing in-browser)
+        guard let webView = webViewReference, webView.url != nil else { return }
 
         beginBackgroundTaskForTransition()
-        try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
 
-        // Ensure keepalive is running for both AVPlayer buffering and WebView blob mode
-        if silentPlayer == nil && (player != nil || isWebViewMode) {
-            log.info("handleEnterBackground: starting keepalive")
-            keepaliveStoppedForPlayback = false
-            startSilentKeepAlive()
+        let mediaCheckJS = """
+        (function() {
+            var videos = document.querySelectorAll('video');
+            var audios = document.querySelectorAll('audio');
+            for (var i = 0; i < videos.length; i++) { if (!videos[i].paused) return true; }
+            for (var i = 0; i < audios.length; i++) { if (!audios[i].paused) return true; }
+            return false;
+        })()
+        """
+
+        webView.evaluateJavaScript(mediaCheckJS) { [weak self] result, _ in
+            Task { @MainActor in
+                guard let self else { return }
+                guard let hasMedia = result as? Bool, hasMedia else {
+                    self.endBackgroundTaskIfNeeded()
+                    return
+                }
+                self.log.info("handleEnterBackground: auto-detected media playback in WKWebView")
+                self.autoEnteredWebViewMode = true
+                self.startWebViewMode(webView: webView, title: webView.title ?? "Media", pageURL: webView.url)
+                try? AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+                self.startSilentKeepAlive()
+            }
         }
     }
 
@@ -748,6 +782,14 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
         if isWebViewMode && silentPlayer != nil {
             log.info("handleEnterForeground: stopping keepalive (WebView mode, no longer needed)")
             stopSilentKeepAlive()
+        }
+
+        // Auto-exit WebView mode if it was auto-entered on background
+        if autoEnteredWebViewMode {
+            log.info("handleEnterForeground: auto-exiting WebView mode")
+            stopWebViewMode()
+            autoEnteredWebViewMode = false
+            nowPlayingManager.clearNowPlaying()
         }
     }
 
