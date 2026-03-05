@@ -1,7 +1,7 @@
-# Velo Browser — App Store Metadata
+# VelGo — App Store Metadata
 
 ## App Name
-Velo Browser
+VelGo
 
 ## Subtitle (max 30 chars)
 Fast, Private & Ad-Free
@@ -14,29 +14,29 @@ Fast, Private & Ad-Free
 4+
 
 ## Keywords (max 100 chars, comma-separated)
-browser,ad blocker,private,fast,background audio,pip,video,download,tabs,secure
+browser,ad blocker,private,fast,background audio,pip,tabs,secure,reader,privacy,podcasts,offline
 
 ## Description (App Store — max 4000 chars)
 
-Velo Browser is a fast, private, and ad-free web browser built exclusively for iPhone and iPad. Browse the web the way it was meant to be — clean, fast, and free of distractions.
+VelGo is a fast, private, and ad-free web browser built exclusively for iPhone and iPad. Browse the web the way it was meant to be — clean, fast, and free of distractions.
 
 **⚡ Lightning-Fast Browsing**
-Built on Apple's native WebKit engine, Velo Browser delivers instant page loads and smooth scrolling. A minimal, Safari-inspired interface keeps the focus on your content with a collapsible address bar and intuitive gesture navigation.
+Built on Apple's native WebKit engine, VelGo delivers instant page loads and smooth scrolling. A minimal, Safari-inspired interface keeps the focus on your content with a collapsible address bar and intuitive gesture navigation.
 
 **🛡️ Built-In Ad Blocker**
-Say goodbye to intrusive ads, pop-ups, and trackers. Velo Browser's powerful ad blocker removes over 60 categories of ad networks and tracking scripts at the network level, plus cosmetic filtering hides remaining ad containers. See exactly how many ads were blocked on every page with the shield counter. Whitelist your favorite sites with a single tap.
+Say goodbye to intrusive ads, pop-ups, and trackers. VelGo's powerful ad blocker removes over 60 categories of ad networks and tracking scripts at the network level, plus cosmetic filtering hides remaining ad containers. See exactly how many ads were blocked on every page with the shield counter. Whitelist your favorite sites with a single tap.
 
 **🎵 Background Audio Playback**
-Keep listening to music, podcasts, and videos even when you switch apps or lock your screen. Velo Browser extracts media from web pages and continues playback in the background with full lock screen controls — play, pause, skip, and scrub right from your Lock Screen or Control Center.
+Keep listening to music and podcasts even when you switch apps or lock your screen. VelGo extracts media from web pages and continues playback in the background with full lock screen controls — play, pause, skip, and scrub right from your Lock Screen or Control Center.
 
 **📺 Picture-in-Picture (PiP)**
-Watch videos in a floating window while you multitask. Velo Browser supports native Picture-in-Picture so you can keep watching while checking email, messaging, or browsing other tabs.
+Watch content in a floating window while you multitask. VelGo supports native Picture-in-Picture so you can keep watching while checking email, messaging, or browsing other tabs.
 
 **🔒 Private Browsing**
 Browse without leaving a trace. Private tabs use a completely isolated data store — no history, no cookies, no cache is saved. A clear purple indicator shows when you're in private mode.
 
-**📥 File Downloads**
-Download any file from the web directly to your device. Track download progress in real time, and access your files through the iOS Files app. Long-press any link for quick download options.
+**📥 Save Files**
+Save any file from the web directly to your device. Track progress in real time, and access your files through the iOS Files app. Long-press any link for quick save options.
 
 **📑 Smart Tab Management**
 Manage up to 100 tabs with a beautiful grid-based tab switcher. Swipe to close, tap to switch, and keep your normal and private tabs organized in separate sections.
@@ -54,7 +54,7 @@ Save your favorite pages and find them instantly with search. Your browsing hist
 • 100% free, no subscriptions
 
 **Privacy First**
-Velo Browser collects zero data. No analytics, no tracking, no telemetry. Your browsing data stays on your device, period.
+VelGo collects zero data. No analytics, no tracking, no telemetry. Your browsing data stays on your device, period.
 
 ---
 
@@ -68,16 +68,16 @@ https://velobrowser.app/support
 https://velobrowser.app
 
 ## Copyright
-© 2025 Velo Browser. All rights reserved.
+© 2025 VelGo. All rights reserved.
 
 ## What's New (Version 1.0.0)
-Initial release of Velo Browser — fast, private, and ad-free browsing for iOS.
+Initial release of VelGo — fast, private, and ad-free browsing for iOS.
 
 - Built-in ad blocker with 60+ filter rules
 - Background audio playback with lock screen controls
-- Picture-in-Picture video support
+- Picture-in-Picture support
 - Private browsing with isolated data store
-- File download manager
+- File manager
 - Tab management (up to 100 tabs)
 - Bookmarks and browsing history
 - Multiple search engine support
@@ -101,19 +101,19 @@ Initial release of Velo Browser — fast, private, and ad-free browsing for iOS.
 ## Localized Keywords
 
 ### English (en) — 100 chars max
-browser,ad blocker,private,fast,background audio,pip,video,download,tabs,secure,reader,privacy
+browser,ad blocker,private,fast,background audio,pip,tabs,secure,reader,privacy,podcasts,offline
 
 ### Vietnamese (vi)
-trình duyệt,chặn quảng cáo,riêng tư,nhanh,phát nền,tải xuống,tab,bảo mật,đọc,quyền riêng tư
+trình duyệt,chặn quảng cáo,riêng tư,nhanh,phát nền,tab,bảo mật,đọc,quyền riêng tư,podcast,ngoại tuyến
 
 ### Japanese (ja)
-ブラウザ,広告ブロック,プライベート,高速,バックグラウンド再生,ダウンロード,タブ,セキュリティ,リーダー
+ブラウザ,広告ブロック,プライベート,高速,バックグラウンド再生,タブ,セキュリティ,リーダー,ポッドキャスト
 
 ### Korean (ko)
-브라우저,광고차단,프라이버시,빠른,백그라운드재생,다운로드,탭,보안,읽기모드,개인정보
+브라우저,광고차단,프라이버시,빠른,백그라운드재생,탭,보안,읽기모드,개인정보,팟캐스트
 
 ### Chinese Simplified (zh-Hans)
-浏览器,广告拦截,隐私,快速,后台播放,下载,标签页,安全,阅读模式,隐私保护
+浏览器,广告拦截,隐私,快速,后台播放,标签页,安全,阅读模式,隐私保护,播客
 
 ### Spanish (es)
-navegador,bloqueador anuncios,privado,rápido,audio fondo,descargas,pestañas,seguro,lector,privacidad
+navegador,bloqueador anuncios,privado,rápido,audio fondo,pestañas,seguro,lector,privacidad,podcast

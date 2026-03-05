@@ -67,7 +67,7 @@ struct FavoritesGridWidgetView: View {
             Text("No Favorites")
                 .font(.caption)
                 .foregroundStyle(.secondary)
-            Text("Add bookmarks in Velo Browser")
+            Text("Add bookmarks in VelGo")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
         }

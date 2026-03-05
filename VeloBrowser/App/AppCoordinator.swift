@@ -229,7 +229,6 @@ struct AppCoordinatorView: View {
                 onShowTabSwitcher: {
                     HapticManager.light()
                     // Capture snapshot of the active tab before showing switcher
-                    // (inactive tabs already have snapshots from when they were switched away)
                     container.tabManager.captureSnapshot(for: activeTab.id)
                     // Small delay for snapshot completion before showing sheet
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
@@ -238,9 +237,6 @@ struct AppCoordinatorView: View {
                 },
                 tabCount: container.tabManager.tabCount
             )
-            // Key by tab ID so SwiftUI creates a fresh view for each tab,
-            // preventing the old tab's WebView from flashing during switch.
-            .id(activeTab.id)
             .navigationBarHidden(true)
         } else {
             ProgressView()

@@ -66,6 +66,19 @@ final class TabManager: TabManagerProtocol {
     /// Tab page snapshots keyed by tab ID.
     private(set) var snapshots: [UUID: UIImage] = [:]
 
+    /// Pooled WKWebView instances keyed by tab ID, surviving tab switches.
+    private(set) var webViews: [UUID: WKWebView] = [:]
+
+    /// Stores a WKWebView in the pool for a given tab.
+    func setWebView(_ webView: WKWebView, for tabID: UUID) {
+        webViews[tabID] = webView
+    }
+
+    /// Returns the pooled WKWebView for a tab, if any.
+    func webView(for tabID: UUID) -> WKWebView? {
+        webViews[tabID]
+    }
+
     /// The view model for the active tab.
     var activeViewModel: BrowserViewModel? {
         guard let tab = activeTab else { return nil }
@@ -78,6 +91,12 @@ final class TabManager: TabManagerProtocol {
     // MARK: - Dependencies
 
     private let historyRepository: HistoryRepositoryProtocol
+
+    /// Debounced autosave task — saves 2 seconds after last change.
+    private var autoSaveTask: Task<Void, Never>?
+
+    /// Maximum number of pooled WKWebViews before LRU eviction.
+    private static let maxPooledWebViews = 8
 
     // MARK: - Init
 
@@ -127,6 +146,42 @@ final class TabManager: TabManagerProtocol {
         }
     }
 
+    /// Schedules a debounced save — 2 seconds after the last change.
+    private func scheduleSave() {
+        autoSaveTask?.cancel()
+        autoSaveTask = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            guard !Task.isCancelled else { return }
+            self?.saveTabs()
+        }
+    }
+
+    /// Evicts least-recently-accessed WKWebViews when pool exceeds limit.
+    private func evictWebViewsIfNeeded() {
+        guard webViews.count > Self.maxPooledWebViews else { return }
+        let activeID = activeTab?.id
+        // Sort tabs by lastAccessedAt ascending (oldest first), skip active
+        let evictCandidates = tabs
+            .filter { $0.id != activeID && webViews[$0.id] != nil }
+            .sorted { $0.lastAccessedAt < $1.lastAccessedAt }
+        let toEvict = evictCandidates.prefix(webViews.count - Self.maxPooledWebViews)
+        for tab in toEvict {
+            if let webView = webViews.removeValue(forKey: tab.id) {
+                webView.loadHTMLString("", baseURL: nil)
+            }
+        }
+    }
+
+    /// Releases all non-active pooled WKWebViews (called on memory warning).
+    func releaseInactiveWebViews() {
+        let activeID = activeTab?.id
+        for (id, _) in webViews where id != activeID {
+            if let webView = webViews.removeValue(forKey: id) {
+                webView.loadHTMLString("", baseURL: nil)
+            }
+        }
+    }
+
     /// Restores previously saved tabs from UserDefaults.
     ///
     /// - Returns: `true` if tabs were successfully restored.
@@ -136,12 +191,10 @@ final class TabManager: TabManagerProtocol {
             return false
         }
 
-        // Clear storage after reading to avoid stale state
-        UserDefaults.standard.removeObject(forKey: Self.tabsStorageKey)
-
         guard let persisted = try? JSONDecoder().decode([PersistedTab].self, from: data),
               !persisted.isEmpty else {
             os_log(.error, "Failed to decode persisted tabs — starting fresh")
+            UserDefaults.standard.removeObject(forKey: Self.tabsStorageKey)
             return false
         }
 
@@ -184,6 +237,16 @@ final class TabManager: TabManagerProtocol {
             tabs[tabs.count - 1].isActive = true
         }
 
+        // Restore persisted snapshots from disk
+        if restoredAny {
+            for tab in tabs {
+                if let image = Self.loadSnapshot(for: tab.id) {
+                    snapshots[tab.id] = image
+                }
+            }
+            cleanOrphanedSnapshots()
+        }
+
         return restoredAny
     }
 
@@ -207,6 +270,7 @@ final class TabManager: TabManagerProtocol {
         if let faviconURL {
             tabs[index].faviconURL = faviconURL
         }
+        scheduleSave()
     }
 
     /// Resets a tab to the home/new-tab state.
@@ -268,6 +332,7 @@ final class TabManager: TabManagerProtocol {
         }
         viewModels[tab.id] = vm
 
+        scheduleSave()
         return tab
     }
 
@@ -284,6 +349,8 @@ final class TabManager: TabManagerProtocol {
         tabs.remove(at: index)
         viewModels.removeValue(forKey: id)
         snapshots.removeValue(forKey: id)
+        webViews.removeValue(forKey: id)
+        removePersistedSnapshot(for: id)
 
         if tabs.isEmpty {
             // Always keep at least one tab
@@ -297,6 +364,7 @@ final class TabManager: TabManagerProtocol {
             tabs[newIndex].isActive = true
             tabs[newIndex].lastAccessedAt = .now
         }
+        scheduleSave()
     }
 
     /// Captures a snapshot of the current tab's web view.
@@ -305,8 +373,74 @@ final class TabManager: TabManagerProtocol {
         let config = WKSnapshotConfiguration()
         webView.takeSnapshot(with: config) { [weak self] image, _ in
             Task { @MainActor in
-                if let image {
-                    self?.snapshots[tabID] = image
+                guard let self, let image else { return }
+                self.snapshots[tabID] = image
+                // Move heavy I/O (opaque render + JPEG encode + disk write) off main thread
+                Task.detached(priority: .utility) {
+                    let opaqueImage = Self.opaqueImage(from: image)
+                    guard let data = opaqueImage.jpegData(compressionQuality: 0.5) else { return }
+                    let dir = Self.snapshotDirectory
+                    let fileURL = dir.appendingPathComponent("\(tabID.uuidString).jpg")
+                    try? data.write(to: fileURL)
+                    // Update in-memory snapshot with opaque version on main
+                    await MainActor.run { [weak self] in
+                        guard let self, self.tabs.contains(where: { $0.id == tabID }) else { return }
+                        self.snapshots[tabID] = opaqueImage
+                    }
+                }
+            }
+        }
+    }
+
+    /// Re-draws an image into an opaque (no alpha) bitmap context.
+    /// Thread-safe — uses its own renderer per call.
+    nonisolated private static func opaqueImage(from source: UIImage) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.opaque = true
+        format.scale = source.scale
+        let renderer = UIGraphicsImageRenderer(size: source.size, format: format)
+        return renderer.image { ctx in
+            source.draw(at: .zero)
+        }
+    }
+
+    // MARK: - Snapshot Persistence
+
+    /// Directory for persisted tab snapshots.
+    nonisolated private static var snapshotDirectory: URL {
+        let caches = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let dir = caches.appendingPathComponent("TabSnapshots", isDirectory: true)
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        return dir
+    }
+
+    /// Loads a persisted snapshot from disk (called from background).
+    nonisolated private static func loadSnapshot(for tabID: UUID) -> UIImage? {
+        let fileURL = snapshotDirectory.appendingPathComponent("\(tabID.uuidString).jpg")
+        guard let data = try? Data(contentsOf: fileURL) else { return nil }
+        return UIImage(data: data)
+    }
+
+    /// Removes a persisted snapshot from disk.
+    private func removePersistedSnapshot(for tabID: UUID) {
+        let id = tabID.uuidString
+        Task.detached(priority: .utility) {
+            let fileURL = Self.snapshotDirectory.appendingPathComponent("\(id).jpg")
+            try? FileManager.default.removeItem(at: fileURL)
+        }
+    }
+
+    /// Cleans up orphaned snapshot files that don't correspond to any open tab.
+    private func cleanOrphanedSnapshots() {
+        let tabIDs = Set(tabs.map { $0.id.uuidString })
+        Task.detached(priority: .utility) {
+            guard let files = try? FileManager.default.contentsOfDirectory(
+                at: Self.snapshotDirectory, includingPropertiesForKeys: nil
+            ) else { return }
+            for file in files {
+                let name = file.deletingPathExtension().lastPathComponent
+                if !tabIDs.contains(name) {
+                    try? FileManager.default.removeItem(at: file)
                 }
             }
         }
@@ -330,6 +464,8 @@ final class TabManager: TabManagerProtocol {
                 tabs[index].lastAccessedAt = .now
             }
         }
+        evictWebViewsIfNeeded()
+        scheduleSave()
     }
 
     /// Reorders tabs via drag-and-drop.
@@ -339,6 +475,7 @@ final class TabManager: TabManagerProtocol {
     ///   - destination: Destination index.
     func moveTab(from source: IndexSet, to destination: Int) {
         tabs.move(fromOffsets: source, toOffset: destination)
+        scheduleSave()
     }
 
     /// Closes all tabs, or only private ones.
@@ -351,8 +488,12 @@ final class TabManager: TabManagerProtocol {
                 closeTab(id: id)
             }
         } else {
+            let allIDs = tabs.map(\.id)
             tabs.removeAll()
             viewModels.removeAll()
+            snapshots.removeAll()
+            webViews.removeAll()
+            for id in allIDs { removePersistedSnapshot(for: id) }
             createTab(url: nil, isPrivate: false)
         }
     }

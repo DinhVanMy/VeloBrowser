@@ -55,6 +55,9 @@ final class BrowserViewModel {
     /// Whether reader mode is currently shown.
     var showReaderMode: Bool = false
 
+    /// Whether reader content is currently being extracted.
+    var isExtractingReaderContent: Bool = false
+
     /// The extracted reader content (populated when reader mode activates).
     var readerContent: ReaderContent?
 
@@ -88,6 +91,12 @@ final class BrowserViewModel {
     /// Incremented to signal go-forward command.
     var goForwardToken: Int = 0
 
+    /// Active reader extraction task (cancelled on re-toggle or tab switch).
+    nonisolated(unsafe) private var readerExtractionTask: Task<Void, Never>?
+
+    /// Active readability check task (cancelled on new page load).
+    nonisolated(unsafe) private var readabilityCheckTask: Task<Void, Never>?
+
     // MARK: - Dependencies
 
     private let historyRepository: HistoryRepositoryProtocol
@@ -112,6 +121,11 @@ final class BrowserViewModel {
         self.historyRepository = historyRepository
         self.searchEngineTemplate = searchEngineTemplate
         self.isPrivate = isPrivate
+    }
+
+    deinit {
+        readerExtractionTask?.cancel()
+        readabilityCheckTask?.cancel()
     }
 
     // MARK: - Actions
@@ -178,12 +192,24 @@ final class BrowserViewModel {
         if showReaderMode {
             showReaderMode = false
             readerContent = nil
+            readerExtractionTask?.cancel()
+            readerExtractionTask = nil
         } else {
             guard let webView else { return }
-            Task {
-                if let content = await readerService.extractContent(from: webView) {
+            readerExtractionTask?.cancel()
+            isExtractingReaderContent = true
+            readerExtractionTask = Task {
+                let content = await readerService.extractContent(from: webView)
+                guard !Task.isCancelled else {
+                    isExtractingReaderContent = false
+                    return
+                }
+                isExtractingReaderContent = false
+                if let content {
                     readerContent = content
                     showReaderMode = true
+                } else {
+                    errorMessage = "Could not extract article content."
                 }
             }
         }
@@ -205,8 +231,11 @@ final class BrowserViewModel {
             isPageReadable = false
             return
         }
-        Task {
-            isPageReadable = await readerService.isReadable(from: webView)
+        readabilityCheckTask?.cancel()
+        readabilityCheckTask = Task {
+            let readable = await readerService.isReadable(from: webView)
+            guard !Task.isCancelled else { return }
+            isPageReadable = readable
         }
     }
 
@@ -263,9 +292,15 @@ final class BrowserViewModel {
         }
     }
 
-    /// Ensures toolbar is visible (e.g., on tap).
+    /// Timestamp of last toolbar show to debounce rapid taps.
+    private var lastToolbarShowTime: Date = .distantPast
+
+    /// Ensures toolbar is visible (e.g., on tap). Debounced to 0.3s.
     func showToolbar() {
         guard !isToolbarVisible else { return }
+        let now = Date()
+        guard now.timeIntervalSince(lastToolbarShowTime) > 0.3 else { return }
+        lastToolbarShowTime = now
         withAnimation(.easeOut(duration: DesignSystem.AnimationDuration.fast)) {
             isToolbarVisible = true
         }

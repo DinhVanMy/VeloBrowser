@@ -35,7 +35,7 @@ struct LockScreenView: View {
                 VeloLogoView(size: 80)
                     .padding(.bottom, DesignSystem.Spacing.md)
 
-                Text("Velo Browser")
+                Text("VelGo")
                     .font(.title.bold())
                     .foregroundStyle(.white)
 

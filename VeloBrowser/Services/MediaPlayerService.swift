@@ -451,7 +451,7 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
     private func configureAudioSession() {
         do {
             let session = AVAudioSession.sharedInstance()
-            try session.setCategory(.playback, mode: .default, options: [])
+            try session.setCategory(.playback, mode: .default, options: [.duckOthers])
             try session.setActive(true)
         } catch {
             // Audio session configuration failed — playback may not work in background
@@ -591,8 +591,9 @@ final class MediaPlayerService: MediaPlayerServiceProtocol {
 
     /// Removes all KVO and time observers.
     private func removeObservers() {
-        if let observer = timeObserver, let player {
-            player.removeTimeObserver(observer)
+        if let observer = timeObserver {
+            // Guard: player may already be nil during stop() cleanup
+            player?.removeTimeObserver(observer)
         }
         timeObserver = nil
         statusObservation?.invalidate()

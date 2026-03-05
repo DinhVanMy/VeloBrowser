@@ -13,6 +13,7 @@ struct TabSwitcherView: View {
     @Bindable var tabManager: TabManager
     @Environment(\.dismiss) private var dismiss
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(DIContainer.self) private var container
 
     /// Whether showing private tabs.
     @State private var showingPrivateTabs = false
@@ -43,6 +44,7 @@ struct TabSwitcherView: View {
                                 tab: tab,
                                 isActive: tab.isActive,
                                 snapshot: tabManager.snapshots[tab.id],
+                                groupColor: container.tabGroupManager.group(for: tab.id)?.color,
                                 onSelect: {
                                     tabManager.switchToTab(id: tab.id)
                                     dismiss()
@@ -117,6 +119,7 @@ struct TabThumbnailView: View {
     let tab: Tab
     let isActive: Bool
     let snapshot: UIImage?
+    var groupColor: Color?
     let onSelect: () -> Void
     let onClose: () -> Void
 
@@ -149,6 +152,13 @@ struct TabThumbnailView: View {
                             .foregroundStyle(DesignSystem.Colors.textSecondary)
                     }
 
+                    // Tab group color dot
+                    if let groupColor {
+                        Circle()
+                            .fill(groupColor)
+                            .frame(width: 8, height: 8)
+                    }
+
                     Text(tab.title)
                         .font(DesignSystem.Typography.caption)
                         .foregroundStyle(DesignSystem.Colors.textPrimary)
@@ -179,11 +189,26 @@ struct TabThumbnailView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(height: 160)
                             .clipped()
+                            .transition(.opacity)
                     } else if let url = tab.url {
                         VStack(spacing: DesignSystem.Spacing.sm) {
-                            Image(systemName: "globe")
-                                .font(.title)
-                                .foregroundStyle(DesignSystem.Colors.textTertiary)
+                            // Favicon or loading indicator
+                            if let faviconURL = tab.faviconURL {
+                                AsyncImage(url: faviconURL) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 32, height: 32)
+                                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                                } placeholder: {
+                                    ProgressView()
+                                        .controlSize(.small)
+                                }
+                            } else {
+                                Image(systemName: "globe")
+                                    .font(.title)
+                                    .foregroundStyle(DesignSystem.Colors.textTertiary)
+                            }
                             Text(url.host() ?? url.absoluteString)
                                 .font(DesignSystem.Typography.caption2)
                                 .foregroundStyle(DesignSystem.Colors.textTertiary)

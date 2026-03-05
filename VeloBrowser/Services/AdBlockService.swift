@@ -163,11 +163,25 @@ final class AdBlockService: AdBlockServiceProtocol {
 
     /// Generates WebKit content blocker JSON rules.
     ///
-    /// These rules block common ad network URLs, tracking scripts,
-    /// third-party ad frames, and YouTube-specific ad content.
-    /// The format follows WebKit's Content Blocker specification.
+    /// Loads rules from the bundled adblock-rules.json file which contains
+    /// 200+ rules covering major ad networks, trackers, analytics, and
+    /// social media pixels. Falls back to a minimal set if the file is missing.
     private static func generateBlockingRules() -> String {
-        let rules = adNetworkRules + trackerRules + scriptAndPixelRules
+        // Try loading from bundled JSON first
+        if let url = Bundle.main.url(forResource: "adblock-rules", withExtension: "json"),
+           let data = try? Data(contentsOf: url),
+           let json = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] {
+            // Re-serialize to ensure valid JSON string
+            if let serialized = try? JSONSerialization.data(withJSONObject: json),
+               let str = String(data: serialized, encoding: .utf8) {
+                os_log(.info, "Loaded %d ad block rules from bundle", json.count)
+                return str
+            }
+        }
+
+        // Fallback to hardcoded rules
+        os_log(.error, "Failed to load bundled ad block rules, using fallback")
+        let rules = fallbackRules
         guard let data = try? JSONSerialization.data(withJSONObject: rules),
               let json = String(data: data, encoding: .utf8) else {
             return "[]"
@@ -175,87 +189,20 @@ final class AdBlockService: AdBlockServiceProtocol {
         return json
     }
 
-    /// Ad network and YouTube ad blocking rules.
-    private static var adNetworkRules: [[String: Any]] {
+    /// Minimal fallback rules if bundled JSON fails to load.
+    private static var fallbackRules: [[String: Any]] {
         [
             blockRule(".*\\.doubleclick\\.net"),
             blockRule(".*\\.googlesyndication\\.com"),
             blockRule(".*\\.googleadservices\\.com"),
             blockRule(".*\\.google-analytics\\.com"),
             blockRule(".*\\.adnxs\\.com"),
-            blockRule(".*\\.adsrvr\\.org"),
-            blockRule(".*\\.amazon-adsystem\\.com"),
-            blockRule(".*\\.moatads\\.com"),
-            blockRule(".*\\.rubiconproject\\.com"),
             blockRule(".*\\.criteo\\.com"),
             blockRule(".*\\.outbrain\\.com"),
             blockRule(".*\\.taboola\\.com"),
-            blockRule(".*\\.pubmatic\\.com"),
-            blockRule(".*\\.openx\\.net"),
-            blockRule(".*\\.casalemedia\\.com"),
-            blockRule(".*\\.indexexchange\\.com"),
-            blockRule(".*\\.bidswitch\\.net"),
-            blockRule(".*\\.smartadserver\\.com"),
-            blockRule(".*\\.adform\\.net"),
-            blockRule(".*\\.33across\\.com"),
-            blockRule(".*\\.sharethrough\\.com"),
-            blockRule(".*\\.triplelift\\.com"),
-            blockRule(".*\\.media\\.net"),
-            blockRule(".*\\.revcontent\\.com"),
-            blockRule(".*\\.mgid\\.com"),
-            blockRule(".*\\.zergnet\\.com"),
-            blockRule(".*\\.adblade\\.com"),
-            blockRule(".*\\.adcolony\\.com"),
-            blockRule(".*\\.inmobi\\.com"),
-            blockRule(".*\\.unityads\\.unity3d\\.com"),
-            blockRule(".*\\.chartboost\\.com"),
+            blockRule(".*\\.facebook\\.com/tr"),
             blockRule(".*\\.youtube\\.com/api/stats/ads"),
             blockRule(".*\\.youtube\\.com/pagead"),
-            blockRule(".*\\.youtube\\.com/ptracking"),
-            blockRule(".*\\.youtube\\.com/get_midroll"),
-            blockRule(".*googlevideo\\.com/videoplayback.*ctier=L"),
-            blockRule(".*\\.youtube\\.com/api/stats/qoe.*ads"),
-        ]
-    }
-
-    /// Tracker blocking rules.
-    private static var trackerRules: [[String: Any]] {
-        [
-            blockRule(".*\\.facebook\\.com/tr"),
-            blockRule(".*\\.scorecardresearch\\.com"),
-            blockRule(".*\\.quantserve\\.com"),
-            blockRule(".*\\.segment\\.io"),
-            blockRule(".*\\.segment\\.com"),
-            blockRule(".*\\.hotjar\\.com"),
-            blockRule(".*\\.mixpanel\\.com"),
-            blockRule(".*\\.amplitude\\.com"),
-            blockRule(".*\\.optimizely\\.com"),
-            blockRule(".*\\.crazyegg\\.com"),
-            blockRule(".*\\.newrelic\\.com.*bam"),
-            blockRule(".*\\.doubleclick\\.com"),
-            blockRule(".*\\.adsafeprotected\\.com"),
-            blockRule(".*\\.demdex\\.net"),
-            blockRule(".*\\.omtrdc\\.net"),
-            blockRule(".*\\.everesttech\\.net"),
-        ]
-    }
-
-    /// Ad script and tracking pixel blocking rules.
-    private static var scriptAndPixelRules: [[String: Any]] {
-        [
-            blockRule(".*/ads\\.js"),
-            blockRule(".*/ad[s]?[_-]?banner"),
-            blockRule(".*/prebid"),
-            blockRule(".*/gpt\\.js"),
-            blockRule(".*/adsbygoogle\\.js"),
-            [
-                "trigger": [
-                    "url-filter": ".*",
-                    "resource-type": ["image"],
-                    "if-domain": ["*tracking*", "*pixel*", "*beacon*"]
-                ] as [String: Any],
-                "action": ["type": "block"]
-            ]
         ]
     }
 

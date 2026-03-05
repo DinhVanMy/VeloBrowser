@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-/// The Velo Browser brand logo — displays the app icon image asset.
+/// The Velo brand logo — displays the app icon image asset.
 ///
 /// Falls back to a gradient circle with "V" if the image asset is unavailable.
 struct VeloLogoView: View {

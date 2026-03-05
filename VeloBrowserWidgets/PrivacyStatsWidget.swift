@@ -124,7 +124,7 @@ struct PrivacyStatsWidget: Widget {
             PrivacyStatsWidgetView(entry: entry)
         }
         .configurationDisplayName("Privacy Stats")
-        .description("See how many ads and trackers Velo Browser has blocked.")
+        .description("See how many ads and trackers VelGo has blocked.")
         .supportedFamilies([.systemSmall])
     }
 }

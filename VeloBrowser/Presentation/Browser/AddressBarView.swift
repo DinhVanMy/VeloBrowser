@@ -12,7 +12,9 @@ import SwiftUI
 /// Collapses when scrolling down (controlled by parent).
 struct AddressBarView: View {
     @Bindable var viewModel: BrowserViewModel
+    @Environment(DIContainer.self) private var container
     @FocusState private var isFocused: Bool
+    @AppStorage("searchEngine") private var searchEngine: String = SearchEngine.google.rawValue
 
     var body: some View {
         VStack(spacing: 0) {
@@ -129,8 +131,56 @@ struct AddressBarView: View {
                 .padding(.horizontal, DesignSystem.Spacing.md)
                 .transition(.opacity)
             }
+
+            // Search suggestions dropdown
+            if isFocused && !container.searchSuggestionService.suggestions.isEmpty {
+                ScrollView {
+                    VStack(spacing: 0) {
+                        ForEach(container.searchSuggestionService.suggestions, id: \.self) { suggestion in
+                            Button {
+                                viewModel.addressBarText = suggestion
+                                viewModel.submitAddressBar()
+                                container.searchSuggestionService.clear()
+                            } label: {
+                                HStack(spacing: DesignSystem.Spacing.sm) {
+                                    Image(systemName: "magnifyingglass")
+                                        .font(.caption)
+                                        .foregroundStyle(DesignSystem.Colors.textTertiary)
+                                    Text(suggestion)
+                                        .font(DesignSystem.Typography.body)
+                                        .foregroundStyle(DesignSystem.Colors.textPrimary)
+                                        .lineLimit(1)
+                                    Spacer()
+                                    // Fill-in button (appends to address bar without submitting)
+                                    Button {
+                                        viewModel.addressBarText = suggestion
+                                    } label: {
+                                        Image(systemName: "arrow.up.left")
+                                            .font(.caption)
+                                            .foregroundStyle(DesignSystem.Colors.textTertiary)
+                                    }
+                                }
+                                .padding(.horizontal, DesignSystem.Spacing.md)
+                                .padding(.vertical, DesignSystem.Spacing.sm)
+                            }
+                            .buttonStyle(.plain)
+
+                            if suggestion != container.searchSuggestionService.suggestions.last {
+                                Divider().padding(.leading, DesignSystem.Spacing.xl)
+                            }
+                        }
+                    }
+                }
+                .frame(maxHeight: 240)
+                .background(DesignSystem.Colors.backgroundPrimary)
+                .clipShape(RoundedRectangle(cornerRadius: DesignSystem.Radius.button))
+                .shadow(color: .black.opacity(0.1), radius: 4, y: 2)
+                .padding(.horizontal, DesignSystem.Spacing.md)
+                .transition(.opacity.combined(with: .move(edge: .top)))
+            }
         }
         .animation(.easeOut(duration: DesignSystem.AnimationDuration.fast), value: viewModel.isLoading)
+        .animation(.easeOut(duration: DesignSystem.AnimationDuration.fast), value: container.searchSuggestionService.suggestions)
         .draggable(viewModel.currentURL?.absoluteString ?? "") {
             // Drag preview: show domain
             Label(viewModel.displayDomain, systemImage: "link")
@@ -149,6 +199,14 @@ struct AddressBarView: View {
         }
         .onChange(of: isFocused) { _, newValue in
             viewModel.isAddressBarFocused = newValue
+            if !newValue {
+                container.searchSuggestionService.clear()
+            }
+        }
+        .onChange(of: viewModel.addressBarText) { _, newText in
+            if isFocused {
+                container.searchSuggestionService.fetchSuggestions(for: newText, engine: searchEngine)
+            }
         }
     }
 

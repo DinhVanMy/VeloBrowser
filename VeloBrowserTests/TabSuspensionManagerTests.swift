@@ -85,6 +85,7 @@ struct TabSuspensionManagerTests {
 
     @Test("handleMemoryWarning suspends all non-active tabs")
     func memoryWarning() {
+        UserDefaults.standard.removeObject(forKey: "persistedTabs")
         let container = DIContainer(inMemory: true)
         let tabManager = container.tabManager
         let manager = TabSuspensionManager(tabManager: tabManager)

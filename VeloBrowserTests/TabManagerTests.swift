@@ -10,7 +10,13 @@ import Foundation
 @MainActor
 @Suite("TabManager Tests")
 struct TabManagerTests {
-    let container = DIContainer(inMemory: true)
+    let container: DIContainer
+
+    init() {
+        // Clear persisted tabs to avoid cross-test contamination
+        UserDefaults.standard.removeObject(forKey: "persistedTabs")
+        container = DIContainer(inMemory: true)
+    }
 
     private var tabManager: TabManager { container.tabManager }
 

@@ -34,7 +34,7 @@ struct QuickSearchEntry: TimelineEntry {
 
 /// View for the Quick Search widget.
 ///
-/// Displays the Velo Browser icon and a "Search the web" prompt.
+/// Displays the Velo icon and a "Search the web" prompt.
 /// Tapping opens the app with the address bar focused.
 struct QuickSearchWidgetView: View {
     var entry: QuickSearchProvider.Entry
@@ -45,7 +45,7 @@ struct QuickSearchWidgetView: View {
                 .font(.system(size: 32, weight: .medium))
                 .foregroundStyle(.blue)
 
-            Text("Velo Browser")
+            Text("VelGo")
                 .font(.caption2)
                 .fontWeight(.semibold)
                 .foregroundStyle(.primary)
@@ -77,7 +77,7 @@ struct QuickSearchWidget: Widget {
             QuickSearchWidgetView(entry: entry)
         }
         .configurationDisplayName("Quick Search")
-        .description("Tap to search the web with Velo Browser.")
+        .description("Tap to search the web with VelGo.")
         .supportedFamilies([.systemSmall])
     }
 }

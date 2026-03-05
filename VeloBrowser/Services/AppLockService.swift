@@ -103,8 +103,8 @@ final class AppLockService: AppLockServiceProtocol {
         context.localizedCancelTitle = "Cancel"
 
         let reason = biometryType == .faceID
-            ? "Unlock Velo Browser with Face ID"
-            : "Unlock Velo Browser with Touch ID"
+            ? "Unlock VelGo with Face ID"
+            : "Unlock VelGo with Touch ID"
 
         do {
             let success = try await context.evaluatePolicy(

@@ -103,7 +103,34 @@ struct WebViewContainer: UIViewRepresentable {
     /// Callback invoked when fullscreen state changes.
     var onFullscreenChange: ((Bool) -> Void)?
 
+    /// An existing WKWebView to reuse (from the WebView pool). Avoids reload on tab switch.
+    var existingWebView: WKWebView?
+
     func makeUIView(context: Context) -> WKWebView {
+        // Reuse pooled webview if available (tab switch back)
+        if let existingWebView {
+            let controller = existingWebView.configuration.userContentController
+            // Remove old handlers (pointing to previous Coordinator) and re-add with new one
+            for name in ["adBlockCounter", "faviconDetected", "fullscreenChange"] {
+                controller.removeScriptMessageHandler(forName: name)
+            }
+            controller.add(context.coordinator, name: "adBlockCounter")
+            controller.add(context.coordinator, name: "faviconDetected")
+            controller.add(context.coordinator, name: "fullscreenChange")
+
+            existingWebView.navigationDelegate = context.coordinator
+            existingWebView.scrollView.delegate = context.coordinator
+            existingWebView.uiDelegate = context.coordinator
+
+            context.coordinator.webView = existingWebView
+            // Set lastLoadedURL to pendingURL so updateUIView won't trigger a spurious reload
+            context.coordinator.lastLoadedURL = url
+            context.coordinator.setupObservers()
+            onWebViewCreated?(existingWebView)
+            return existingWebView
+        }
+
+        // Create new webview
         let config = prepareConfiguration()
         injectUserScripts(into: config)
 
@@ -275,15 +302,15 @@ struct WebViewContainer: UIViewRepresentable {
         // Override visibility API so sites think the page is always visible
         Object.defineProperty(document, 'hidden', {
             get: function() { return false; },
-            configurable: true
+            configurable: false
         });
         Object.defineProperty(document, 'visibilityState', {
             get: function() { return 'visible'; },
-            configurable: true
+            configurable: false
         });
         Object.defineProperty(document, 'webkitHidden', {
             get: function() { return false; },
-            configurable: true
+            configurable: false
         });
 
         // Intercept and block visibilitychange events from reaching site scripts
@@ -294,16 +321,7 @@ struct WebViewContainer: UIViewRepresentable {
             e.stopImmediatePropagation();
         }, true);
 
-        // Also override the Page Visibility API on window for edge cases
-        window.addEventListener('blur', function(e) {
-            e.stopImmediatePropagation();
-        }, true);
-        window.addEventListener('focus', function(e) {
-            e.stopImmediatePropagation();
-        }, true);
-
         // Override hasFocus to always return true
-        var origHasFocus = document.hasFocus;
         document.hasFocus = function() { return true; };
     })();
     """
@@ -491,9 +509,10 @@ struct WebViewContainer: UIViewRepresentable {
                 return .cancel
             }
 
-            // Tracking parameter removal
+            // Tracking parameter removal — only redirect if URL actually changed
             if scheme == "http" || scheme == "https",
-               let cleaned = parent.cleanTrackingParams?(url) {
+               let cleaned = parent.cleanTrackingParams?(url),
+               cleaned.url != url {
                 Task { @MainActor in
                     webView.load(URLRequest(url: cleaned.url))
                 }
@@ -522,7 +541,13 @@ struct WebViewContainer: UIViewRepresentable {
         /// Without this handler, the crash propagates to the main app process.
         func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
             Task { @MainActor in
+                // Preserve current URL before reload for state restoration
+                let currentURL = webView.url
                 webView.reload()
+                // If reload fails (no back-forward list), load the saved URL
+                if webView.url == nil, let url = currentURL {
+                    webView.load(URLRequest(url: url))
+                }
             }
         }
 
@@ -643,6 +668,9 @@ struct WebViewContainer: UIViewRepresentable {
             progressObservation?.invalidate()
             canGoBackObservation?.invalidate()
             canGoForwardObservation?.invalidate()
+            // Don't remove script message handlers here — the WKWebView may be
+            // pooled for reuse. Handlers are re-wired in makeUIView on reuse,
+            // and released automatically when the WKWebView is deallocated.
         }
     }
 }

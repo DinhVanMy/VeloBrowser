@@ -37,10 +37,12 @@ struct SettingsView: View {
     let trackingProtectionService: TrackingProtectionServiceProtocol
     let fingerprintProtectionService: FingerprintProtectionServiceProtocol
     @Environment(\.dismiss) private var dismiss
+    @Environment(DIContainer.self) private var container
 
     @AppStorage("searchEngine") private var searchEngine: String = SearchEngine.google.rawValue
     @AppStorage("javaScriptEnabled") private var javaScriptEnabled: Bool = true
     @AppStorage("blockThirdPartyCookies") private var blockThirdPartyCookies: Bool = false
+    @AppStorage("appAppearance") private var appAppearance: String = "system"
 
     @State private var showClearDataAlert = false
     @State private var isClearing = false
@@ -50,7 +52,11 @@ struct SettingsView: View {
             generalSection
             performanceSection
             adBlockerSection
+            filterListSection
             privacySection
+            dnsSection
+            cookieAutoDeleteSection
+            gestureSection
             if DeviceHelper.isIPad {
                 iPadSection
             }
@@ -80,9 +86,35 @@ struct SettingsView: View {
             }
             .accessibilityLabel("Default search engine")
 
+            // Appearance picker
+            Picker("Appearance", selection: $appAppearance) {
+                Text("System").tag("system")
+                Text("Light").tag("light")
+                Text("Dark").tag("dark")
+            }
+            .accessibilityLabel("App appearance mode")
+
             // JavaScript toggle
             Toggle("JavaScript", isOn: $javaScriptEnabled)
                 .accessibilityLabel("Enable JavaScript")
+
+            // Default browser
+            Button {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            } label: {
+                HStack {
+                    Label("Default Browser", systemImage: "globe")
+                    Spacer()
+                    Text("Set in Settings")
+                        .font(DesignSystem.Typography.caption)
+                        .foregroundStyle(DesignSystem.Colors.textSecondary)
+                    Image(systemName: "arrow.up.forward.square")
+                        .font(.caption)
+                        .foregroundStyle(DesignSystem.Colors.textSecondary)
+                }
+            }
 
             // Storage & Cache
             NavigationLink {
@@ -249,6 +281,13 @@ struct SettingsView: View {
                 Label("Manage Cookies", systemImage: "list.bullet.rectangle")
             }
 
+            // Privacy Report
+            NavigationLink {
+                PrivacyReportView()
+            } label: {
+                Label("Privacy Report", systemImage: "chart.bar.xaxis")
+            }
+
             // Clear Browsing Data
             Button(role: .destructive) {
                 showClearDataAlert = true
@@ -312,6 +351,155 @@ struct SettingsView: View {
         }
     }
 
+    // MARK: - Custom Filter Lists
+
+    private var filterListSection: some View {
+        Section {
+            ForEach(container.filterListManager.lists) { list in
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(list.name)
+                        Text("\(list.ruleCount) rules")
+                            .font(DesignSystem.Typography.caption)
+                            .foregroundStyle(DesignSystem.Colors.textSecondary)
+                    }
+                    Spacer()
+                    Toggle("", isOn: Binding(
+                        get: { list.isEnabled },
+                        set: { _ in container.filterListManager.toggleList(id: list.id) }
+                    ))
+                    .labelsHidden()
+                }
+            }
+            .onDelete { indexSet in
+                let lists = container.filterListManager.lists
+                for i in indexSet {
+                    container.filterListManager.removeList(id: lists[i].id)
+                }
+            }
+
+            Menu {
+                ForEach(FilterListManager.popularLists, id: \.url) { preset in
+                    Button(preset.name) {
+                        if let url = URL(string: preset.url) {
+                            container.filterListManager.addList(name: preset.name, url: url)
+                            HapticManager.light()
+                        }
+                    }
+                }
+            } label: {
+                Label("Add Filter List", systemImage: "plus.circle")
+            }
+
+            if container.filterListManager.isUpdating {
+                HStack {
+                    ProgressView().controlSize(.small)
+                    Text("Updating…")
+                        .font(DesignSystem.Typography.caption)
+                        .foregroundStyle(DesignSystem.Colors.textSecondary)
+                }
+            }
+        } header: {
+            Label("Custom Filter Lists", systemImage: "line.3.horizontal.decrease.circle")
+        } footer: {
+            Text("Add third-party filter lists for extra ad/tracker blocking.")
+                .font(DesignSystem.Typography.caption)
+        }
+    }
+
+    // MARK: - DNS-over-HTTPS
+
+    private var dnsSection: some View {
+        Section {
+            Picker("DNS Provider", selection: Binding(
+                get: { container.dohService.provider },
+                set: { container.dohService.provider = $0 }
+            )) {
+                ForEach(DoHProvider.allCases) { provider in
+                    Text(provider.rawValue).tag(provider)
+                }
+            }
+
+            if container.dohService.provider != .disabled {
+                HStack {
+                    Text("Queries Resolved")
+                    Spacer()
+                    Text("\(container.dohService.totalResolved)")
+                        .foregroundStyle(DesignSystem.Colors.textSecondary)
+                }
+            }
+        } header: {
+            Label("DNS-over-HTTPS", systemImage: "network.badge.shield.half.filled")
+        } footer: {
+            Text("Encrypts DNS queries to prevent ISP snooping.")
+                .font(DesignSystem.Typography.caption)
+        }
+    }
+
+    // MARK: - Cookie Auto-Delete
+
+    private var cookieAutoDeleteSection: some View {
+        Section {
+            Toggle("Auto-Delete Cookies", isOn: Binding(
+                get: { container.cookieAutoDeleteService.isEnabled },
+                set: { container.cookieAutoDeleteService.isEnabled = $0 }
+            ))
+
+            if container.cookieAutoDeleteService.isEnabled {
+                Picker("Delete After", selection: Binding(
+                    get: { Int(container.cookieAutoDeleteService.deleteDelay) },
+                    set: { container.cookieAutoDeleteService.deleteDelay = TimeInterval($0) }
+                )) {
+                    Text("30 seconds").tag(30)
+                    Text("1 minute").tag(60)
+                    Text("5 minutes").tag(300)
+                    Text("15 minutes").tag(900)
+                }
+
+                NavigationLink {
+                    cookieWhitelistView
+                } label: {
+                    HStack {
+                        Text("Whitelisted Sites")
+                        Spacer()
+                        Text("\(container.cookieAutoDeleteService.whitelist.count)")
+                            .foregroundStyle(DesignSystem.Colors.textSecondary)
+                    }
+                }
+            }
+        } header: {
+            Label("Cookie Auto-Delete", systemImage: "trash.circle")
+        } footer: {
+            Text("Deletes cookies after leaving a site to prevent tracking.")
+                .font(DesignSystem.Typography.caption)
+        }
+    }
+
+    // MARK: - Gesture Shortcuts
+
+    private var gestureSection: some View {
+        Section {
+            Toggle("Shake to Clear Data", isOn: Binding(
+                get: { container.gestureShortcutService.shakeToClean },
+                set: { container.gestureShortcutService.shakeToClean = $0 }
+            ))
+            Toggle("Long-Press Back for History", isOn: Binding(
+                get: { container.gestureShortcutService.longPressBackForHistory },
+                set: { container.gestureShortcutService.longPressBackForHistory = $0 }
+            ))
+            Toggle("Pull Down to Search", isOn: Binding(
+                get: { container.gestureShortcutService.pullDownToSearch },
+                set: { container.gestureShortcutService.pullDownToSearch = $0 }
+            ))
+            Toggle("Double-Tap Select All", isOn: Binding(
+                get: { container.gestureShortcutService.doubleTapSelectAll },
+                set: { container.gestureShortcutService.doubleTapSelectAll = $0 }
+            ))
+        } header: {
+            Label("Gesture Shortcuts", systemImage: "hand.draw")
+        }
+    }
+
     // MARK: - Allowlist Subview
 
     private var allowlistView: some View {
@@ -333,6 +521,27 @@ struct SettingsView: View {
             }
         }
         .navigationTitle("Allowlisted Sites")
+    }
+
+    private var cookieWhitelistView: some View {
+        List {
+            if container.cookieAutoDeleteService.whitelist.isEmpty {
+                Text("No whitelisted sites")
+                    .foregroundStyle(DesignSystem.Colors.textTertiary)
+                    .font(DesignSystem.Typography.subheadline)
+            } else {
+                ForEach(Array(container.cookieAutoDeleteService.whitelist.sorted()), id: \.self) { domain in
+                    Text(domain)
+                }
+                .onDelete { indexSet in
+                    let sorted = container.cookieAutoDeleteService.whitelist.sorted()
+                    for index in indexSet {
+                        container.cookieAutoDeleteService.removeFromWhitelist(sorted[index])
+                    }
+                }
+            }
+        }
+        .navigationTitle("Cookie Whitelist")
     }
 
     // MARK: - Private

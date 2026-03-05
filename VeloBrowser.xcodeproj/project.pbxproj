@@ -3,96 +3,118 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0A008D6394D27A7E7D4E70C0 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B8B08D88CBAC11AC86697C /* Bookmark.swift */; };
+		0BD7E8CD23C7B527737D8D11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EF39994539446C107D03E2 /* Assets.xcassets */; };
+		0EC65507C09887EB8243979F /* VeloBrowserWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */; };
+		15FD366540BC45A3BED33699 /* CookieAutoDeleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AFA35956384406A5C966FB /* CookieAutoDeleteService.swift */; };
+		20086A5FA80BF655F2D9BFD4 /* VeloBrowserWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22A66E142F596BDF0076AAF8 /* VeloBrowserShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 22A66E0A2F596BDF0076AAF8 /* VeloBrowserShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		23D34CA1BF943EDA085E208C /* AddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51682E218C32EFC7863B0C0 /* AddressBarView.swift */; };
-		33F52EA7BBAE29867D31FFE9 /* NewTabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57CCD668609986C1E1B706C /* NewTabPageView.swift */; };
-		B8E6B75694DF1D26ABAAAE14 /* FindInPageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D5082F083188926383C0C /* FindInPageBar.swift */; };
+		24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */; };
+		2A5E2B3BB74A47849CD95A20 /* DarkReaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82114ED0EE04473592E06240 /* DarkReaderService.swift */; };
+		2E5C28B7C4564D82BF86DD40 /* PrivacyShieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A31F6EB356742DA8F207B57 /* PrivacyShieldView.swift */; };
 		3039531D7E7D0EE16F9EEE6B /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0351C6032DA49C53695D8D /* Tab.swift */; };
+		3079EEC36C86A1D9D44D8156 /* QuickSearchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */; };
+		33F52EA7BBAE29867D31FFE9 /* NewTabPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57CCD668609986C1E1B706C /* NewTabPageView.swift */; };
 		3451BBC5E842F39E64D189B3 /* MediaPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B031DAB4FC9CB26EE159C4 /* MediaPlayerService.swift */; };
+		3FD694990492F49052164757 /* ReadingListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */; };
 		430500C33B9F639F3D6A2C34 /* TabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2C7CBBD08C16C61CDF9A98 /* TabManager.swift */; };
 		4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F53760F7CD6555D3DEF9BA2 /* NetworkMonitor.swift */; };
 		45773CF9D5618629E86DDC71 /* DownloadRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D16A85CCB4BA04CAD7F378E /* DownloadRepositoryProtocol.swift */; };
+		4713F38100A038AD9696C315 /* AppLockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B10B4A2FCAB774284E973 /* AppLockService.swift */; };
+		4C45D7A9977F559EED46E319 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B8A44C882024F58925879F /* TabBarView.swift */; };
 		4C5F4511185F63D51D95817D /* HistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4E24555AA33466B4492376 /* HistoryEntry.swift */; };
+		4F0A0AF16CBC4128AA3B51BE /* FilterListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E626B759194810B1869177 /* FilterListManager.swift */; };
+		4F41B9BC542A9A94291CA3D6 /* FavoritesGridWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */; };
+		4QGX8SP6WWQHC2JY0OUIXLKH /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AGBXC8O3DFJYRMPG03AUZLCI /* TranslationService.swift */; };
 		5078F20075959319F3B03367 /* DownloadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122132FB187F1627F93D39C6 /* DownloadsView.swift */; };
 		51EEB5F63067C590C27A23B8 /* DownloadRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FA3A6707F4CB266EEC658 /* DownloadRepository.swift */; };
 		539AD0C6201C5FBA17C457B7 /* UserDefaultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4C923FEC18DCF21F8F1F3 /* UserDefaultsStore.swift */; };
 		54D6E2B528652E4EE505457C /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39115E179B2AE1780690687B /* NowPlayingView.swift */; };
+		58758D08B7614AC3AC9CFE48 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39381AF2EB34D4C9A0BD4CE /* Logger.swift */; };
 		59158E94CD67388A18D9F24A /* WebViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5753E18D949E901BAE7B204 /* WebViewContainer.swift */; };
 		5E2B4B4F6AD3B62BD1ACE2BC /* BookmarkRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEEB5C28B610DFB656ABD98 /* BookmarkRepositoryProtocol.swift */; };
+		5F680422E42C02C38E68341E /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */; };
 		61FCDF4ADF9485ABD36B21DC /* FirstLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC49F63F02D67505F3D593D1 /* FirstLaunchView.swift */; };
+		65A5727982C14C69A5EC0117 /* PageCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71506F3A7054462CBE1C9BC4 /* PageCaptureService.swift */; };
+		6FF1EC6D2241ED2CE5B761D1 /* BrowserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */; };
 		71C55FAB530E8FC3C808730B /* BrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D5CAA5C5A3F441926AC7E5 /* BrowserViewModel.swift */; };
+		73C3353C50E3318F5E18E041 /* ReadingListRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787DEFF6EEB8F9E805078DEF /* ReadingListRepositoryProtocol.swift */; };
+		76E75D7C34A5EE00798861D9 /* HTTPSUpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A30578E3C1479CDA30C2F /* HTTPSUpgradeService.swift */; };
+		7B4CE0547EA90C903E9A53CC /* PlatformLogos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95796A7183FBB2634B1A1208 /* PlatformLogos.swift */; };
+		7B4E60C121A6C49A646F66BD /* TabSuspensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179456FF36417004BB5DF235 /* TabSuspensionManager.swift */; };
+		81ABF6AC2BC2D216919FEA79 /* iPadLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */; };
+		8201BD2625C4755A3256084C /* CacheManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */; };
 		823F29975FE4F93F3F88FD5A /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E050D8D6456447838CD19A1 /* ShareSheet.swift */; };
 		8539813F15ED4044C288CE38 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87DB71B431DA1BE198E9CD4 /* AppCoordinator.swift */; };
+		87D72E95CC769C2A9BD76DF6 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */; };
+		884D2C6F5D1C0753F85AD015 /* SharedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */; };
 		88DF2D7FBAD70756F6881F18 /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B13C9BEDF0E7CA0D603694C /* BrowserView.swift */; };
 		8B3DFD9F6EE6B0271AC9EE70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D748B58AD8AF3709C24610 /* Assets.xcassets */; };
 		8D33D867629EDCC1826E6FC1 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41224F4BA1C865D982EC3DF5 /* ColorPalette.swift */; };
+		8D6F3B9D07914747B8F6F1BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7267DF417CD060CC52F641D3 /* LaunchScreen.storyboard */; };
+		92EB054F24D94743C9EBF769 /* SearchSuggestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D200EAB95E0442B2138E83 /* SearchSuggestionService.swift */; };
+		943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */; };
+		971FB4CEC6CA2AB9F29D7A98 /* adblock-rules.json in Resources */ = {isa = PBXBuildFile; fileRef = 35E49377853233BCF17B7112 /* adblock-rules.json */; };
 		99F6EC3376648C754BE7EE61 /* MiniPlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103770E93A2192B45FF56F56 /* MiniPlayerBar.swift */; };
 		9E50ACDE6170026F398448E5 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033B0318798FD561FA4712CF /* BookmarksView.swift */; };
+		A1C0303E171AE3594CFEBA92 /* ReaderModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9F559CBF7EF391AAE1B3B /* ReaderModeService.swift */; };
+		A1DB76AE43F26C0A0763584D /* WidgetDataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */; };
 		A4FB66BEA54ED1ADB490F6D3 /* AdBlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1BB7FBFA121175B348198A /* AdBlockService.swift */; };
 		A54D00EFA667EAC2FD240BCE /* SwiftDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F0CF1267B0CEE6930602CF /* SwiftDataStore.swift */; };
 		A597D9F8EDCE00E6932F23E8 /* NowPlayingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A6AAF5D2A3DC8A0A2F2D62 /* NowPlayingManager.swift */; };
+		A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */; };
+		A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */; };
+		B1E2BEBC9E0976D406E56855 /* PrivacyStatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */; };
+		B32AF5914E5673009B22C2BF /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16429C16A892F6610F32D86 /* ReviewManager.swift */; };
 		B49C86E56803F57FAF4F7154 /* PiPPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C414BE1810CFE0CA048AB44 /* PiPPlayerView.swift */; };
+		B50383EA025345F0A77D2B53 /* DoHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A15DD31B8F24259BBA817D4 /* DoHService.swift */; };
+		B5C2131F9942BBE3D7A8CEE3 /* ReaderModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70055DB124D18163F37CF18F /* ReaderModeView.swift */; };
 		B7B2A49CD8CCE3457BC31EF2 /* HistoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD900609801A8FE5B707602C /* HistoryRepository.swift */; };
+		B8E6B75694DF1D26ABAAAE14 /* FindInPageBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D5082F083188926383C0C /* FindInPageBar.swift */; };
 		BB0A20CAFFF26F8D195604A5 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B505721FC675032497D79 /* DIContainer.swift */; };
 		BB2F3C86A275A74F1B7075EB /* DownloadManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF800E052C5399F1FF6ADE /* DownloadManagerService.swift */; };
+		BE7EADA1C119793104A6F35F /* ReadingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F746B52E459969E9CA8BBE /* ReadingListItem.swift */; };
+		C744641F71783567067DF6D2 /* TabManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A896D296C22A0204E85A6 /* TabManagerTests.swift */; };
+		CA6FE2AD39FA465BB62F9A48 /* GestureShortcutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F4D70371954332821FFBB4 /* GestureShortcutService.swift */; };
 		CB2EE7963C4B0FA3D5F9D4C6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA1CD63A29D1A0A8A4A3B95 /* Theme.swift */; };
 		CB924DF94D28FA035405D22E /* BookmarkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3351D6DA52134FB293CA14 /* BookmarkRepository.swift */; };
+		CBB1408FBA711114F4D2220F /* DeviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F312E43AAC76ACAF8EC1F3 /* DeviceHelper.swift */; };
+		D2614397A726ABD44C352B83 /* TabSuspensionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */; };
 		D2C21078BF183C41E9AF1206 /* TabSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671C9EA50BCB2FAC5D47A31 /* TabSwitcherView.swift */; };
+		D3D5AEBE3C5D4A8C3C36B971 /* HTTPSUpgradeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */; };
+		D4D9666134B1B6F59D706792 /* ReadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */; };
 		DA31D345474259741D98678E /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE76A92BEA5432772B5C9F5 /* Typography.swift */; };
 		DB61D8C48F7DF24CB3B12A04 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285DBB4F92340576E80A2727 /* HapticManager.swift */; };
+		DC5EE0C74F020584308F89B5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D6272794F51141D5802ABB05 /* Localizable.xcstrings */; };
+		E01D21F7D4CE4CB2920A249A /* VideoDetectorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208E2D4A23424B20AD7D7F26 /* VideoDetectorService.swift */; };
+		E0532957217EEDA9898D5F7A /* PrivacyDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */; };
 		E140E3F0496E12D3EA69D707 /* VeloBrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F46AC1BF1ADB318962CFB9 /* VeloBrowserApp.swift */; };
 		E3498A711DB2FE67B4ED7998 /* HistoryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431C5CABC17C5248CD431E2 /* HistoryRepositoryProtocol.swift */; };
+		E4921558F40B497A86524E99 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA20CB17B3C0485391079AE0 /* QRScannerView.swift */; };
+		E64A93FC80DA4B0AB508D18D /* TabGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B814FCEF424B9581B93FF0 /* TabGroup.swift */; };
 		E7284B92505F54F709EAFD72 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647BE74420607CC194045AE3 /* HistoryView.swift */; };
-		F22261CDCFF1BEBDFDBCAB76 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300DAC4D05673DF80F035CAF /* SettingsView.swift */; };
-		FADD4BBA70C218DCFAC7864E /* DownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A9C8C792B5EA38C4746A8 /* DownloadItem.swift */; };
-		6FF1EC6D2241ED2CE5B761D1 /* BrowserViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */; };
-		C744641F71783567067DF6D2 /* TabManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A896D296C22A0204E85A6 /* TabManagerTests.swift */; };
-		943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */; };
-		24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */; };
-7B4CE0547EA90C903E9A53CC /* PlatformLogos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95796A7183FBB2634B1A1208 /* PlatformLogos.swift */; };
-A8E03889CB99729D2099AAAA /* VeloLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */; };
-		A1C0303E171AE3594CFEBA92 /* ReaderModeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9F559CBF7EF391AAE1B3B /* ReaderModeService.swift */; };
-		B5C2131F9942BBE3D7A8CEE3 /* ReaderModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70055DB124D18163F37CF18F /* ReaderModeView.swift */; };
-		BE7EADA1C119793104A6F35F /* ReadingListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F746B52E459969E9CA8BBE /* ReadingListItem.swift */; };
-		73C3353C50E3318F5E18E041 /* ReadingListRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787DEFF6EEB8F9E805078DEF /* ReadingListRepositoryProtocol.swift */; };
-		3FD694990492F49052164757 /* ReadingListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */; };
-		D4D9666134B1B6F59D706792 /* ReadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */; };
-		A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */; };
-		76E75D7C34A5EE00798861D9 /* HTTPSUpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380A30578E3C1479CDA30C2F /* HTTPSUpgradeService.swift */; };
-		4713F38100A038AD9696C315 /* AppLockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96B10B4A2FCAB774284E973 /* AppLockService.swift */; };
-		F87A9E952975971BC30EB304 /* TrackingProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */; };
-		FE11A7CCB3C54C00303BAB18 /* FingerprintProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */; };
-		EF35300DDA8FA922D716C018 /* CookieManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87786380319CB48C12E9B43E /* CookieManagerView.swift */; };
-		E0532957217EEDA9898D5F7A /* PrivacyDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */; };
-		87D72E95CC769C2A9BD76DF6 /* LockScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */; };
-		F48F4B42A3DD8F0F371860CD /* TrackingProtectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */; };
-		D3D5AEBE3C5D4A8C3C36B971 /* HTTPSUpgradeServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */; };
-		CBB1408FBA711114F4D2220F /* DeviceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F312E43AAC76ACAF8EC1F3 /* DeviceHelper.swift */; };
 		E80AB063AB8711D6190CBB09 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027B77B665EF51B2C65783B0 /* SidebarView.swift */; };
-		4C45D7A9977F559EED46E319 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B8A44C882024F58925879F /* TabBarView.swift */; };
-		81ABF6AC2BC2D216919FEA79 /* iPadLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */; };
-		7B4E60C121A6C49A646F66BD /* TabSuspensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179456FF36417004BB5DF235 /* TabSuspensionManager.swift */; };
-		8201BD2625C4755A3256084C /* CacheManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */; };
-		D2614397A726ABD44C352B83 /* TabSuspensionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */; };
-		DC5EE0C74F020584308F89B5 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D6272794F51141D5802ABB05 /* Localizable.xcstrings */; };
-		5F680422E42C02C38E68341E /* SpotlightIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */; };
-		B32AF5914E5673009B22C2BF /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16429C16A892F6610F32D86 /* ReviewManager.swift */; };
-		A1DB76AE43F26C0A0763584D /* WidgetDataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */; };
-		8D6F3B9D07914747B8F6F1BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7267DF417CD060CC52F641D3 /* LaunchScreen.storyboard */; };
-0EC65507C09887EB8243979F /* VeloBrowserWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */; };
-3079EEC36C86A1D9D44D8156 /* QuickSearchWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */; };
-4F41B9BC542A9A94291CA3D6 /* FavoritesGridWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */; };
-B1E2BEBC9E0976D406E56855 /* PrivacyStatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */; };
-884D2C6F5D1C0753F85AD015 /* SharedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */; };
-0BD7E8CD23C7B527737D8D11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EF39994539446C107D03E2 /* Assets.xcassets */; };
-20086A5FA80BF655F2D9BFD4 /* VeloBrowserWidgets.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EF35300DDA8FA922D716C018 /* CookieManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87786380319CB48C12E9B43E /* CookieManagerView.swift */; };
+		F22261CDCFF1BEBDFDBCAB76 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300DAC4D05673DF80F035CAF /* SettingsView.swift */; };
+		F48F4B42A3DD8F0F371860CD /* TrackingProtectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */; };
+		F87A9E952975971BC30EB304 /* TrackingProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */; };
+		FADD4BBA70C218DCFAC7864E /* DownloadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A9C8C792B5EA38C4746A8 /* DownloadItem.swift */; };
+		FE11A7CCB3C54C00303BAB18 /* FingerprintProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		22A66E122F596BDF0076AAF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88CA87BB3F5765642BE78D3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22A66E092F596BDF0076AAF8;
+			remoteInfo = VeloBrowserShareExtension;
+		};
 		41CB7E5684EF3BECAF5DFFB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C88CA87BB3F5765642BE78D3 /* Project object */;
@@ -100,123 +122,153 @@ B1E2BEBC9E0976D406E56855 /* PrivacyStatsWidget.swift in Sources */ = {isa = PBXB
 			remoteGlobalIDString = 66CBAF970BD90622C3254C79;
 			remoteInfo = VeloBrowser;
 		};
-85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */ = {
-isa = PBXContainerItemProxy;
-containerPortal = C88CA87BB3F5765642BE78D3 /* Project object */;
-proxyType = 1;
-remoteGlobalIDString = 868947C76CEA2BBBB3BA8973;
-remoteInfo = VeloBrowserWidgets;
-};
+		85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C88CA87BB3F5765642BE78D3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 868947C76CEA2BBBB3BA8973;
+			remoteInfo = VeloBrowserWidgets;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-F6299643EF2F7E10DFDC7FD1 /* Embed App Extensions */ = {
-isa = PBXCopyFilesBuildPhase;
-buildActionMask = 2147483647;
-dstPath = "";
-dstSubfolderSpec = 13;
-files = (
-20086A5FA80BF655F2D9BFD4 /* VeloBrowserWidgets.appex in Embed App Extensions */,
-);
-name = "Embed App Extensions";
-runOnlyForDeploymentPostprocessing = 0;
-};
+		F6299643EF2F7E10DFDC7FD1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				20086A5FA80BF655F2D9BFD4 /* VeloBrowserWidgets.appex in Embed App Extensions */,
+				22A66E142F596BDF0076AAF8 /* VeloBrowserShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00B031DAB4FC9CB26EE159C4 /* MediaPlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerService.swift; sourceTree = "<group>"; };
+		027B77B665EF51B2C65783B0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		033B0318798FD561FA4712CF /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockServiceTests.swift; sourceTree = "<group>"; };
+		08D200EAB95E0442B2138E83 /* SearchSuggestionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSuggestionService.swift; sourceTree = "<group>"; };
+		0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VeloBrowserWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEEB5C28B610DFB656ABD98 /* BookmarkRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepositoryProtocol.swift; sourceTree = "<group>"; };
+		0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSuspensionManagerTests.swift; sourceTree = "<group>"; };
 		0E050D8D6456447838CD19A1 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		0E3B505721FC675032497D79 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyStatsWidget.swift; sourceTree = "<group>"; };
 		103770E93A2192B45FF56F56 /* MiniPlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerBar.swift; sourceTree = "<group>"; };
 		122132FB187F1627F93D39C6 /* DownloadsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsView.swift; sourceTree = "<group>"; };
+		136A896D296C22A0204E85A6 /* TabManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManagerTests.swift; sourceTree = "<group>"; };
+		14EBEFC8696FADD6C0520E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		179456FF36417004BB5DF235 /* TabSuspensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSuspensionManager.swift; sourceTree = "<group>"; };
+		1C118F4652F8232ACEC0F69A /* VeloBrowser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeloBrowser.entitlements; sourceTree = "<group>"; };
+		208E2D4A23424B20AD7D7F26 /* VideoDetectorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetectorService.swift; sourceTree = "<group>"; };
+		22A66E0A2F596BDF0076AAF8 /* VeloBrowserShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VeloBrowserShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		25B8A44C882024F58925879F /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		25F46AC1BF1ADB318962CFB9 /* VeloBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloBrowserApp.swift; sourceTree = "<group>"; };
 		285DBB4F92340576E80A2727 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeloBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A31F6EB356742DA8F207B57 /* PrivacyShieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyShieldView.swift; sourceTree = "<group>"; };
 		2D16A85CCB4BA04CAD7F378E /* DownloadRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRepositoryProtocol.swift; sourceTree = "<group>"; };
 		300DAC4D05673DF80F035CAF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
+		35E49377853233BCF17B7112 /* adblock-rules.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "adblock-rules.json"; sourceTree = "<group>"; };
+		380A30578E3C1479CDA30C2F /* HTTPSUpgradeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSUpgradeService.swift; sourceTree = "<group>"; };
 		39115E179B2AE1780690687B /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
+		3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadLayoutView.swift; sourceTree = "<group>"; };
+		3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewModelTests.swift; sourceTree = "<group>"; };
 		3F53760F7CD6555D3DEF9BA2 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		41224F4BA1C865D982EC3DF5 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		46F0CF1267B0CEE6930602CF /* SwiftDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataStore.swift; sourceTree = "<group>"; };
+		4A15DD31B8F24259BBA817D4 /* DoHService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoHService.swift; sourceTree = "<group>"; };
+		509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSearchWidget.swift; sourceTree = "<group>"; };
+		5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepositoryTests.swift; sourceTree = "<group>"; };
 		52A6AAF5D2A3DC8A0A2F2D62 /* NowPlayingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingManager.swift; sourceTree = "<group>"; };
+		55E626B759194810B1869177 /* FilterListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListManager.swift; sourceTree = "<group>"; };
 		5671C9EA50BCB2FAC5D47A31 /* TabSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitcherView.swift; sourceTree = "<group>"; };
 		5C414BE1810CFE0CA048AB44 /* PiPPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPPlayerView.swift; sourceTree = "<group>"; };
+		5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataSync.swift; sourceTree = "<group>"; };
 		5F927EAB0FBC56EEFC72FA8F /* VeloBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeloBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		647BE74420607CC194045AE3 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		67F746B52E459969E9CA8BBE /* ReadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListItem.swift; sourceTree = "<group>"; };
+		6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintProtectionService.swift; sourceTree = "<group>"; };
 		6B2C7CBBD08C16C61CDF9A98 /* TabManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManager.swift; sourceTree = "<group>"; };
+		6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListView.swift; sourceTree = "<group>"; };
 		6E1BB7FBFA121175B348198A /* AdBlockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockService.swift; sourceTree = "<group>"; };
+		70055DB124D18163F37CF18F /* ReaderModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderModeView.swift; sourceTree = "<group>"; };
+		71506F3A7054462CBE1C9BC4 /* PageCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCaptureService.swift; sourceTree = "<group>"; };
+		7267DF417CD060CC52F641D3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		787DEFF6EEB8F9E805078DEF /* ReadingListRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepositoryProtocol.swift; sourceTree = "<group>"; };
 		78E659AC4475569097B5725E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloBrowserWidgetsBundle.swift; sourceTree = "<group>"; };
+		82114ED0EE04473592E06240 /* DarkReaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkReaderService.swift; sourceTree = "<group>"; };
+		86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloLogoView.swift; sourceTree = "<group>"; };
+		87786380319CB48C12E9B43E /* CookieManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieManagerView.swift; sourceTree = "<group>"; };
 		8B13C9BEDF0E7CA0D603694C /* BrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
+		8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataProvider.swift; sourceTree = "<group>"; };
 		8E1A9C8C792B5EA38C4746A8 /* DownloadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadItem.swift; sourceTree = "<group>"; };
+		95796A7183FBB2634B1A1208 /* PlatformLogos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformLogos.swift; sourceTree = "<group>"; };
+		9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingProtectionService.swift; sourceTree = "<group>"; };
 		A07FA3A6707F4CB266EEC658 /* DownloadRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadRepository.swift; sourceTree = "<group>"; };
+		A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyDashboardView.swift; sourceTree = "<group>"; };
+		A3B814FCEF424B9581B93FF0 /* TabGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabGroup.swift; sourceTree = "<group>"; };
+		A4F312E43AAC76ACAF8EC1F3 /* DeviceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHelper.swift; sourceTree = "<group>"; };
+		A89D5082F083188926383C0C /* FindInPageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindInPageBar.swift; sourceTree = "<group>"; };
+		A96B10B4A2FCAB774284E973 /* AppLockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockService.swift; sourceTree = "<group>"; };
 		AC49F63F02D67505F3D593D1 /* FirstLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchView.swift; sourceTree = "<group>"; };
+		AGBXC8O3DFJYRMPG03AUZLCI /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
 		B3E4C923FEC18DCF21F8F1F3 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
 		BF4E24555AA33466B4492376 /* HistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntry.swift; sourceTree = "<group>"; };
+		C2F4D70371954332821FFBB4 /* GestureShortcutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureShortcutService.swift; sourceTree = "<group>"; };
 		C431C5CABC17C5248CD431E2 /* HistoryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRepositoryProtocol.swift; sourceTree = "<group>"; };
+		C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingProtectionServiceTests.swift; sourceTree = "<group>"; };
+		C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightIndexer.swift; sourceTree = "<group>"; };
 		C5753E18D949E901BAE7B204 /* WebViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewContainer.swift; sourceTree = "<group>"; };
+		C57CCD668609986C1E1B706C /* NewTabPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTabPageView.swift; sourceTree = "<group>"; };
+		C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepositoryTests.swift; sourceTree = "<group>"; };
 		C87DB71B431DA1BE198E9CD4 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		CA20CB17B3C0485391079AE0 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		CBAF800E052C5399F1FF6ADE /* DownloadManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManagerService.swift; sourceTree = "<group>"; };
 		CC0351C6032DA49C53695D8D /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		CD900609801A8FE5B707602C /* HistoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRepository.swift; sourceTree = "<group>"; };
+		D2AFA35956384406A5C966FB /* CookieAutoDeleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieAutoDeleteService.swift; sourceTree = "<group>"; };
+		D6272794F51141D5802ABB05 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGridWidget.swift; sourceTree = "<group>"; };
 		E1D748B58AD8AF3709C24610 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E2EF39994539446C107D03E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerView.swift; sourceTree = "<group>"; };
 		E51682E218C32EFC7863B0C0 /* AddressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBarView.swift; sourceTree = "<group>"; };
-		C57CCD668609986C1E1B706C /* NewTabPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTabPageView.swift; sourceTree = "<group>"; };
-		A89D5082F083188926383C0C /* FindInPageBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindInPageBar.swift; sourceTree = "<group>"; };
+		E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSUpgradeServiceTests.swift; sourceTree = "<group>"; };
 		E5B8B08D88CBAC11AC86697C /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepository.swift; sourceTree = "<group>"; };
 		EDA1CD63A29D1A0A8A4A3B95 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		EEE76A92BEA5432772B5C9F5 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		EFE9F559CBF7EF391AAE1B3B /* ReaderModeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderModeService.swift; sourceTree = "<group>"; };
+		F16429C16A892F6610F32D86 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		F39381AF2EB34D4C9A0BD4CE /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F9D5CAA5C5A3F441926AC7E5 /* BrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewModel.swift; sourceTree = "<group>"; };
 		FA3351D6DA52134FB293CA14 /* BookmarkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepository.swift; sourceTree = "<group>"; };
-		06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockServiceTests.swift; sourceTree = "<group>"; };
-		136A896D296C22A0204E85A6 /* TabManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabManagerTests.swift; sourceTree = "<group>"; };
-		292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeloBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewModelTests.swift; sourceTree = "<group>"; };
-		5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRepositoryTests.swift; sourceTree = "<group>"; };
-95796A7183FBB2634B1A1208 /* PlatformLogos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformLogos.swift; sourceTree = "<group>"; };
-86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloLogoView.swift; sourceTree = "<group>"; };
-		EFE9F559CBF7EF391AAE1B3B /* ReaderModeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderModeService.swift; sourceTree = "<group>"; };
-		70055DB124D18163F37CF18F /* ReaderModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderModeView.swift; sourceTree = "<group>"; };
-		67F746B52E459969E9CA8BBE /* ReadingListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListItem.swift; sourceTree = "<group>"; };
-		787DEFF6EEB8F9E805078DEF /* ReadingListRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepositoryProtocol.swift; sourceTree = "<group>"; };
-		EC96596E70BCAF301D74B539 /* ReadingListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepository.swift; sourceTree = "<group>"; };
-		6CD155C2442EC1A80CA5F538 /* ReadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListView.swift; sourceTree = "<group>"; };
-		C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListRepositoryTests.swift; sourceTree = "<group>"; };
-		380A30578E3C1479CDA30C2F /* HTTPSUpgradeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSUpgradeService.swift; sourceTree = "<group>"; };
-		A96B10B4A2FCAB774284E973 /* AppLockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLockService.swift; sourceTree = "<group>"; };
-		9893784F1A8CD3BC19F42F1D /* TrackingProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingProtectionService.swift; sourceTree = "<group>"; };
-		6850ADABB787C04C894BC64A /* FingerprintProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintProtectionService.swift; sourceTree = "<group>"; };
-		87786380319CB48C12E9B43E /* CookieManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieManagerView.swift; sourceTree = "<group>"; };
-		A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyDashboardView.swift; sourceTree = "<group>"; };
-		354F82E3A49E2156B11F8FC6 /* LockScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenView.swift; sourceTree = "<group>"; };
-		C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingProtectionServiceTests.swift; sourceTree = "<group>"; };
-		E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSUpgradeServiceTests.swift; sourceTree = "<group>"; };
-		A4F312E43AAC76ACAF8EC1F3 /* DeviceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHelper.swift; sourceTree = "<group>"; };
-		027B77B665EF51B2C65783B0 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
-		25B8A44C882024F58925879F /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadLayoutView.swift; sourceTree = "<group>"; };
-		179456FF36417004BB5DF235 /* TabSuspensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSuspensionManager.swift; sourceTree = "<group>"; };
-		E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerView.swift; sourceTree = "<group>"; };
-		0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSuspensionManagerTests.swift; sourceTree = "<group>"; };
-		D6272794F51141D5802ABB05 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		C4486FD7C76E4EE2F93CB853 /* SpotlightIndexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightIndexer.swift; sourceTree = "<group>"; };
-		F16429C16A892F6610F32D86 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
-80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloBrowserWidgetsBundle.swift; sourceTree = "<group>"; };
-509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSearchWidget.swift; sourceTree = "<group>"; };
-DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesGridWidget.swift; sourceTree = "<group>"; };
-0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyStatsWidget.swift; sourceTree = "<group>"; };
-8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataProvider.swift; sourceTree = "<group>"; };
-14EBEFC8696FADD6C0520E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-E2EF39994539446C107D03E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-FC2DFA0B2256DAC5A4E397B0 /* VeloBrowserWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeloBrowserWidgets.entitlements; sourceTree = "<group>"; };
-0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = VeloBrowserWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-1C118F4652F8232ACEC0F69A /* VeloBrowser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeloBrowser.entitlements; sourceTree = "<group>"; };
-5D3C0C38019CF1E85D54DDDB /* WidgetDataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataSync.swift; sourceTree = "<group>"; };
-7267DF417CD060CC52F641D3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FC2DFA0B2256DAC5A4E397B0 /* VeloBrowserWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeloBrowserWidgets.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		22A66E172F596BDF0076AAF8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 22A66E092F596BDF0076AAF8 /* VeloBrowserShareExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		22A66E0B2F596BDF0076AAF8 /* VeloBrowserShareExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (22A66E172F596BDF0076AAF8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = VeloBrowserShareExtension; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		E0FE87046B94B321B27A2E5B /* Frameworks */ = {
+		22A66E072F596BDF0076AAF8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -230,13 +282,20 @@ FC2DFA0B2256DAC5A4E397B0 /* VeloBrowserWidgets.entitlements */ = {isa = PBXFileR
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-A88C9ECF03B3D100A4B0809A /* Frameworks */ = {
-isa = PBXFrameworksBuildPhase;
-buildActionMask = 2147483647;
-files = (
-);
-runOnlyForDeploymentPostprocessing = 0;
-};
+		A88C9ECF03B3D100A4B0809A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E0FE87046B94B321B27A2E5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -255,6 +314,16 @@ runOnlyForDeploymentPostprocessing = 0;
 			isa = PBXGroup;
 			children = (
 				6E1BB7FBFA121175B348198A /* AdBlockService.swift */,
+				F39381AF2EB34D4C9A0BD4CE /* Logger.swift */,
+				AGBXC8O3DFJYRMPG03AUZLCI /* TranslationService.swift */,
+				208E2D4A23424B20AD7D7F26 /* VideoDetectorService.swift */,
+				82114ED0EE04473592E06240 /* DarkReaderService.swift */,
+				71506F3A7054462CBE1C9BC4 /* PageCaptureService.swift */,
+				D2AFA35956384406A5C966FB /* CookieAutoDeleteService.swift */,
+				4A15DD31B8F24259BBA817D4 /* DoHService.swift */,
+				C2F4D70371954332821FFBB4 /* GestureShortcutService.swift */,
+				55E626B759194810B1869177 /* FilterListManager.swift */,
+				08D200EAB95E0442B2138E83 /* SearchSuggestionService.swift */,
 				CBAF800E052C5399F1FF6ADE /* DownloadManagerService.swift */,
 				00B031DAB4FC9CB26EE159C4 /* MediaPlayerService.swift */,
 				3F53760F7CD6555D3DEF9BA2 /* NetworkMonitor.swift */,
@@ -279,6 +348,7 @@ runOnlyForDeploymentPostprocessing = 0;
 				9713F1BFB46453663B9B074A /* VeloBrowserWidgets */,
 				6E8932C064D77B9016E0657D /* VeloBrowser */,
 				95F21B59DAACEF6B58749A59 /* VeloBrowserTests */,
+				22A66E0B2F596BDF0076AAF8 /* VeloBrowserShareExtension */,
 				F8BAFC4040BB9E74AEF9B722 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -308,6 +378,7 @@ runOnlyForDeploymentPostprocessing = 0;
 				8E1A9C8C792B5EA38C4746A8 /* DownloadItem.swift */,
 				BF4E24555AA33466B4492376 /* HistoryEntry.swift */,
 				CC0351C6032DA49C53695D8D /* Tab.swift */,
+				A3B814FCEF424B9581B93FF0 /* TabGroup.swift */,
 				67F746B52E459969E9CA8BBE /* ReadingListItem.swift */,
 			);
 			path = Models;
@@ -336,20 +407,11 @@ runOnlyForDeploymentPostprocessing = 0;
 			path = Downloads;
 			sourceTree = "<group>";
 		};
-		C0MM0NGROUPID00000000001 /* Common */ = {
-isa = PBXGroup;
-children = (
-95796A7183FBB2634B1A1208 /* PlatformLogos.swift */,
-86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */,
-);
-path = Common;
-sourceTree = "<group>";
-};
-7EF43E2270DA7ACA4382E5FE /* Presentation */ = {
+		7EF43E2270DA7ACA4382E5FE /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				C0MM0NGROUPID00000000001 /* Common */,
-D6D08C862BED256CC66164A5 /* Bookmarks */,
+				D6D08C862BED256CC66164A5 /* Bookmarks */,
 				E2FAA3BAF03357BCAFF46023 /* Browser */,
 				9E0CADC4E1918C91F0947484 /* DesignSystem */,
 				78A6E72CC8EF3F8229EA4AEB /* Downloads */,
@@ -363,6 +425,36 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				DEADBEEF1234567890ABCDEF /* iPad */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		95F21B59DAACEF6B58749A59 /* VeloBrowserTests */ = {
+			isa = PBXGroup;
+			children = (
+				06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */,
+				5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */,
+				C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */,
+				E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */,
+				C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */,
+				3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */,
+				136A896D296C22A0204E85A6 /* TabManagerTests.swift */,
+				0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */,
+			);
+			path = VeloBrowserTests;
+			sourceTree = "<group>";
+		};
+		9713F1BFB46453663B9B074A /* VeloBrowserWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */,
+				509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */,
+				DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */,
+				0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */,
+				8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */,
+				14EBEFC8696FADD6C0520E99 /* Info.plist */,
+				E2EF39994539446C107D03E2 /* Assets.xcassets */,
+				FC2DFA0B2256DAC5A4E397B0 /* VeloBrowserWidgets.entitlements */,
+			);
+			path = VeloBrowserWidgets;
 			sourceTree = "<group>";
 		};
 		9E0CADC4E1918C91F0947484 /* DesignSystem */ = {
@@ -379,6 +471,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			isa = PBXGroup;
 			children = (
 				300DAC4D05673DF80F035CAF /* SettingsView.swift */,
+				2A31F6EB356742DA8F207B57 /* PrivacyShieldView.swift */,
 				87786380319CB48C12E9B43E /* CookieManagerView.swift */,
 				A390D03DEAED0807CCC0AC79 /* PrivacyDashboardView.swift */,
 				E35404CBB8B8A9E2745ED530 /* CacheManagerView.swift */,
@@ -392,6 +485,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 				E1D748B58AD8AF3709C24610 /* Assets.xcassets */,
 				78E659AC4475569097B5725E /* Info.plist */,
 				7267DF417CD060CC52F641D3 /* LaunchScreen.storyboard */,
+				35E49377853233BCF17B7112 /* adblock-rules.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -433,6 +527,15 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			path = Local;
 			sourceTree = "<group>";
 		};
+		C0MM0NGROUPID00000000001 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				95796A7183FBB2634B1A1208 /* PlatformLogos.swift */,
+				86AF0CC9A98AF9FA8476AE4B /* VeloLogoView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		D366B379FC59425070385DCF /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +555,16 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			path = Bookmarks;
 			sourceTree = "<group>";
 		};
+		DEADBEEF1234567890ABCDEF /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				027B77B665EF51B2C65783B0 /* SidebarView.swift */,
+				25B8A44C882024F58925879F /* TabBarView.swift */,
+				3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
 		E2233BB3A2EB58E705FFF9BC /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +580,7 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			isa = PBXGroup;
 			children = (
 				E51682E218C32EFC7863B0C0 /* AddressBarView.swift */,
+				CA20CB17B3C0485391079AE0 /* QRScannerView.swift */,
 				8B13C9BEDF0E7CA0D603694C /* BrowserView.swift */,
 				C57CCD668609986C1E1B706C /* NewTabPageView.swift */,
 				A89D5082F083188926383C0C /* FindInPageBar.swift */,
@@ -485,27 +599,13 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		95F21B59DAACEF6B58749A59 /* VeloBrowserTests */ = {
-			isa = PBXGroup;
-			children = (
-				06226B37D771C9A52677AE12 /* AdBlockServiceTests.swift */,
-				5122DA21FDABDA39404B5484 /* BookmarkRepositoryTests.swift */,
-				C68AA3EE23A69073F121AB96 /* ReadingListRepositoryTests.swift */,
-				E566BA585B7DAB261903D8D7 /* HTTPSUpgradeServiceTests.swift */,
-				C442A018649F900E526DCF3E /* TrackingProtectionServiceTests.swift */,
-				3F3411C4BE50BDA4BC1D01CA /* BrowserViewModelTests.swift */,
-				136A896D296C22A0204E85A6 /* TabManagerTests.swift */,
-				0D34042BBF5EE767D86998BD /* TabSuspensionManagerTests.swift */,
-			);
-			path = VeloBrowserTests;
-			sourceTree = "<group>";
-		};
 		F8BAFC4040BB9E74AEF9B722 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */,
 				5F927EAB0FBC56EEFC72FA8F /* VeloBrowser.app */,
 				292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */,
+				22A66E0A2F596BDF0076AAF8 /* VeloBrowserShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -526,34 +626,31 @@ D6D08C862BED256CC66164A5 /* Bookmarks */,
 			path = ReadingList;
 			sourceTree = "<group>";
 		};
-DEADBEEF1234567890ABCDEF /* iPad */ = {
-isa = PBXGroup;
-children = (
-				027B77B665EF51B2C65783B0 /* SidebarView.swift */,
-				25B8A44C882024F58925879F /* TabBarView.swift */,
-				3AB3426409FBF0484C60C175 /* iPadLayoutView.swift */,
-);
-path = iPad;
-sourceTree = "<group>";
-};
-9713F1BFB46453663B9B074A /* VeloBrowserWidgets */ = {
-isa = PBXGroup;
-children = (
-80F682C8B827CDAB9C2C7D94 /* VeloBrowserWidgetsBundle.swift */,
-509230C27CFF01DC03C9B26F /* QuickSearchWidget.swift */,
-DCB5B1671AB59FDA8770808C /* FavoritesGridWidget.swift */,
-0E612AB865BF7CFD0F5B5FE5 /* PrivacyStatsWidget.swift */,
-8CB379718414194C26D5D2E0 /* SharedDataProvider.swift */,
-14EBEFC8696FADD6C0520E99 /* Info.plist */,
-E2EF39994539446C107D03E2 /* Assets.xcassets */,
-FC2DFA0B2256DAC5A4E397B0 /* VeloBrowserWidgets.entitlements */,
-);
-path = VeloBrowserWidgets;
-sourceTree = "<group>";
-};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		22A66E092F596BDF0076AAF8 /* VeloBrowserShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22A66E182F596BDF0076AAF8 /* Build configuration list for PBXNativeTarget "VeloBrowserShareExtension" */;
+			buildPhases = (
+				22A66E062F596BDF0076AAF8 /* Sources */,
+				22A66E072F596BDF0076AAF8 /* Frameworks */,
+				22A66E082F596BDF0076AAF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				22A66E0B2F596BDF0076AAF8 /* VeloBrowserShareExtension */,
+			);
+			name = VeloBrowserShareExtension;
+			packageProductDependencies = (
+			);
+			productName = VeloBrowserShareExtension;
+			productReference = 22A66E0A2F596BDF0076AAF8 /* VeloBrowserShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		66CBAF970BD90622C3254C79 /* VeloBrowser */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F6E526EBF580B4A3DE242452 /* Build configuration list for PBXNativeTarget "VeloBrowser" */;
@@ -567,11 +664,29 @@ sourceTree = "<group>";
 			);
 			dependencies = (
 				6CE5CF64BFC1125E62824D23 /* PBXTargetDependency */,
+				22A66E132F596BDF0076AAF8 /* PBXTargetDependency */,
 			);
 			name = VeloBrowser;
 			productName = VeloBrowser;
 			productReference = 5F927EAB0FBC56EEFC72FA8F /* VeloBrowser.app */;
 			productType = "com.apple.product-type.application";
+		};
+		868947C76CEA2BBBB3BA8973 /* VeloBrowserWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8B287E373C538769C76A85E /* Build configuration list for PBXNativeTarget "VeloBrowserWidgets" */;
+			buildPhases = (
+				3D96C8123F0A80C3DD88B4E8 /* Sources */,
+				A88C9ECF03B3D100A4B0809A /* Frameworks */,
+				4271397B653F8BD28B702849 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VeloBrowserWidgets;
+			productName = VeloBrowserWidgets;
+			productReference = 0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		F9515ECE56F449DD2B08C043 /* VeloBrowserTests */ = {
 			isa = PBXNativeTarget;
@@ -590,45 +705,20 @@ sourceTree = "<group>";
 			productReference = 292776175A3EC9E6EB9F8AC4 /* VeloBrowserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-868947C76CEA2BBBB3BA8973 /* VeloBrowserWidgets */ = {
-isa = PBXNativeTarget;
-buildConfigurationList = A8B287E373C538769C76A85E /* Build configuration list for PBXNativeTarget "VeloBrowserWidgets" */;
-buildPhases = (
-3D96C8123F0A80C3DD88B4E8 /* Sources */,
-A88C9ECF03B3D100A4B0809A /* Frameworks */,
-4271397B653F8BD28B702849 /* Resources */,
-);
-buildRules = (
-);
-dependencies = (
-);
-name = VeloBrowserWidgets;
-productName = VeloBrowserWidgets;
-productReference = 0960F5A1DDC446CD4330CB9D /* VeloBrowserWidgets.appex */;
-productType = "com.apple.product-type.app-extension";
-};
 /* End PBXNativeTarget section */
-
-/* Begin PBXTargetDependency section */
-		FD7604569FE6A45A4BCABAE6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 66CBAF970BD90622C3254C79 /* VeloBrowser */;
-			targetProxy = 41CB7E5684EF3BECAF5DFFB0 /* PBXContainerItemProxy */;
-		};
-6CE5CF64BFC1125E62824D23 /* PBXTargetDependency */ = {
-isa = PBXTargetDependency;
-target = 868947C76CEA2BBBB3BA8973 /* VeloBrowserWidgets */;
-targetProxy = 85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */;
-};
-/* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
 		C88CA87BB3F5765642BE78D3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					22A66E092F596BDF0076AAF8 = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
+				};
 			};
 			buildConfigurationList = 5332CC7324CB5C8A2306DA13 /* Build configuration list for PBXProject "VeloBrowser" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -651,11 +741,27 @@ targetProxy = 85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */;
 				66CBAF970BD90622C3254C79 /* VeloBrowser */,
 				F9515ECE56F449DD2B08C043 /* VeloBrowserTests */,
 				868947C76CEA2BBBB3BA8973 /* VeloBrowserWidgets */,
+				22A66E092F596BDF0076AAF8 /* VeloBrowserShareExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		22A66E082F596BDF0076AAF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4271397B653F8BD28B702849 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BD7E8CD23C7B527737D8D11 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEBA35FF8AF5F55368336FDD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -663,20 +769,28 @@ targetProxy = 85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */;
 				DC5EE0C74F020584308F89B5 /* Localizable.xcstrings in Resources */,
 				8B3DFD9F6EE6B0271AC9EE70 /* Assets.xcassets in Resources */,
 				8D6F3B9D07914747B8F6F1BE /* LaunchScreen.storyboard in Resources */,
+				971FB4CEC6CA2AB9F29D7A98 /* adblock-rules.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-4271397B653F8BD28B702849 /* Resources */ = {
-isa = PBXResourcesBuildPhase;
-buildActionMask = 2147483647;
-files = (
-0BD7E8CD23C7B527737D8D11 /* Assets.xcassets in Resources */,
-);
-runOnlyForDeploymentPostprocessing = 0;
-};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		08074459B57C8247E0B3A668 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FF1EC6D2241ED2CE5B761D1 /* BrowserViewModelTests.swift in Sources */,
+				C744641F71783567067DF6D2 /* TabManagerTests.swift in Sources */,
+				943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */,
+				24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */,
+				A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */,
+				D2614397A726ABD44C352B83 /* TabSuspensionManagerTests.swift in Sources */,
+				D3D5AEBE3C5D4A8C3C36B971 /* HTTPSUpgradeServiceTests.swift in Sources */,
+				F48F4B42A3DD8F0F371860CD /* TrackingProtectionServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		20D4A7F60D6350D34201F051 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -717,6 +831,19 @@ runOnlyForDeploymentPostprocessing = 0;
 				DB61D8C48F7DF24CB3B12A04 /* HapticManager.swift in Sources */,
 				823F29975FE4F93F3F88FD5A /* ShareSheet.swift in Sources */,
 				A4FB66BEA54ED1ADB490F6D3 /* AdBlockService.swift in Sources */,
+				58758D08B7614AC3AC9CFE48 /* Logger.swift in Sources */,
+				4QGX8SP6WWQHC2JY0OUIXLKH /* TranslationService.swift in Sources */,
+				92EB054F24D94743C9EBF769 /* SearchSuggestionService.swift in Sources */,
+				E64A93FC80DA4B0AB508D18D /* TabGroup.swift in Sources */,
+				2E5C28B7C4564D82BF86DD40 /* PrivacyShieldView.swift in Sources */,
+				E4921558F40B497A86524E99 /* QRScannerView.swift in Sources */,
+				4F0A0AF16CBC4128AA3B51BE /* FilterListManager.swift in Sources */,
+				CA6FE2AD39FA465BB62F9A48 /* GestureShortcutService.swift in Sources */,
+				B50383EA025345F0A77D2B53 /* DoHService.swift in Sources */,
+				15FD366540BC45A3BED33699 /* CookieAutoDeleteService.swift in Sources */,
+				65A5727982C14C69A5EC0117 /* PageCaptureService.swift in Sources */,
+				2A5E2B3BB74A47849CD95A20 /* DarkReaderService.swift in Sources */,
+				E01D21F7D4CE4CB2920A249A /* VideoDetectorService.swift in Sources */,
 				BB2F3C86A275A74F1B7075EB /* DownloadManagerService.swift in Sources */,
 				3451BBC5E842F39E64D189B3 /* MediaPlayerService.swift in Sources */,
 				4396C232D5C1014E65A90D5F /* NetworkMonitor.swift in Sources */,
@@ -749,36 +876,75 @@ runOnlyForDeploymentPostprocessing = 0;
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		08074459B57C8247E0B3A668 /* Sources */ = {
+		22A66E062F596BDF0076AAF8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FF1EC6D2241ED2CE5B761D1 /* BrowserViewModelTests.swift in Sources */,
-				C744641F71783567067DF6D2 /* TabManagerTests.swift in Sources */,
-				943592375D574CC61BB9FEB9 /* AdBlockServiceTests.swift in Sources */,
-				24B7E7682EA568A7FE0BF3DD /* BookmarkRepositoryTests.swift in Sources */,
-				A6B1F93002AE258E9A5583C3 /* ReadingListRepositoryTests.swift in Sources */,
-				D2614397A726ABD44C352B83 /* TabSuspensionManagerTests.swift in Sources */,
-				D3D5AEBE3C5D4A8C3C36B971 /* HTTPSUpgradeServiceTests.swift in Sources */,
-				F48F4B42A3DD8F0F371860CD /* TrackingProtectionServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-3D96C8123F0A80C3DD88B4E8 /* Sources */ = {
-isa = PBXSourcesBuildPhase;
-buildActionMask = 2147483647;
-files = (
-0EC65507C09887EB8243979F /* VeloBrowserWidgetsBundle.swift in Sources */,
-3079EEC36C86A1D9D44D8156 /* QuickSearchWidget.swift in Sources */,
-4F41B9BC542A9A94291CA3D6 /* FavoritesGridWidget.swift in Sources */,
-B1E2BEBC9E0976D406E56855 /* PrivacyStatsWidget.swift in Sources */,
-884D2C6F5D1C0753F85AD015 /* SharedDataProvider.swift in Sources */,
-);
-runOnlyForDeploymentPostprocessing = 0;
-};
+		3D96C8123F0A80C3DD88B4E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0EC65507C09887EB8243979F /* VeloBrowserWidgetsBundle.swift in Sources */,
+				3079EEC36C86A1D9D44D8156 /* QuickSearchWidget.swift in Sources */,
+				4F41B9BC542A9A94291CA3D6 /* FavoritesGridWidget.swift in Sources */,
+				B1E2BEBC9E0976D406E56855 /* PrivacyStatsWidget.swift in Sources */,
+				884D2C6F5D1C0753F85AD015 /* SharedDataProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		22A66E132F596BDF0076AAF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22A66E092F596BDF0076AAF8 /* VeloBrowserShareExtension */;
+			targetProxy = 22A66E122F596BDF0076AAF8 /* PBXContainerItemProxy */;
+		};
+		6CE5CF64BFC1125E62824D23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 868947C76CEA2BBBB3BA8973 /* VeloBrowserWidgets */;
+			targetProxy = 85F9E6CE49CB800AF4C8FA11 /* PBXContainerItemProxy */;
+		};
+		FD7604569FE6A45A4BCABAE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66CBAF970BD90622C3254C79 /* VeloBrowser */;
+			targetProxy = 41CB7E5684EF3BECAF5DFFB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		01446A9596FFE92082311C3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = VeloBrowserWidgets/VeloBrowserWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = VeloBrowserWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "VelGo Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		0F0CD40BADB296A01C75A169 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -803,6 +969,141 @@ runOnlyForDeploymentPostprocessing = 0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22A66E152F596BDF0076AAF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VeloBrowserShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VeloBrowserShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.VeloBrowserShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22A66E162F596BDF0076AAF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VeloBrowserShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VeloBrowserShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.VeloBrowserShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -834,6 +1135,73 @@ runOnlyForDeploymentPostprocessing = 0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		8F8FC8E0B8328E0F63AB06D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = VeloBrowserWidgets/VeloBrowserWidgets.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = VeloBrowserWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "VelGo Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9FE346366340C9C170221AFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeloBrowser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VeloBrowser";
+			};
+			name = Debug;
+		};
+		E301DDE1D96754BE2162B83D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z82T2F75B;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeloBrowser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VeloBrowser";
+			};
+			name = Release;
 		};
 		E7F931D7B227A42619B8D957 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -888,110 +1256,32 @@ runOnlyForDeploymentPostprocessing = 0;
 			};
 			name = Release;
 		};
-		9FE346366340C9C170221AFD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6Z82T2F75B;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeloBrowser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VeloBrowser";
-			};
-			name = Debug;
-		};
-		E301DDE1D96754BE2162B83D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6Z82T2F75B;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeloBrowser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VeloBrowser";
-			};
-			name = Release;
-		};
-8F8FC8E0B8328E0F63AB06D7 /* Debug */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-CODE_SIGN_ENTITLEMENTS = VeloBrowserWidgets/VeloBrowserWidgets.entitlements;
-CODE_SIGN_STYLE = Automatic;
-CURRENT_PROJECT_VERSION = 1;
-DEVELOPMENT_TEAM = 6Z82T2F75B;
-GENERATE_INFOPLIST_FILE = NO;
-INFOPLIST_FILE = VeloBrowserWidgets/Info.plist;
-INFOPLIST_KEY_CFBundleDisplayName = "VeloBrowser Widgets";
-INFOPLIST_KEY_NSHumanReadableCopyright = "";
-LD_RUNPATH_SEARCH_PATHS = (
-"$(inherited)",
-"@executable_path/Frameworks",
-"@executable_path/../../Frameworks",
-);
-MARKETING_VERSION = 1.0.0;
-PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.widgets;
-PRODUCT_NAME = "$(TARGET_NAME)";
-SKIP_INSTALL = YES;
-SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-SUPPORTS_MACCATALYST = NO;
-SWIFT_EMIT_LOC_STRINGS = YES;
-TARGETED_DEVICE_FAMILY = "1,2";
-};
-name = Debug;
-};
-01446A9596FFE92082311C3C /* Release */ = {
-isa = XCBuildConfiguration;
-buildSettings = {
-ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-CODE_SIGN_ENTITLEMENTS = VeloBrowserWidgets/VeloBrowserWidgets.entitlements;
-CODE_SIGN_STYLE = Automatic;
-CURRENT_PROJECT_VERSION = 1;
-DEVELOPMENT_TEAM = 6Z82T2F75B;
-GENERATE_INFOPLIST_FILE = NO;
-INFOPLIST_FILE = VeloBrowserWidgets/Info.plist;
-INFOPLIST_KEY_CFBundleDisplayName = "VeloBrowser Widgets";
-INFOPLIST_KEY_NSHumanReadableCopyright = "";
-LD_RUNPATH_SEARCH_PATHS = (
-"$(inherited)",
-"@executable_path/Frameworks",
-"@executable_path/../../Frameworks",
-);
-MARKETING_VERSION = 1.0.0;
-PRODUCT_BUNDLE_IDENTIFIER = com.velobrowser.app.widgets;
-PRODUCT_NAME = "$(TARGET_NAME)";
-SKIP_INSTALL = YES;
-SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-SUPPORTS_MACCATALYST = NO;
-SWIFT_EMIT_LOC_STRINGS = YES;
-TARGETED_DEVICE_FAMILY = "1,2";
-};
-name = Release;
-};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		22A66E182F596BDF0076AAF8 /* Build configuration list for PBXNativeTarget "VeloBrowserShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22A66E152F596BDF0076AAF8 /* Debug */,
+				22A66E162F596BDF0076AAF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5332CC7324CB5C8A2306DA13 /* Build configuration list for PBXProject "VeloBrowser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7F931D7B227A42619B8D957 /* Debug */,
 				FAA17E0C8B726B220933B71A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8B287E373C538769C76A85E /* Build configuration list for PBXNativeTarget "VeloBrowserWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F8FC8E0B8328E0F63AB06D7 /* Debug */,
+				01446A9596FFE92082311C3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1014,15 +1304,6 @@ name = Release;
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-A8B287E373C538769C76A85E /* Build configuration list for PBXNativeTarget "VeloBrowserWidgets" */ = {
-isa = XCConfigurationList;
-buildConfigurations = (
-8F8FC8E0B8328E0F63AB06D7 /* Debug */,
-01446A9596FFE92082311C3C /* Release */,
-);
-defaultConfigurationIsVisible = 0;
-defaultConfigurationName = Release;
-};
 /* End XCConfigurationList section */
 	};
 	rootObject = C88CA87BB3F5765642BE78D3 /* Project object */;

@@ -70,7 +70,7 @@ struct SidebarView: View {
             }
         }
         .listStyle(.sidebar)
-        .navigationTitle("Velo Browser")
+        .navigationTitle("VelGo")
     }
 }
 

@@ -82,7 +82,7 @@ struct NewTabPageView: View {
                 VStack(spacing: DesignSystem.Spacing.xs) {
                     VeloLogoView(size: 56)
 
-                    Text("Velo Browser")
+                    Text("VelGo")
                         .font(.system(size: 26, weight: .bold, design: .rounded))
                         .foregroundStyle(DesignSystem.Colors.textPrimary)
                 }

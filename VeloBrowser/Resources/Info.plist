@@ -5,7 +5,13 @@
 <key>CFBundleDevelopmentRegion</key>
 <string>en</string>
 <key>CFBundleDisplayName</key>
-<string>Velo Browser</string>
+<string>VelGo</string>
+<key>NSFaceIDUsageDescription</key>
+<string>VelGo uses Face ID to protect your private browsing data.</string>
+<key>NSCameraUsageDescription</key>
+<string>VelGo uses the camera to scan QR codes.</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>VelGo saves screenshots to your photo library.</string>
 <key>CFBundleExecutable</key>
 <string>$(EXECUTABLE_NAME)</string>
 <key>CFBundleIdentifier</key>
@@ -64,6 +70,7 @@
 <string>com.velobrowser.url</string>
 <key>CFBundleURLSchemes</key>
 <array>
+<string>velgo</string>
 <string>velobrowser</string>
 </array>
 </dict>

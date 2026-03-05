@@ -97,6 +97,36 @@ final class DIContainer {
     /// Browser fingerprint protection service.
     let fingerprintProtectionService: FingerprintProtectionServiceProtocol
 
+    /// Search autocomplete suggestion service.
+    let searchSuggestionService: SearchSuggestionService
+
+    /// Video/audio detection service for media downloads.
+    let videoDetectorService: VideoDetectorService
+
+    /// Dark reader CSS injection service.
+    let darkReaderService: DarkReaderService
+
+    /// Full-page screenshot and PDF export service.
+    let pageCaptureService: PageCaptureService
+
+    /// Cookie auto-delete service.
+    let cookieAutoDeleteService: CookieAutoDeleteService
+
+    /// DNS-over-HTTPS resolver.
+    let dohService: DoHService
+
+    /// Tab group manager.
+    let tabGroupManager: TabGroupManager
+
+    /// Gesture shortcut service.
+    let gestureShortcutService: GestureShortcutService
+
+    /// Custom ad block filter list manager.
+    let filterListManager: FilterListManager
+
+    /// Page translation service.
+    let translationService: TranslationService
+
     // MARK: - Initialization
 
     /// Creates a new DIContainer with all dependencies wired up.
@@ -137,6 +167,18 @@ final class DIContainer {
             self.appLockService = AppLockService()
             self.trackingProtectionService = TrackingProtectionService()
             self.fingerprintProtectionService = FingerprintProtectionService()
+            self.searchSuggestionService = SearchSuggestionService()
+
+            // New v1.0 services
+            self.videoDetectorService = VideoDetectorService()
+            self.darkReaderService = DarkReaderService()
+            self.pageCaptureService = PageCaptureService()
+            self.cookieAutoDeleteService = CookieAutoDeleteService()
+            self.dohService = DoHService()
+            self.tabGroupManager = TabGroupManager()
+            self.gestureShortcutService = GestureShortcutService()
+            self.filterListManager = FilterListManager()
+            self.translationService = TranslationService()
 
             // Wire tab suspension to tab manager and memory warnings
             self.tabSuspensionManager.configure(tabManager: self.tabManager)

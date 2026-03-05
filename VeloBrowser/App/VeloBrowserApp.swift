@@ -22,6 +22,9 @@ struct VeloBrowserApp: App {
     /// Whether onboarding has been completed.
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
+    /// User-selected appearance mode.
+    @AppStorage("appAppearance") private var appAppearance = "system"
+
     /// Review manager for App Store review prompts.
     private let reviewManager = ReviewManager()
 
@@ -64,10 +67,23 @@ struct VeloBrowserApp: App {
             .onChange(of: scenePhase) { _, newPhase in
                 handleScenePhaseChange(newPhase)
             }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification)) { _ in
+                container.tabManager.releaseInactiveWebViews()
+            }
+            .preferredColorScheme(resolvedColorScheme)
         }
     }
 
     @Environment(\.scenePhase) private var scenePhase
+
+    /// Resolves the user's appearance preference to a SwiftUI ColorScheme.
+    private var resolvedColorScheme: ColorScheme? {
+        switch appAppearance {
+        case "light": return .light
+        case "dark": return .dark
+        default: return nil
+        }
+    }
 
     // MARK: - Audio Session
 
@@ -96,8 +112,9 @@ struct VeloBrowserApp: App {
     /// - `velobrowser://settings` — open settings
     /// - `https://` or `http://` — open URL in new tab
     private func handleIncomingURL(_ url: URL) {
-        guard url.scheme == "velobrowser" else {
-            if url.scheme == "https" || url.scheme == "http" {
+        let scheme = url.scheme?.lowercased()
+        guard scheme == "velobrowser" || scheme == "velgo" else {
+            if scheme == "https" || scheme == "http" {
                 container.tabManager.createTab(url: url)
             }
             return

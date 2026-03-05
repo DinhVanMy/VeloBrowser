@@ -24,6 +24,11 @@ struct BrowserView: View {
     @State private var showTabLimitAlert = false
     @State private var showFindInPage = false
     @State private var showNoMediaAlert = false
+    @State private var showQRScanner = false
+    @State private var showPrivacyShield = false
+    @State private var showDetectedMedia = false
+    @State private var toastMessage: String?
+    @State private var toastDismissWorkItem: DispatchWorkItem?
     @AppStorage("javaScriptEnabled") private var javaScriptEnabled: Bool = true
 
     var body: some View {
@@ -66,6 +71,23 @@ struct BrowserView: View {
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
+
+            // Toast notification overlay
+            if let message = toastMessage {
+                VStack {
+                    Spacer()
+                    Text(message)
+                        .font(DesignSystem.Typography.caption)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, DesignSystem.Spacing.md)
+                        .padding(.vertical, DesignSystem.Spacing.sm)
+                        .background(Color.black.opacity(0.8))
+                        .clipShape(Capsule())
+                        .padding(.bottom, 80)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+                .allowsHitTesting(false)
+            }
         }
         .animation(
             .spring(response: 0.3, dampingFraction: 0.8),
@@ -94,9 +116,43 @@ struct BrowserView: View {
                         coordinator.showShareSheet = true
                     }
                 )
+            } else {
+                // Safety fallback: dismiss if content became nil
+                Color.clear.onAppear { viewModel.showReaderMode = false }
             }
         }
         .statusBarHidden(viewModel.isFullscreen)
+        .onChange(of: viewModel.errorMessage) { _, newMessage in
+            guard let message = newMessage, !message.isEmpty else { return }
+            showToast(message)
+        }
+        .onChange(of: viewModel.currentURL) { _, newURL in
+            // Cookie auto-delete tracking
+            container.cookieAutoDeleteService.didNavigate(to: newURL)
+            // Reset translation state on navigation
+            container.translationService.reset()
+            // Scan for downloadable media when page finishes loading
+            if let webView = viewModel.webView, newURL != nil {
+                container.videoDetectorService.scanForMedia(in: webView)
+            }
+        }
+        .sheet(isPresented: $showQRScanner) {
+            QRScannerView(isPresented: $showQRScanner) { url in
+                viewModel.loadURL(url)
+            }
+        }
+        .sheet(isPresented: $showPrivacyShield) {
+            PrivacyShieldView(
+                domain: viewModel.displayDomain,
+                adsBlocked: viewModel.adsBlockedCount,
+                trackersStripped: container.trackingProtectionService.strippedCount,
+                isHTTPS: viewModel.currentURL?.scheme == "https",
+                fingerprintProtected: container.fingerprintProtectionService.isEnabled
+            )
+        }
+        .sheet(isPresented: $showDetectedMedia) {
+            detectedMediaSheet
+        }
         // iPad keyboard shortcuts
         .background {
             keyboardShortcuts
@@ -219,6 +275,10 @@ struct BrowserView: View {
                 onWebViewCreated: { webView in
                     viewModel.webView = webView
                     container.mediaPlayerService.setActiveWebView(webView)
+                    // Store in pool so it survives tab switches
+                    if let activeTab = container.tabManager.activeTab {
+                        container.tabManager.setWebView(webView, for: activeTab.id)
+                    }
                 },
                 onDownloadLink: { url in
                     Task { await container.downloadManager.startDownload(url: url) }
@@ -270,7 +330,8 @@ struct BrowserView: View {
                 },
                 onFullscreenChange: { fullscreen in
                     viewModel.handleFullscreenChange(fullscreen)
-                }
+                },
+                existingWebView: container.tabManager.activeTab.flatMap { container.tabManager.webView(for: $0.id) }
             )
 
             // New Tab Page overlay (when no URL loaded)
@@ -443,8 +504,76 @@ struct BrowserView: View {
                     Button {
                         viewModel.toggleReaderMode(using: container.readerModeService)
                     } label: {
-                        Label("Reader Mode", systemImage: "doc.plaintext")
+                        if viewModel.isExtractingReaderContent {
+                            Label("Loading Reader…", systemImage: "ellipsis")
+                        } else {
+                            Label("Reader Mode", systemImage: "doc.plaintext")
+                        }
                     }
+                    .disabled(viewModel.isExtractingReaderContent)
+                }
+
+                // Dark Reader toggle
+                Button {
+                    if let webView = viewModel.webView {
+                        container.darkReaderService.toggle(in: webView)
+                        HapticManager.light()
+                    }
+                } label: {
+                    Label(
+                        container.darkReaderService.isEnabled ? "Disable Dark Mode" : "Dark Mode",
+                        systemImage: container.darkReaderService.isEnabled ? "sun.max" : "moon.fill"
+                    )
+                }
+
+                // Translate page
+                Button {
+                    if let webView = viewModel.webView {
+                        if container.translationService.isTranslated {
+                            container.translationService.restoreOriginal(webView: webView)
+                        } else {
+                            container.translationService.translatePage(webView: webView)
+                        }
+                        HapticManager.light()
+                    }
+                } label: {
+                    Label(
+                        container.translationService.isTranslated ? "Show Original" : "Translate Page",
+                        systemImage: "translate"
+                    )
+                }
+                .disabled(container.translationService.isTranslating)
+
+                // Video/Audio downloader
+                if !container.videoDetectorService.detectedMedia.isEmpty {
+                    Button {
+                        showDetectedMedia = true
+                    } label: {
+                        Label("Download Media (\(container.videoDetectorService.detectedMedia.count))", systemImage: "arrow.down.circle.fill")
+                    }
+                }
+
+                // Screenshot & PDF
+                Menu {
+                    Button {
+                        captureScreenshot()
+                    } label: {
+                        Label("Screenshot", systemImage: "camera")
+                    }
+                    Button {
+                        exportPDF()
+                    } label: {
+                        Label("Save as PDF", systemImage: "doc.richtext")
+                    }
+                    Button {
+                        if let webView = viewModel.webView {
+                            container.pageCaptureService.printPage(webView: webView)
+                        }
+                    } label: {
+                        Label("Print", systemImage: "printer")
+                    }
+                } label: {
+                    Label("Page Capture", systemImage: "camera.viewfinder")
                 }
             }
 
@@ -480,6 +609,23 @@ struct BrowserView: View {
                     addToReadingList()
                 } label: {
                     Label("Add to Reading List", systemImage: "plus.circle")
+                }
+            }
+
+            // QR Scanner
+            Button {
+                showQRScanner = true
+                HapticManager.light()
+            } label: {
+                Label("Scan QR Code", systemImage: "qrcode.viewfinder")
+            }
+
+            // Privacy Shield
+            if viewModel.currentURL != nil {
+                Button {
+                    showPrivacyShield = true
+                } label: {
+                    Label("Privacy Shield", systemImage: "shield.lefthalf.filled")
                 }
             }
 
@@ -548,6 +694,98 @@ struct BrowserView: View {
             try? await container.readingListRepository.save(item)
             HapticManager.success()
         }
+    }
+
+    /// Shows a toast message that auto-dismisses after 2.5 seconds.
+    /// Cancels any pending dismiss from a previous toast.
+    private func showToast(_ message: String) {
+        toastDismissWorkItem?.cancel()
+        withAnimation(.spring(response: 0.3)) {
+            toastMessage = message
+        }
+        let workItem = DispatchWorkItem { [self] in
+            withAnimation(.easeOut) {
+                toastMessage = nil
+            }
+        }
+        toastDismissWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: workItem)
+    }
+
+    private func captureScreenshot() {
+        guard let webView = viewModel.webView else { return }
+        Task {
+            if let image = await container.pageCaptureService.captureFullPage(webView: webView) {
+                container.pageCaptureService.saveToPhotos(image)
+                showToast("Screenshot saved to Photos")
+                HapticManager.success()
+            } else {
+                showToast("Screenshot failed")
+            }
+        }
+    }
+
+    private func exportPDF() {
+        guard let webView = viewModel.webView else { return }
+        Task {
+            if let pdfData = await container.pageCaptureService.exportPDF(webView: webView) {
+                let title = viewModel.pageTitle.isEmpty ? "webpage" : viewModel.pageTitle
+                if let url = container.pageCaptureService.sharePDF(pdfData, title: title) {
+                    coordinator.shareURL = url
+                    coordinator.showShareSheet = true
+                    HapticManager.success()
+                }
+            } else {
+                showToast("PDF export failed")
+            }
+        }
+    }
+
+    private var detectedMediaSheet: some View {
+        NavigationStack {
+            List {
+                ForEach(container.videoDetectorService.detectedMedia) { media in
+                    Button {
+                        Task { await container.downloadManager.startDownload(url: media.url) }
+                        showDetectedMedia = false
+                        showToast("Downloading \(media.type.rawValue)…")
+                        HapticManager.medium()
+                    } label: {
+                        HStack {
+                            Image(systemName: media.type == .audio ? "music.note" : "film")
+                                .foregroundStyle(DesignSystem.Colors.accent)
+                                .frame(width: 28)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(media.title ?? media.url.lastPathComponent)
+                                    .font(DesignSystem.Typography.body)
+                                    .lineLimit(1)
+                                HStack(spacing: DesignSystem.Spacing.sm) {
+                                    Text(media.type.rawValue.uppercased())
+                                        .font(DesignSystem.Typography.caption2)
+                                        .foregroundStyle(DesignSystem.Colors.textTertiary)
+                                    if let quality = media.quality {
+                                        Text(quality)
+                                            .font(DesignSystem.Typography.caption2)
+                                            .foregroundStyle(DesignSystem.Colors.textSecondary)
+                                    }
+                                }
+                            }
+                            Spacer()
+                            Image(systemName: "arrow.down.circle")
+                                .foregroundStyle(DesignSystem.Colors.accent)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Detected Media")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") { showDetectedMedia = false }
+                }
+            }
+        }
+        .presentationDetents([.medium])
     }
 }
 
