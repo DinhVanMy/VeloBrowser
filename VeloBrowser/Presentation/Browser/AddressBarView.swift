@@ -195,7 +195,14 @@ struct AddressBarView: View {
             return true
         }
         .onChange(of: viewModel.isAddressBarFocused) { _, newValue in
-            isFocused = newValue
+            if newValue {
+                // Small delay ensures TextField is in the hierarchy before focus
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    isFocused = true
+                }
+            } else {
+                isFocused = false
+            }
         }
         .onChange(of: isFocused) { _, newValue in
             viewModel.isAddressBarFocused = newValue

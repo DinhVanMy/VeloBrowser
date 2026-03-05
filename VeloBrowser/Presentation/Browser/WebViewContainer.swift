@@ -127,6 +127,20 @@ struct WebViewContainer: UIViewRepresentable {
             context.coordinator.lastLoadedURL = url
             context.coordinator.setupObservers()
             onWebViewCreated?(existingWebView)
+
+            // Fire initial state for pooled webview (KVO only fires on value changes)
+            DispatchQueue.main.async { [self] in
+                onNavigationChange?(existingWebView.canGoBack, existingWebView.canGoForward)
+                onLoadingChange?(existingWebView.isLoading)
+                onProgressChange?(existingWebView.estimatedProgress)
+                if let title = existingWebView.title, !title.isEmpty {
+                    onTitleChange?(title)
+                }
+                if let currentURL = existingWebView.url {
+                    onURLChange?(currentURL)
+                }
+            }
+
             return existingWebView
         }
 
@@ -233,6 +247,9 @@ struct WebViewContainer: UIViewRepresentable {
 
     func updateUIView(_ webView: WKWebView, context: Context) {
         let coord = context.coordinator
+
+        // Keep coordinator's parent in sync with latest closures
+        coord.parent = self
 
         // Update JavaScript preference if changed
         webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = javaScriptEnabled

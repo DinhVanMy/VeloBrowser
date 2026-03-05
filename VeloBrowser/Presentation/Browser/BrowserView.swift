@@ -93,9 +93,6 @@ struct BrowserView: View {
             .spring(response: 0.3, dampingFraction: 0.8),
             value: viewModel.isToolbarVisible
         )
-        .onTapGesture {
-            viewModel.showToolbar()
-        }
         .ignoresSafeArea(.keyboard)
         .alert("Tab Limit Reached", isPresented: $showTabLimitAlert) {
             Button("OK", role: .cancel) {}
@@ -264,6 +261,13 @@ struct BrowserView: View {
                     viewModel.handleLoadingChange(loading)
                     if !loading {
                         viewModel.checkReadability(using: container.readerModeService)
+                        // Capture snapshot after page renders
+                        if let activeTab = container.tabManager.activeTab {
+                            Task {
+                                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                                container.tabManager.captureSnapshot(for: activeTab.id)
+                            }
+                        }
                     }
                 },
                 onProgressChange: { viewModel.handleProgressChange($0) },
@@ -333,6 +337,7 @@ struct BrowserView: View {
                 },
                 existingWebView: container.tabManager.activeTab.flatMap { container.tabManager.webView(for: $0.id) }
             )
+            .id(container.tabManager.activeTab?.id)
 
             // New Tab Page overlay (when no URL loaded)
             if viewModel.currentURL == nil && viewModel.pendingURL == nil {
